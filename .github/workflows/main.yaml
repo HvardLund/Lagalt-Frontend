@@ -48,7 +48,7 @@ jobs:
         path: build
 
     - name: GitHub Deploy to One.com
-      uses: lagalt/one.com-deployer@master
+      uses: norasb/one.com-deployer@master
       env:
           ONE_DOMAIN_NAME: lagalt.no
           ONE_SSH_KEY_PUBLIC: ${{ secrets.PUBLIC_KEY_LAGALT }}
