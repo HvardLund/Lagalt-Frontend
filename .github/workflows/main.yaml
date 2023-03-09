@@ -1,0 +1,57 @@
+name: Deploy to One.com
+
+on:
+  push:
+    branches:
+        - main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    - name: Install npm
+      run: npm ci
+    - name: Build
+      run: npm run build
+      env:
+        CI: false
+
+    - name: Upload artifact for deployment job
+      uses: actions/upload-artifact@v3
+      with:
+        name: build
+        path: build
+
+    
+
+  deploy:
+
+    needs: [build]
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Download artifact from build job
+      uses: actions/download-artifact@v3
+      with:
+        name: build
+        path: build
+
+    - name: GitHub Deploy to One.com
+      uses: lagalt/one.com-deployer@master
+      env:
+          ONE_DOMAIN_NAME: lagalt.no
+          ONE_SSH_KEY_PUBLIC: ${{ secrets.PUBLIC_KEY_LAGALT }}
+          ONE_SSH_KEY_PRIVATE: ${{ secrets.PRIVATE_KEY_LAGALT }}
+          TPO_SRC_PATH: "build/"
+          TPO_PATH: ""
