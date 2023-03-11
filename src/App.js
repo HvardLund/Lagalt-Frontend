@@ -1,23 +1,17 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-//import FrontPage from './pages/frontpage/frontpage';
-import StartPage from './pages/startpage/startpage';
-import ProfilePage from './pages/profilepage/profilepage';
-import KeycloakRoute from "./routes/KeycloakRoute";
-import { ROLES } from "./const/roles";
+import FrontPage from './pages/frontpage/frontpage';
 
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
-      
+    <BrowserRouter>
+      <div className="App">
           <Routes>
-            <Route path="/" element={<StartPage/>}/>
-            <Route path="/profile" element={<KeycloakRoute role={ ROLES.User }><ProfilePage/></KeycloakRoute>}/>
-            <Route path="*" element={<StartPage/>}/>
+            <Route path="/" element={<FrontPage/>}/>
+            <Route path="*" element={<FrontPage/>}/>
           </Routes>
-      </BrowserRouter>
-    </div>
+      </div>
+    </BrowserRouter>
   );
 }
 
