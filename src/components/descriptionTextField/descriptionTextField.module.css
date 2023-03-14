@@ -3,7 +3,7 @@
     height: fit-content;
     background-color: #272524;
     width: 100%;
-    font-family: 'Archivo Black', sans-serif;
+    font-family: 'Archivo', sans-serif;
     justify-content: center;
     border-radius: 6px;
 }
@@ -14,11 +14,12 @@
     font-size: 36px;
     padding: 20px;
     text-align: center;
+    font-family: 'Archivo black', sans-serif;
 }
 
 .introduction{
     color: #FFECB7;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 20px;
     padding: 20px;
 }
