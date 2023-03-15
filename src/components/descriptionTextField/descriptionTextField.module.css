@@ -1,0 +1,32 @@
+.textCard{
+    display: flex;
+    height: fit-content;
+    background-color: #272524;
+    width: 100%;
+    font-family: 'Archivo', sans-serif;
+    justify-content: center;
+    border-radius: 6px;
+}
+
+.headerText{
+    color: #FFECB7;
+    font-weight: 400;
+    font-size: 36px;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Archivo black', sans-serif;
+}
+
+.introduction{
+    color: #FFECB7;
+    font-weight: 500;
+    font-size: 20px;
+    padding: 20px;
+}
+
+.description{
+    color: #FFECB7;
+    font-weight: 400;
+    font-size: 16px;
+    padding: 20px;
+}
