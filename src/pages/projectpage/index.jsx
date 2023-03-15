@@ -1,6 +1,8 @@
 import DescriptionTextField from '../../components/descriptionTextField';
 import MemberList from '../../components/memberList';
 import ProgressBar from '../../components/progressBar';
+import ProjectTag from '../../components/projectTag';
+import SkillList from '../../components/skillList';
 import styles from './projectpage.module.css'
 
 const intro='Bli med på et sci-fi-basert rollespill og utforsk ulike planeter og galakser! Vi er et lidenskapelig team som arbeider med å skape en spennende ny spillopplevelse for spillere over hele verden. Hvis du er interessert i å bli med på denne hobbybaserte utviklingen, kontakt oss for mer informasjon om hvordan du kan bidra til å skape et fantastisk spill!'
@@ -12,19 +14,27 @@ const memberList = [
     {
         fullname: 'Petter Pettersen',
         username: 'Petter sprett',
-        profileImage: 'profile.svg'
+        profileImage: 'Green.svg'
     },
     {
         fullname: 'Hans Hansen',
         username: 'Hansen',
-        profileImage: 'profile.svg'
+        profileImage: 'Blue.svg'
     },
     {
         fullname: 'Ola Nordmann',
         username: 'Bola Ola',
-        profileImage: 'profile.svg'
+        profileImage: 'Pink.svg'
+    },
+    {
+        fullname: 'Nils',
+        username: 'Nils...',
+        profileImage: 'Profile.svg'
     },
 ]
+
+const skills = ['Skillpadde', 'Avoid indecies', 'too cool for school', 'ski ll', 'koding']
+const tags = ['tag1', 'tag2 med langt navn', 'tagger4', 'tag5']
 
 function ProjectPage(){
 
@@ -47,8 +57,14 @@ function ProjectPage(){
                     <h2 className={styles.subHeader}>Members</h2>
                     <MemberList members={memberList}/>
                 </div>
-                <div className={styles.contentCard}><h2 className={styles.subHeader}>Skills</h2></div>
-                <div className={styles.contentCard}><h2 className={styles.subHeader}>Tags</h2></div>
+                <div className={styles.contentCard}>
+                    <h2 className={styles.subHeader}>Skills</h2>
+                    <SkillList skills ={skills}/>
+                </div>
+                <div className={styles.contentCard}>
+                    <h2 className={styles.subHeader}>Tags</h2>
+                    <div className={styles.tagList}>{tags.map(tag => <ProjectTag name={tag}/>)}</div>
+                </div>
             </div>
         </div>
     )

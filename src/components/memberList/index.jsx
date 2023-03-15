@@ -1,5 +1,4 @@
 import styles from './memberList.module.css'
-//import FeatherIcon from 'feather-icons-react';
 
 function MemberList(props) {
 

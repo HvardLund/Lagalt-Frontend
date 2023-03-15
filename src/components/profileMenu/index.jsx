@@ -1,13 +1,29 @@
 import styles from './profileMenu.module.css'
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 
 function ProfileMenu() {
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => {setOpen(!open);};
+    const [open, setOpen] = useState(false)
+    const handleOpen = () => {setOpen(!open)}
+    const containerRef = useRef(null);
+
+    function useOutsideAlerter(ref) {
+        useEffect(() => {
+          function handleClickOutside(event) {
+            if (ref.current && !ref.current.contains(event.target)) {setOpen(false)}
+          }
+          document.addEventListener("mousedown", handleClickOutside);
+          return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+          };
+        }, [ref]);
+      }
+
+    useOutsideAlerter(containerRef)
+    
 
     return(
-        <div className={styles.container}>
+        <div ref={containerRef} className={styles.container}>
             <div className={styles.profileContainer}><img onClick={handleOpen} className = {styles.profilePicture} src='profile.svg' alt='Profile'></img></div>
             {open ? (
                 <div className={styles.menu}>
