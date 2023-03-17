@@ -9,17 +9,7 @@
 }
 
 .container::-webkit-scrollbar {
-    width: 4px;
-}
-
-.container::-webkit-scrollbar-track {
-    height: 10%;
-    margin-bottom: 10px;
-}
-
-.container::-webkit-scrollbar-thumb {
-    background:#FFECB7;
-    border-radius: 5px;
+    display: none;
 }
 
 .member{
