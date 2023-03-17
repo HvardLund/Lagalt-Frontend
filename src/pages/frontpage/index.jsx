@@ -23,7 +23,7 @@ function FrontPage(){
     return(
         <div className={styles.container}>
             <div className={`${styles.leftColumn} ${styles.column}`}>
-                <input placeholder='search...'></input>
+                <div></div>
             </div>
             <div className={`${styles.rightColumn} ${styles.column}`}>
                 {projects.map(project =>

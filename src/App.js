@@ -2,6 +2,7 @@ import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import FrontPage from './pages/frontpage';
 import ProjectPage from './pages/projectpage'
+import ProfilePage from './pages/profilepage'
 import Header from './components/header';
 import DummyPage from './pages/dummy';
 import KeycloakRoute from "./routes/KeycloakRoute";
@@ -16,6 +17,7 @@ function App() {
           <Routes>
             <Route path="/" element={<FrontPage/>}/>
             <Route path="/project/:id" element={<KeycloakRoute role={ ROLES.User }><ProjectPage/></KeycloakRoute>}/>
+            <Route path="/profile/me" element={<ProfilePage/>}/>
             <Route path="/dummy" element={<DummyPage/>}/>
             <Route path="*" element={<FrontPage/>}/>
           </Routes>

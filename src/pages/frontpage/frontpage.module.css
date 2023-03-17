@@ -17,6 +17,8 @@
     gap: 20px;
     margin-bottom: 20px;
     color: white;
+    max-height: 86vh;
+    overflow: auto;
 }
 
 .leftColumn{
@@ -26,6 +28,21 @@
 }
 
 .rightColumn{
-    width: max(357px, 73%);
+    width: max(796px, 73%);
     align-items: flex-start;
+}
+
+.column::-webkit-scrollbar {
+    display: none;
+    width: 4px;
+}
+  
+.column::-webkit-scrollbar-track {
+    height: 10%;
+    margin-bottom: 10px;
+}
+  
+.column::-webkit-scrollbar-thumb {
+    background:#FFECB7;
+    border-radius: 5px;
 }
