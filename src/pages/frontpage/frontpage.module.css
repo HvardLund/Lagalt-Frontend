@@ -20,11 +20,12 @@
 }
 
 .leftColumn{
-    width: max(357px, 30%);
+    width: max(357px, 27%);
     align-items: center;
+    padding-top: 50px;
 }
 
 .rightColumn{
-    width: max(357px, 70%);
+    width: max(357px, 73%);
     align-items: flex-start;
 }

@@ -1,6 +1,4 @@
 .container{
-    height: 30px;
-    width: fit-content;
     width: fit-content;
     background-color: #F3AE32;
     border-radius: 6px;
@@ -14,6 +12,15 @@
     font-family: 'Archivo', sans-serif;
     font-style: normal;
     font-weight: 600;
-    font-size: 20px;
     color: #454242;
+}
+
+.default{
+    font-size: 20px;
+    height: 30px;
+}
+
+.small{
+    font-size:12px;
+    height: 14px;
 }

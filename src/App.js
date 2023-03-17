@@ -15,7 +15,7 @@ function App() {
           <Header></Header>
           <Routes>
             <Route path="/" element={<FrontPage/>}/>
-            <Route path="/project" element={<KeycloakRoute role={ ROLES.User }><ProjectPage/></KeycloakRoute>}/>
+            <Route path="/project/:id" element={<KeycloakRoute role={ ROLES.User }><ProjectPage/></KeycloakRoute>}/>
             <Route path="/dummy" element={<DummyPage/>}/>
             <Route path="*" element={<FrontPage/>}/>
           </Routes>

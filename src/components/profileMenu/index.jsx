@@ -24,7 +24,7 @@ function ProfileMenu() {
 
     return(
         <div ref={containerRef} className={styles.container}>
-            <div className={styles.profileContainer}><img onClick={handleOpen} className = {styles.profilePicture} src='profile.svg' alt='Profile'></img></div>
+            <div className={styles.profileContainer}><img onClick={handleOpen} className = {styles.profilePicture} src={'assets/profile.svg'} alt='Profile'></img></div>
             {open ? (
                 <div className={styles.menu}>
                     <button className={styles.menuButton}>My profile</button>
