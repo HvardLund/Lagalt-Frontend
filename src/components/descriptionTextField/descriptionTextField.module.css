@@ -1,11 +1,18 @@
 .textCard{
     display: flex;
     height: fit-content;
-    background-color: #272524;
     width: 100%;
     font-family: 'Archivo', sans-serif;
     justify-content: center;
     border-radius: 6px;
+}
+
+.frontpage{
+    background-color: #353231;
+}
+
+.projectpage{
+    background-color: #272524;
 }
 
 .headerText{
@@ -17,11 +24,21 @@
     font-family: 'Archivo black', sans-serif;
 }
 
+.frontpageheader{
+    font-size: 20px;
+    padding: 10px;
+}
+
 .introduction{
     color: #FFECB7;
     font-weight: 500;
     font-size: 20px;
     padding: 20px;
+}
+
+.frontpageintro{
+    font-size: 12px;
+    padding: 10px;
 }
 
 .description{

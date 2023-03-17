@@ -4,12 +4,14 @@
     align-items: center;
     overflow: auto;
     width: 100%;
-    padding-bottom: 10px;
     padding-top: 10px;
-    gap:5px;
-    background-color: #272524;
+    gap:4px;
+    font-size: 20px;
     height: fit-content;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 8px 0px inset;
+}
+
+.frontpage{
+    font-size: 12px;
 }
 
 .container::-webkit-scrollbar {
@@ -28,15 +30,14 @@
 
 .skill{
     background-color: #454242;
-    height: 24px;
-    width: 96%;
-    padding-top: 2px;
-    padding-bottom: 2px;
+    height: fit-content;
+    width: 98%;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .skillName{
     font-family: 'Archivo', sans-serif;
     font-weight: 400;
-    font-size: 20px;
     color: #FFECB7;
 }

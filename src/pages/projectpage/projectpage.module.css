@@ -51,9 +51,9 @@
     height: fit-content;
     background-color: #272524;
     padding-top: 20px;
-    padding-bottom: 5px;
+    padding-bottom: 10px;
     gap:10px;
-    max-height: 30%;
+    max-height: 32%;
     border-radius: 6px;
 }
 
