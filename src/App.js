@@ -17,7 +17,7 @@ function App() {
           <Routes>
             <Route path="/" element={<FrontPage/>}/>
             <Route path="/project/:id" element={<KeycloakRoute role={ ROLES.User }><ProjectPage/></KeycloakRoute>}/>
-            <Route path="/profile/:id" element={<ProfilePage/>}/>
+            <Route path="/profile/me" element={<ProfilePage/>}/>
             <Route path="/dummy" element={<DummyPage/>}/>
             <Route path="*" element={<FrontPage/>}/>
           </Routes>

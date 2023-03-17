@@ -28,11 +28,12 @@
 }
 
 .rightColumn{
-    width: max(357px, 73%);
+    width: max(796px, 73%);
     align-items: flex-start;
 }
 
 .column::-webkit-scrollbar {
+    display: none;
     width: 4px;
 }
   

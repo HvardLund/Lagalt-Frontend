@@ -25,7 +25,7 @@ function ProfileMenu() {
 
     function handleMyProfile(){
       setOpen(false)
-      navigate("/profile/1")
+      navigate("/profile/me")
     }
     
 
