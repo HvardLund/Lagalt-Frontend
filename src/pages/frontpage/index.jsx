@@ -3,8 +3,12 @@ import styles from './frontpage.module.css'
 function FrontPage(){
     return(
         <div className={styles.container}>
-            <div className={styles.header}>Lagalt</div>
-            <div className={styles.coming}>Coming soon...</div>
+            <div className={`${styles.leftColumn} ${styles.column}`}>
+                Left Column
+            </div>
+            <div className={`${styles.rightColumn} ${styles.column}`}>
+                Right column
+            </div>
         </div>
     )
 }
