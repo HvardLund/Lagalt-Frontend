@@ -1,6 +1,6 @@
 import styles from './profileMenu.module.css'
 import { useState, useEffect, useRef } from 'react';
-
+import keycloak from '../../keycloak';
 
 function ProfileMenu() {
     const [open, setOpen] = useState(false)
@@ -28,8 +28,7 @@ function ProfileMenu() {
             {open ? (
                 <div className={styles.menu}>
                     <button className={styles.menuButton}>My profile</button>
-                    <button className={styles.menuButton}>My projects</button>
-                    <button className={`${styles.menuButton} ${styles.logoutButton}`}>Log out</button>
+                    <button className={`${styles.menuButton} ${styles.logoutButton}`} onClick={() => keycloak.logout()}>Log out</button>
                 </div>
             ) : null}
         </div>

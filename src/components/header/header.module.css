@@ -23,6 +23,7 @@
 
 .logo{
     max-height: 42px;
+    cursor: pointer;
 }
 
 .notificationContainer{
@@ -41,4 +42,18 @@
 
 .profilePicture{
     max-height: 42px;
+}
+
+.loginButton{
+    width: 72px;
+    height: 27px;
+    color: #FFECB7;
+    background-color: #DA5E3F;
+    font-family: 'Archivo', sans-serif;
+    font-style: normal;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 12px;
+    border-radius: 8px;
 }
