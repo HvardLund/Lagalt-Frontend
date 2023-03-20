@@ -4,7 +4,6 @@
     min-height: 360px;
     display: flex;
     flex-direction: row;
-    gap:10px;
     cursor: pointer;
 }
 
@@ -102,4 +101,52 @@
     margin-bottom: 20px;
     border-radius: 6px;
     gap:6px;
+}
+
+.activity{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    box-shadow: inset -4px 0px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 6px 0px 0px 6px;
+    color: #272524;
+    position: relative;
+    height: fit-content;
+    padding: 2px 0px 10px;
+    left: 0%;
+    right: 95.35%;
+    top: 20.04%;
+    bottom: 49.96%;
+    font-size: 14px;
+    font-weight: 600;
+    width: 37px;
+}
+
+.music{
+    background-color: #EBE9BF;
+}
+
+.web{
+    background-color: #A6BDBE;
+}
+
+.movie{
+    background-color: #F4A8A8;
+}
+
+.games{
+    background-color: #E4C6FA;
+
+}
+
+.activityName{
+    width: 12.01px;
+    height: 81px;
+    font-family: 'Archivo';
+    font-style: normal;
+    text-align: center;
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+    text-transform: uppercase;  
 }
