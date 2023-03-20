@@ -18,19 +18,22 @@
     gap: 30px;
     margin-bottom: 20px;
     color: white;
-    max-height: 86vh;
-    overflow: auto;
 }
 
 .rightColumn{
     width: max(305px, 20%);
     align-items: center;
+    max-height: calc(100vh - 110px);
+    overflow: auto;
 }
 
 .leftColumn{
     min-width: 796px;
     max-width: 796px;
+    margin-top: 30px;
     align-items: center;
+    max-height: calc(100vh - 140px);
+    overflow: auto;
 }
 
 .column::-webkit-scrollbar {

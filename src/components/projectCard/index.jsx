@@ -16,11 +16,19 @@ function ProjectCard(props) {
     const skills = props.skills?props.skills:[]
     const tags = props.tags?props.tags:[]
     const id = props.id
+    const activityType = props.activityType
 
     const navigate = useNavigate()
 
     return(
         <div className={styles.container} onClick={() => navigate(`/project/${id}`)}>
+            <div className={`${styles.activity} ${styles[activityType.toLowerCase()]}`}>
+                {activityType.toLowerCase()==='music'&&<span class="material-symbols-outlined">music_note</span>}
+                {activityType.toLowerCase()==='web'&&<span class="material-symbols-outlined">code</span>}
+                {activityType.toLowerCase()==='movie'&&<span class="material-symbols-outlined">movie</span>}
+                {activityType.toLowerCase()==='games'&&<span class="material-symbols-outlined">stadia_controller</span>}
+                <div className={styles.activityName}>{activityType}</div>
+            </div>
             <div className={styles.card}>
                 <div className={styles.columns}>
                     <div className={`${styles.leftColumn} ${styles.column}`}>
