@@ -75,12 +75,35 @@
 }
 
 .selected{
-    border-bottom: 3px solid #587D3B;
-    color:#587D3B;
     font-family: 'Archivo';
     font-style: normal;
     font-weight: 600;
     font-size: 20px;
     line-height: 22px;
     padding-bottom: 10px;
+}
+
+.allColor{
+    border-bottom: 3px solid #587D3B;
+    color:#587D3B;
+}
+
+.musicColor{
+    border-bottom: 3px solid #EBE9BF;
+    color:#EBE9BF;
+}
+
+.webColor{
+    border-bottom: 3px solid #A6BDBE;
+    color:#A6BDBE;
+}
+
+.movieColor{
+    border-bottom: 3px solid #F4A8A8;
+    color:#F4A8A8;
+}
+
+.gamesColor{
+    border-bottom: 3px solid #E4C6FA;
+    color:#E4C6FA;
 }

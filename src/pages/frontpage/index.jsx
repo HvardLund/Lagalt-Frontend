@@ -8,7 +8,8 @@ const project1 = {
     tags: ['tag1', 'tag2 med langt navn', 'tagger4', 'tag5'],
     image: 'assets/Prosjektbilde.png',
     owner: { fullname: 'Nils', username: 'Nils...', profileImage: 'assets/profile.svg'},
-    activityType: 'music',
+    activityType: 'movie',
+    progress: 'Completed',
     intro: 'Bli med på et sci-fi-basert rollespill og utforsk ulike planeter og galakser! Vi er et lidenskapelig team som arbeider med å skape en spennende ny spillopplevelse for spillere over hele verden. Hvis du er interessert i å bli med på denne hobbybaserte utviklingen, kontakt oss for mer informasjon om hvordan du kan bidra til å skape et fantastisk spill!'
 }
 
@@ -42,11 +43,11 @@ function FrontPage(){
             </div>
             <div className={`${styles.rightColumn} ${styles.column}`}>
                 <div className={styles.navbar}>
-                    <div onClick={() => select('All')} className={selected==='All'?styles.selected:styles.navText}>All</div>
-                    <div onClick={() => select('Games')} className={selected==='Games'?styles.selected:styles.navText}>Game development</div>
-                    <div onClick={() => select('Web')} className={selected==='Web'?styles.selected:styles.navText}>Webdesign</div>
-                    <div onClick={() => select('Music')} className={selected==='Music'?styles.selected:styles.navText}>Music</div>
-                    <div onClick={() => select('Film')} className={selected==='Film'?styles.selected:styles.navText}>Film production</div>
+                    <div onClick={() => select('All')} className={selected==='All'?`${styles.selected} ${styles.allColor}`:styles.navText}>All</div>
+                    <div onClick={() => select('Games')} className={selected==='Games'?`${styles.selected} ${styles.gamesColor}`:styles.navText}>Game development</div>
+                    <div onClick={() => select('Web')} className={selected==='Web'?`${styles.selected} ${styles.webColor}`:styles.navText}>Webdesign</div>
+                    <div onClick={() => select('Music')} className={selected==='Music'?`${styles.selected} ${styles.musicColor}`:styles.navText}>Music</div>
+                    <div onClick={() => select('Movie')} className={selected==='Movie'?`${styles.selected} ${styles.movieColor}`:styles.navText}>Film production</div>
                 </div>
                 {displayedProjects.map(project =>
                     <ProjectCard 
@@ -57,6 +58,7 @@ function FrontPage(){
                         skills={project.skills}
                         id={project.id}
                         activityType={project.activityType}
+                        progress={project.progress}
                     />
                 )}
             </div>
