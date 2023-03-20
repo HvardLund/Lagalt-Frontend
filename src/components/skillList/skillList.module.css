@@ -1,0 +1,33 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+    width: 100%;
+    padding-top: 10px;
+    gap:4px;
+    font-size: 20px;
+    height: fit-content;
+}
+
+.frontpage{
+    font-size: 12px;
+}
+
+.container::-webkit-scrollbar {
+    display: none;
+}
+
+.skill{
+    background-color: #454242;
+    height: fit-content;
+    width: 98%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.skillName{
+    font-family: 'Archivo', sans-serif;
+    font-weight: 400;
+    color: #FFECB7;
+}

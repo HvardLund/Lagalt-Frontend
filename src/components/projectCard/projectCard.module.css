@@ -1,0 +1,152 @@
+.container{
+    min-width: 796px;
+    max-width: 796px;
+    min-height: 360px;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+}
+
+.card{
+    min-width: 759px;
+    max-width: 759px;
+    min-height: 360px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #272524;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.card:hover {
+    background-color: #353231;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+.columns{
+    min-width: 759px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap:10px;
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 20px;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.leftColumn{
+    width: 25%;
+}
+
+.midColumn{
+    width: 42%;
+}
+
+.rightColumn{
+    width: 25%;
+}
+
+.imageContainer{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    height: 143px;
+    margin-bottom: 5px;
+}
+
+.projectImage{
+    width:100%;
+    max-height: 100%;
+    border-radius: 6px;
+}
+
+.subHeader{
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #FFECB7;
+}
+
+.contentCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: fit-content;
+    background-color: #353231;
+    padding-top: 10px;
+    max-height: 30%;
+    border-radius: 6px;
+}
+
+.tagList{
+    width:92%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 10px;
+    background-color: #353231;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    gap:6px;
+}
+
+.activity{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    box-shadow: inset -4px 0px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 6px 0px 0px 6px;
+    color: #272524;
+    position: relative;
+    height: fit-content;
+    padding: 2px 0px 10px;
+    left: 0%;
+    right: 95.35%;
+    top: 20.04%;
+    bottom: 49.96%;
+    font-size: 14px;
+    font-weight: 600;
+    width: 37px;
+}
+
+.music{
+    background-color: #EBE9BF;
+}
+
+.web{
+    background-color: #A6BDBE;
+}
+
+.movie{
+    background-color: #F4A8A8;
+}
+
+.games{
+    background-color: #E4C6FA;
+
+}
+
+.activityName{
+    width: 12.01px;
+    height: 81px;
+    font-family: 'Archivo';
+    font-style: normal;
+    text-align: center;
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+    text-transform: uppercase;  
+}

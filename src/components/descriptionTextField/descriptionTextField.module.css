@@ -1,0 +1,49 @@
+.textCard{
+    display: flex;
+    height: fit-content;
+    width: 100%;
+    font-family: 'Archivo', sans-serif;
+    justify-content: center;
+    border-radius: 6px;
+}
+
+.frontpage{
+    background-color: #353231;
+}
+
+.projectpage{
+    background-color: #272524;
+}
+
+.headerText{
+    color: #FFECB7;
+    font-weight: 400;
+    font-size: 36px;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Archivo black', sans-serif;
+}
+
+.frontpageheader{
+    font-size: 20px;
+    padding: 10px;
+}
+
+.introduction{
+    color: #FFECB7;
+    font-weight: 500;
+    font-size: 20px;
+    padding: 20px;
+}
+
+.frontpageintro{
+    font-size: 12px;
+    padding: 20px 10px;
+}
+
+.description{
+    color: #FFECB7;
+    font-weight: 400;
+    font-size: 16px;
+    padding: 20px;
+}

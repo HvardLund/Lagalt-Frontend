@@ -1,0 +1,59 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #272524;
+    height: 50px;
+    color: #FFECB7;
+    font-size: 45px;
+    width: 100%;
+}
+
+.headerItem{
+    max-height: 42px;
+}
+
+.logoContainer{
+    width: calc(100% - 100px);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+}
+
+.logo{
+    max-height: 42px;
+    cursor: pointer;
+}
+
+.notificationContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+}
+
+.profileContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+}
+
+.profilePicture{
+    max-height: 42px;
+}
+
+.loginButton{
+    width: 72px;
+    height: 27px;
+    color: #FFECB7;
+    background-color: #DA5E3F;
+    font-family: 'Archivo', sans-serif;
+    font-style: normal;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 12px;
+    border-radius: 8px;
+}
