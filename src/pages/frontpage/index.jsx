@@ -38,17 +38,18 @@ function FrontPage(){
 
     return(
         <div className={styles.container}>
-            <div className={`${styles.leftColumn} ${styles.column}`}>
-                <div></div>
+            <div className={styles.navbar}>
+                <div onClick={() => select('All')} className={selected==='All'?`${styles.selected} ${styles.allColor}`:styles.navText}>All</div>
+                <div onClick={() => select('Games')} className={selected==='Games'?`${styles.selected} ${styles.gamesColor}`:styles.navText}>Game development</div>
+                <div onClick={() => select('Web')} className={selected==='Web'?`${styles.selected} ${styles.webColor}`:styles.navText}>Webdesign</div>
+                <div onClick={() => select('Music')} className={selected==='Music'?`${styles.selected} ${styles.musicColor}`:styles.navText}>Music</div>
+                <div onClick={() => select('Movie')} className={selected==='Movie'?`${styles.selected} ${styles.movieColor}`:styles.navText}>Film production</div>
             </div>
-            <div className={`${styles.rightColumn} ${styles.column}`}>
-                <div className={styles.navbar}>
-                    <div onClick={() => select('All')} className={selected==='All'?`${styles.selected} ${styles.allColor}`:styles.navText}>All</div>
-                    <div onClick={() => select('Games')} className={selected==='Games'?`${styles.selected} ${styles.gamesColor}`:styles.navText}>Game development</div>
-                    <div onClick={() => select('Web')} className={selected==='Web'?`${styles.selected} ${styles.webColor}`:styles.navText}>Webdesign</div>
-                    <div onClick={() => select('Music')} className={selected==='Music'?`${styles.selected} ${styles.musicColor}`:styles.navText}>Music</div>
-                    <div onClick={() => select('Movie')} className={selected==='Movie'?`${styles.selected} ${styles.movieColor}`:styles.navText}>Film production</div>
-                </div>
+            <div className={styles.columnsContainer}>
+            <div className={`${styles.leftColumn} ${styles.column}`}>
+                <div>hei</div>
+            </div>
+            <div className={`${styles.midColumn} ${styles.column}`}>
                 {displayedProjects.map(project =>
                     <ProjectCard 
                         intro={project.intro} 
@@ -61,6 +62,10 @@ function FrontPage(){
                         progress={project.progress}
                     />
                 )}
+            </div>
+            <div className={`${styles.rightColumn} ${styles.column}`}>
+                <div></div>
+            </div>
             </div>
         </div>
     )

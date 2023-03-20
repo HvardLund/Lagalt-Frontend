@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom"
 
 function ProjectCard(props) {
 
-    const projectImage = props.image?props.image: 'lagalt.png'
+    const projectImage = props.image?props.image: 'assets/lagalt.png'
     const status = props.progress? props.progress: 'Founding'
     const header = props.header? props.header: 'Header'
     const intro = props.intro? props.intro: 'Introduction'
