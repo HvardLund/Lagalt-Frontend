@@ -10,7 +10,7 @@ function MemberList(props) {
     return(
         <div className={styles.container}>
             {memberList.map(member =>
-            <div onClick={() => navigate(`/profile/${member.username}`)}className={styles.member}>
+            <div onClick={() => navigate(`/profile/${member.username.replaceAll(' ', '_')}`)}className={styles.member}>
                 <img className={styles.profilePhoto} src={member.profileImage} alt='avatar' />
                 <div className={styles.username}>{member.username}</div>
             </div>

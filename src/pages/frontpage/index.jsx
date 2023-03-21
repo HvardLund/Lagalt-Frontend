@@ -1,6 +1,7 @@
 import ProjectCard from '../../components/projectCard';
 import styles from './frontpage.module.css'
 import { useEffect, useState } from 'react';
+import keycloak from '../../keycloak'
 
 const project1 = {
     id:1,
@@ -47,12 +48,12 @@ function FrontPage(){
             </div>
             <div className={styles.columnsContainer}>
             <div className={`${styles.leftColumn} ${styles.column}`}>
-                <div>hei</div>
+                {keycloak.tokenParsed && <div>{keycloak.tokenParsed.preferred_username}</div>}
             </div>
             <div className={`${styles.midColumn} ${styles.column}`}>
                 {displayedProjects.map(project =>
                     <ProjectCard 
-                        intro={project.intro} 
+                        intro={project.intro}
                         tags={project.tags} 
                         image={project.image}
                         owner={project.owner}
