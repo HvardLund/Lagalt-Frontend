@@ -19,6 +19,7 @@
     margin-bottom: 20px;
     max-height: calc(100vh - 90px);
     overflow: auto;
+    color: #FFECB7;
 }
 
 .leftColumn{
@@ -45,7 +46,6 @@
     margin: 0;
     font-size: 20px;
     font-weight: 600;
-    color: #FFECB7;
 }
 
 .contentCard {
@@ -75,4 +75,16 @@
 
 .tagList::-webkit-scrollbar {
     display: none;
+}
+
+.edit{
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    align-self: flex-end;
+    padding-right: 15px;
+    font-family: 'Archivo';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
 }

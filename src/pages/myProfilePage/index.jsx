@@ -4,6 +4,7 @@ import DescriptionTextField from '../../components/descriptionTextField';
 import SkillList from '../../components/skillList';
 import keycloak from '../../keycloak';
 import FeatherIcon from 'feather-icons-react'
+import ToggleSwitch from '../../components/toggleSwitch';
 
 const skills = ['Skillpadde', 'Avoid indecies', 'too cool for school', 'ski ll', 'koding']
 
@@ -40,7 +41,10 @@ function MyProfilePage(){
                         <img className={styles.profileImage} src={me.profileImage} alt='avatar' />
                         <div className={styles.username}>{keycloak.tokenParsed.name}</div>
                     </div>
-                    <div className={styles.edit}><FeatherIcon size="32" icon="edit-3" /></div>
+                    <div className={styles.editContainer}>
+                        <div className={styles.edit}><ToggleSwitch /><div>Hidden mode</div></div>
+                        <div className={styles.edit}><FeatherIcon cursor='pointer' size="25" icon="edit-3" /><div>Edit profile</div></div>
+                    </div>
                 </div>
                 <DescriptionTextField type='description' content={about}></DescriptionTextField>
                 <div className={styles.contentCard}>
