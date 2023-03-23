@@ -10,7 +10,7 @@ const project1 = {
     id:1,
     skills: skills,
     tags: ['tag1', 'tag2 med langt navn', 'tagger4', 'tag5'],
-    image: 'assets/Prosjektbilde.png',
+    image: 'https://lagaltprojectimages.blob.core.windows.net/images/lagalt.png',
     owner: { fullname: 'Nils', username: 'Nils...', profileImage: 'assets/profile.svg'},
     activityType: 'music',
     intro: 'Bli med på et sci-fi-basert rollespill og utforsk ulike planeter og galakser! Vi er et lidenskapelig team som arbeider med å skape en spennende ny spillopplevelse for spillere over hele verden. Hvis du er interessert i å bli med på denne hobbybaserte utviklingen, kontakt oss for mer informasjon om hvordan du kan bidra til å skape et fantastisk spill!'
