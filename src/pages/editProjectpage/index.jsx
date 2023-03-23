@@ -100,7 +100,7 @@ function EditProjectPage(){
                 alt='project foto'
                 onError={({ currentTarget }) => {
                     currentTarget.onerror = null
-                    currentTarget.src='./assets/noimage.png'
+                    currentTarget.src='https://lagaltprojectimages.blob.core.windows.net/images/noimage.png'
                 }}
                 >
             </img>
