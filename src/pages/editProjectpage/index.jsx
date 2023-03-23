@@ -1,5 +1,4 @@
 import DescriptionTextField from '../../components/descriptionTextField'
-import MemberList from '../../components/memberList'
 import ProgressBar from '../../components/progressBar'
 import ProjectTag from '../../components/projectTag'
 import SkillList from '../../components/skillList'
@@ -16,33 +15,9 @@ let description='Vi er en gruppe med lidenskapelige spillutviklere som arbeider 
 const description2 = description + description
 const status = 'In progress'
 const projectImage = 'lagalt.png'
-
-const memberList = [
-    {
-        fullname: 'Petter Pettersen',
-        username: 'Petter sprett',
-        profileImage: 'assets/green.svg'
-    },
-    {
-        fullname: 'Hans Hansen',
-        username: 'Hansen',
-        profileImage: 'assets/blue.svg'
-    },
-    {
-        fullname: 'Ola Nordmann',
-        username: 'Bola Ola',
-        profileImage: 'assets/pink.svg'
-    },
-    {
-        fullname: 'Nils',
-        username: 'Nils...',
-        profileImage: 'assets/profile.svg'
-    },
-]
-
 const skills = ['Skillpadde', 'Avoid indecies', 'too cool for school', 'ski ll', 'koding']
 const allSkills = ['Skillpadde', 'Avoid indecies', 'too cool for school', 'ski ll', 'koding', 'sverre', 'kake']
-const tags = ['tag1', 'tag2 med langt navn', 'tagger4', 'tag5']
+const projtags = ['tag1', 'tag2 med langt navn', 'tagger4', 'tag5']
 
 function EditProjectPage(){
     const [editProgress, setEditProgress] = useState(false)
@@ -53,36 +28,33 @@ function EditProjectPage(){
     const [newIntro, setNewIntro] = useState(intro)
     const [newDescription, setNewDescription] = useState(description2)
     const [selectedSkills, setSelectedSkills] = useState(skills)
+    const [tags, setTags] = useState(projtags)
+    const [selectedTags, setSelectedTags] = useState(projtags)
+    const [newTag, setNewTag] = useState('')
 
     const changeProgress = () => {
         setEditProgress(!editProgress)
     }
-
-    const selectProject = (newStatus) => {
+    const selectProjectStatus = (newStatus) => {
         setProjectStatus(newStatus)
         setEditProgress(!editProgress)
     }
-
     const handleUrl = (event) => {
         const value = event.target.value
         value.length > 0? setImageUrl(value): setImageUrl(projectImage)
     }
-
     const handleHeader = (event) => {
         const value = event.target.value
         setNewHeader(value)
     }
-
     const handleIntroduction = (event) => {
         const value = event.target.value
         setNewIntro(value)
     }
-
     const handleDescription = (event) => {
         const value = event.target.value
         setNewDescription(value)
     }
-
     const handleCheckboxChange = (event) => {
         const itemId = event.target.id;
         const isChecked = event.target.checked;
@@ -93,8 +65,31 @@ function EditProjectPage(){
           setSelectedSkills(selectedSkills.filter((id) => id !== itemId));
         }
     }
-
-    //useEffect(() => {console.log(selectedSkills)},[selectedSkills])
+    const handleTagSelection = (tag) => {
+        if (!selectedTags.includes(tag)) {
+            setSelectedTags([...selectedTags, tag])
+        } else {
+            setSelectedTags(selectedTags.filter((tagName) => tagName !== tag))
+        }
+    }
+    const handleNewTag = (event) => {
+        const value = event.target.value
+        setNewTag(value)
+    }
+    const pressEnter = (event) => {
+        if (event.key === 'Enter') {
+            addTag()
+        }
+    } 
+    const addTag = () => {
+        if (!tags.includes(newTag) && newTag.length>0) {
+            setSelectedTags([...selectedTags, newTag])
+            setTags([...tags, newTag])
+            setNewTag('')
+        }
+    }
+    
+    useEffect(() => {console.log(selectedTags)},[selectedTags])
 
     return(
         <div className={styles.container}>
@@ -119,9 +114,9 @@ function EditProjectPage(){
                     </h2>
                     {editProgress?
                     <div className={styles.progressButtonContainer}>
-                        <div onClick={() => selectProject('Founding')} className={styles.progressButton}><ProgressBar stage={'Founding'}/></div>
-                        <div onClick={() => selectProject('In progress')} className={styles.progressButton}><ProgressBar stage={'In progress'}/></div>
-                        <div onClick={() => selectProject('Completed')} className={styles.progressButton}><ProgressBar stage={'Completed'}/></div>
+                        <div onClick={() => selectProjectStatus('Founding')} className={styles.progressButton}><ProgressBar stage={'Founding'}/></div>
+                        <div onClick={() => selectProjectStatus('In progress')} className={styles.progressButton}><ProgressBar stage={'In progress'}/></div>
+                        <div onClick={() => selectProjectStatus('Completed')} className={styles.progressButton}><ProgressBar stage={'Completed'}/></div>
                     </div>
                     :<ProgressBar stage={projectStatus}/>
                     }
@@ -129,8 +124,8 @@ function EditProjectPage(){
             </div>
             <div className={`${styles.midColumn} ${styles.column}`}>
                 <DescriptionTextField handleChange={handleHeader} edit={true} type='header' content={newHeader}/>
-                <DescriptionTextField handleChange={handleIntroduction} edit={true} type='introduction' content={intro}/>
-                <DescriptionTextField handleChange={handleDescription} edit={true} type='description' content={description}/>
+                <DescriptionTextField handleChange={handleIntroduction} edit={true} type='introduction' content={newIntro}/>
+                <DescriptionTextField handleChange={handleDescription} edit={true} type='description' content={newDescription}/>
             </div>
             <div className={`${styles.rightColumn} ${styles.column}`}>
                 <div className={styles.contentCard}>
@@ -139,7 +134,13 @@ function EditProjectPage(){
                 </div>
                 <div className={styles.contentCard}>
                     <h2 className={styles.subHeader}>Tags</h2>
-                    <div className={styles.tagList}>{tags.map(tag => <ProjectTag key={tag} name={tag}/>)}</div>
+                    <div className={styles.tagList}>
+                        {tags.map(tag => <ProjectTag selected={selectedTags.includes(tag)} onClick={() => handleTagSelection(tag)} key={tag} name={tag}/>)}
+                    </div>
+                    <div className={styles.addTag}>
+                        <input value={newTag} onKeyDown={pressEnter} onChange={handleNewTag} placeholder='add new tag...' maxLength={20} className={styles.newTag} />
+                        <div className={styles.addTagButton} onClick={() => addTag()}>+</div >
+                    </div> 
                 </div>
             </div>
         </div>

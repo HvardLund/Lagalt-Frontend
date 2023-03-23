@@ -12,7 +12,7 @@ function SkillList(props) {
         <div className={`${styles.container} ${styles[type]}`}>
             {skillList.map(skill =>
             <div key={skill} className={styles.skill}>
-                <div className={styles.skillName}>{skill}</div>
+                <div className={`${styles.skillName} ${styles[edit?'edit':'notEdit']}`}>{skill}</div>
                 {edit &&
                 <input 
                     className={styles.checkbox} 

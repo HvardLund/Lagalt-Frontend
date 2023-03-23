@@ -70,7 +70,7 @@ function ProjectPage(){
                 </div>
                 <div className={styles.contentCard}>
                     <h2 className={styles.subHeader}>Tags</h2>
-                    <div className={styles.tagList}>{tags.map(tag => <ProjectTag key={tag} name={tag}/>)}</div>
+                    <div className={styles.tagList}>{tags.map(tag => <ProjectTag selected={true} key={tag} name={tag}/>)}</div>
                 </div>
             </div>
         </div>

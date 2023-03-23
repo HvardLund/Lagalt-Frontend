@@ -49,8 +49,6 @@
     border-radius: 5px;
 }
 
-
-
 .projectImage{
     max-height: 400px;
     max-width: 100%;
@@ -87,6 +85,7 @@
     overflow: auto;
     padding-bottom: 15px;
     padding-top: 5px;
+    padding-left: 2px;
 }
 
 .tagList::-webkit-scrollbar {
@@ -134,4 +133,38 @@
 
 .progressButton:hover{
     background-color: #353231;
+}
+
+.addTag{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 20px;
+    gap:5px;
+    width: 80%;
+    padding: 20px 0px;
+}
+
+.newTag{
+    background-color: #F3AE32;
+    outline: none;
+    border: none;
+    color: #454242;
+    font-size: 20px;
+    font-family: 'Archivo', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    width: 95%;
+    height: 30px;
+    border-radius: 6px;
+    padding: 2px 10px;
+}
+
+.newTag::placeholder{
+    color:#454242;
+}
+
+.addTagButton{
+    cursor: pointer;
+    width: 10%;
 }

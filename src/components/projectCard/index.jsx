@@ -52,7 +52,7 @@ function ProjectCard(props) {
                         }
                     </div>
                 </div>
-                <div className={styles.tagList}>{tags.map(tag => <ProjectTag key={tag} small={true} name={tag}/>)}</div>
+                <div className={styles.tagList}>{tags.map(tag => <ProjectTag selected={true} key={tag} small={true} name={tag}/>)}</div>
             </div>
         </div>
     )
