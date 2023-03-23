@@ -7,7 +7,10 @@ The project consists of creating the website lagalt.no, a platform that aims to 
 The website uses Oauth for handling authentication, and the website's backend exposes REST API endpoints and utilizes SQLServer for the database. 
 
 ## Development
-The frontend framework used is React. Further info can be found in the section below.
+The frontend framework used is React. Further info can be found in the sections below.
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 # Getting Started with Create React App
