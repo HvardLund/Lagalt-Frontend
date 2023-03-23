@@ -19,6 +19,9 @@
 }
 
 .skill{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     background-color: #454242;
     height: fit-content;
     width: 98%;
@@ -30,4 +33,12 @@
     font-family: 'Archivo', sans-serif;
     font-weight: 400;
     color: #FFECB7;
+    text-align: center;
+    width: 80%;
+    margin-left: 10%;
+}
+
+.checkbox{
+    width: 10%;
+    accent-color: #F3AE32;
 }

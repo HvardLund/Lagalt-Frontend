@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom"
 
 function ProjectCard(props) {
 
-    const projectImage = props.image?props.image: 'assets/lagalt.png'
+    const projectImage = props.image?props.image: 'assets/noimage.png'
     const status = props.progress? props.progress: 'Founding'
     const header = props.header? props.header: 'Header'
     const intro = props.intro? props.intro: 'Introduction'
@@ -23,10 +23,10 @@ function ProjectCard(props) {
     return(
         <div className={styles.container} onClick={() => navigate(`/project/${id}`)}>
             <div className={`${styles.activity} ${styles[activityType.toLowerCase()]}`}>
-                {activityType.toLowerCase()==='music'&&<span class="material-symbols-outlined">music_note</span>}
-                {activityType.toLowerCase()==='web'&&<span class="material-symbols-outlined">code</span>}
-                {activityType.toLowerCase()==='movie'&&<span class="material-symbols-outlined">movie</span>}
-                {activityType.toLowerCase()==='games'&&<span class="material-symbols-outlined">stadia_controller</span>}
+                {activityType.toLowerCase()==='music'&&<span className="material-symbols-outlined">music_note</span>}
+                {activityType.toLowerCase()==='web'&&<span className="material-symbols-outlined">code</span>}
+                {activityType.toLowerCase()==='movie'&&<span className="material-symbols-outlined">movie</span>}
+                {activityType.toLowerCase()==='games'&&<span className="material-symbols-outlined">stadia_controller</span>}
                 <div className={styles.activityName}>{activityType}</div>
             </div>
             <div className={styles.card}>
@@ -44,13 +44,15 @@ function ProjectCard(props) {
                             <h2 className={styles.subHeader}>Skills</h2>
                             <SkillList type='frontpage' skills ={skills}/>
                         </div>
+                        {owner.length > 0 &&
                         <div className={styles.contentCard}>
                             <h2 className={styles.subHeader}>Owner</h2>
                             <MemberList members={owner}/>
                         </div>
+                        }
                     </div>
                 </div>
-                <div className={styles.tagList}>{tags.map(tag => <ProjectTag small={true} name={tag}/>)}</div>
+                <div className={styles.tagList}>{tags.map(tag => <ProjectTag key={tag} small={true} name={tag}/>)}</div>
             </div>
         </div>
     )

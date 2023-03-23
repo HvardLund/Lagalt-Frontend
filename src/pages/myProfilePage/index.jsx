@@ -60,6 +60,7 @@ function MyProfilePage(){
                         skills={project.skills}
                         id={project.id}
                         activityType={project.activityType}
+                        key={project.id}
                     />
                 )}
             </div>
