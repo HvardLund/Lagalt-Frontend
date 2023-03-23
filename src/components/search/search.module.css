@@ -1,0 +1,27 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 65%;
+    height: 39px;
+    background: #454242;
+    border-radius: 6px;
+    color: #FFECB7;
+    gap: 5px;
+    padding-right: 10px;
+}
+
+.inputField{
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #FFECB7;
+    font-family: 'Archivo', sans-serif;
+    font-style: normal;
+    cursor: text;
+    font-weight: 500;
+    padding-left: 15px;
+    font-size: 15px;
+    width: calc(100% - 39px)
+}

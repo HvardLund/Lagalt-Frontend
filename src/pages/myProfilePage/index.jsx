@@ -1,8 +1,10 @@
-import styles from './profilepage.module.css'
+import styles from './myProfilepage.module.css'
 import ProjectCard from '../../components/projectCard';
 import DescriptionTextField from '../../components/descriptionTextField';
 import SkillList from '../../components/skillList';
-import { useParams } from 'react-router';
+import keycloak from '../../keycloak';
+import FeatherIcon from 'feather-icons-react'
+import ToggleSwitch from '../../components/toggleSwitch';
 
 const skills = ['Skillpadde', 'Avoid indecies', 'too cool for school', 'ski ll', 'koding']
 
@@ -30,16 +32,19 @@ const projects = [project1, project2, project3]
 
 const about = 'Hei! Jeg er en kreativ person som er lidenskapelig opptatt av å utforske nye ideer og utfordringer. Jeg har en interesse for [sett inn interessefelt] og bruker min tid på å lære og utvikle meg selv innen dette området. Jeg er alltid på utkikk etter nye muligheter til å samarbeide og jobbe med andre mennesker som deler min lidenskap. Jeg er åpen for å delta i hobbyprosjekter og ser frem til å møte likesinnede mennesker her på plattformen!"'
 
-function ProfilePage(){
-
-    const {username} = useParams()
-
+function MyProfilePage(){
     return(
         <div className={styles.container}>        
             <div className={`${styles.midColumn} ${styles.column}`}>
                 <div className={styles.me}>
-                    <img className={styles.profileImage} src={me.profileImage} alt='avatar' />
-                    <div className={styles.username}>{username.replaceAll('_', ' ')}</div>
+                    <div className={styles.profileInfo}>
+                        <img className={styles.profileImage} src={me.profileImage} alt='avatar' />
+                        <div className={styles.username}>{keycloak.tokenParsed.preferred_username}<div className={styles.name}>{keycloak.tokenParsed.name}</div></div>
+                    </div>
+                    <div className={styles.editContainer}>
+                        <div className={styles.edit}><ToggleSwitch /><div>Hidden mode</div></div>
+                        <div className={styles.edit}><FeatherIcon cursor='pointer' size="25" icon="edit-3" /><div>Edit profile</div></div>
+                    </div>
                 </div>
                 <DescriptionTextField type='description' content={about}></DescriptionTextField>
                 <div className={styles.contentCard}>
@@ -49,16 +54,17 @@ function ProfilePage(){
                 <h2 className={styles.subHeader}>Portfolio</h2>
                 {projects.map(project =>
                     <ProjectCard 
-                        intro={project.intro}
+                        intro={project.intro} 
                         tags={project.tags} 
                         image={project.image}
                         skills={project.skills}
                         id={project.id}
                         activityType={project.activityType}
+                        key={project.id}
                     />
                 )}
             </div>
         </div>
     )
 }
-export default ProfilePage;
+export default MyProfilePage;

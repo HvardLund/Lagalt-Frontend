@@ -1,6 +1,5 @@
 .container{
     width: fit-content;
-    background-color: #F3AE32;
     border-radius: 6px;
     display: flex;
     align-items: center;
@@ -12,7 +11,6 @@
     font-family: 'Archivo', sans-serif;
     font-style: normal;
     font-weight: 600;
-    color: #454242;
 }
 
 .default{
@@ -23,4 +21,26 @@
 .small{
     font-size:12px;
     height: 14px;
+}
+
+.selected{
+    background-color: #F3AE32;
+    color: #454242;
+}
+
+.notSelected{
+    background-color: #454242;
+    color:#272524;
+}
+
+.clickable{
+    cursor: pointer;
+}
+
+.clickable.notSelected:hover{
+    outline:solid 1px #F3AE32;
+}
+
+.clickable.selected:hover{
+    outline:solid 2px #F3AE32;
 }

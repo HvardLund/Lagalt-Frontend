@@ -19,14 +19,20 @@
     margin-bottom: 20px;
     overflow: auto;
     color: #FFECB7;
+    max-height: calc(100vh - 90px);
 }
 
 .leftColumn{
     width: max(357px, 25%);
+    height:calc(100vh - 90px);
 }
 
 .midColumn{
     width: max(357px, 42%);
+}
+
+.rightColumn{
+    width: max(357px, 25%);
 }
 
 .column::-webkit-scrollbar {
@@ -43,15 +49,15 @@
     border-radius: 5px;
 }
 
-.rightColumn{
-    width: max(357px, 25%);
-}
-
 .projectImage{
-    width:100%;
+    max-height: 400px;
+    max-width: 100%;
 }
 
 .subHeader{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 0;
     font-size: 20px;
     font-weight: 600;
@@ -63,12 +69,11 @@
     align-items: center;
     justify-content: flex-start;
     width: 100%;
-    height: fit-content;
     background-color: #272524;
     padding-top: 20px;
     padding-bottom: 10px;
     gap:10px;
-    max-height: 35%;
+    max-height: 40%;
     border-radius: 6px;
 }
 
@@ -80,6 +85,7 @@
     overflow: auto;
     padding-bottom: 15px;
     padding-top: 5px;
+    padding-left: 2px;
 }
 
 .tagList::-webkit-scrollbar {
@@ -96,4 +102,69 @@
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
+}
+
+.dropdown{
+    margin:0;
+    margin-top: 8px;   
+}
+
+.progressButtonContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color:#272524;
+    padding-bottom: 20px;
+    border-radius: 6px;
+    position: relative;
+}
+
+.progressButton{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    width: 90%;
+    padding-top: 10px;
+    height: fit-content;
+}
+
+.progressButton:hover{
+    background-color: #353231;
+}
+
+.addTag{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 20px;
+    gap:5px;
+    width: 80%;
+    padding: 20px 0px;
+}
+
+.newTag{
+    background-color: #F3AE32;
+    outline: none;
+    border: none;
+    color: #454242;
+    font-size: 20px;
+    font-family: 'Archivo', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    width: 95%;
+    height: 30px;
+    border-radius: 6px;
+    padding: 2px 10px;
+}
+
+.newTag::placeholder{
+    color:#454242;
+}
+
+.addTagButton{
+    cursor: pointer;
+    width: 10%;
 }

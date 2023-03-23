@@ -1,12 +1,13 @@
 import ProjectCard from '../../components/projectCard';
 import styles from './frontpage.module.css'
 import { useEffect, useState } from 'react';
+import Search from '../../components/search';
 
 const project1 = {
     id:1,
     skills: ['Skillpadde', 'Avoid indecies', 'too cool for school', 'ski ll', 'koding'],
     tags: ['tag1', 'tag2 med langt navn', 'tagger4', 'tag5'],
-    image: 'assets/Prosjektbilde.png',
+    image: 'https://lagaltprojectimages.blob.core.windows.net/images/lagalt.png',
     owner: { fullname: 'Nils', username: 'Nils...', profileImage: 'assets/profile.svg'},
     activityType: 'movie',
     progress: 'Completed',
@@ -26,7 +27,8 @@ const projects = [project1, project2, project3]
 function FrontPage(){
 
     const [selected, setSelected] = useState('All')
-    const [displayedProjects, setDisplayedProjects] = useState(projects) 
+    const [displayedProjects, setDisplayedProjects] = useState(projects)
+    const [searchPhrase, setSearchPhrase] = useState('')
 
     const select = (activity) => {
         setSelected(activity)
@@ -35,6 +37,15 @@ function FrontPage(){
     useEffect(() => {
         selected==='All'?(setDisplayedProjects(projects)):setDisplayedProjects(projects.filter(projects => projects.activityType===selected.toLowerCase()))
     }, [selected])
+
+    const handleSearch = (event) => {
+        const value = event.target.value;
+        setSearchPhrase(value);
+    }
+
+    useEffect(() => {
+        console.log(searchPhrase)
+    },[searchPhrase])
 
     return(
         <div className={styles.container}>
@@ -47,12 +58,12 @@ function FrontPage(){
             </div>
             <div className={styles.columnsContainer}>
             <div className={`${styles.leftColumn} ${styles.column}`}>
-                <div>hei</div>
+                <Search value={searchPhrase} handleSearch={handleSearch}/>
             </div>
             <div className={`${styles.midColumn} ${styles.column}`}>
                 {displayedProjects.map(project =>
                     <ProjectCard 
-                        intro={project.intro} 
+                        intro={project.intro}
                         tags={project.tags} 
                         image={project.image}
                         owner={project.owner}
@@ -60,6 +71,7 @@ function FrontPage(){
                         id={project.id}
                         activityType={project.activityType}
                         progress={project.progress}
+                        key={project.id}
                     />
                 )}
             </div>
