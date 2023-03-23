@@ -67,9 +67,15 @@
 }
 
 .username{
+    text-align: left;
     font-family: 'Archivo', sans-serif;
     font-weight: 600;
     font-size: 36px;
+}
+
+.name {
+    font-size: 16px;
+    color: #F3AE32;
 }
 
 .profileInfo{

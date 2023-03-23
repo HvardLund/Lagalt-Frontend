@@ -52,7 +52,6 @@ function ProfilePage(){
                         intro={project.intro}
                         tags={project.tags} 
                         image={project.image}
-                        owner={project.owner}
                         skills={project.skills}
                         id={project.id}
                         activityType={project.activityType}
