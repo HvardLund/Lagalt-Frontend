@@ -6,6 +6,7 @@ import SkillList from '../../components/skillList';
 import styles from './projectpage.module.css'
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
 import { useNavigate, useParams } from 'react-router-dom';
+import keycloak from '../../keycloak';
 
 const header = 'Galactic quest'
 const intro='Bli med på et sci-fi-basert rollespill og utforsk ulike planeter og galakser! Vi er et lidenskapelig team som arbeider med å skape en spennende ny spillopplevelse for spillere over hele verden. Hvis du er interessert i å bli med på denne hobbybaserte utviklingen, kontakt oss for mer informasjon om hvordan du kan bidra til å skape et fantastisk spill!'
@@ -13,6 +14,7 @@ let description='Vi er en gruppe med lidenskapelige spillutviklere som arbeider 
 description = description + description
 const projectImage = './assets/noimage.png'
 const status = 'In progress'
+const owner = 'nils'
 
 const memberList = [
     {
@@ -59,7 +61,7 @@ function ProjectPage(){
                 <DescriptionTextField type='description' content={description}/>
             </div>
             <div className={`${styles.rightColumn} ${styles.column}`}>
-                <div className={styles.edit}><FeatherIcon onClick={() => navigate(`/project/${id}/edit`)} cursor='pointer' size="39" icon="edit-3" /></div>
+                {keycloak.tokenParsed.preferred_username === owner && <div className={styles.edit}><FeatherIcon onClick={() => navigate(`/project/${id}/edit`)} cursor='pointer' size="39" icon="edit-3" /></div>}
                 <div className={styles.contentCard}>
                     <h2 className={styles.subHeader}>Members</h2>
                     <MemberList members={memberList}/>

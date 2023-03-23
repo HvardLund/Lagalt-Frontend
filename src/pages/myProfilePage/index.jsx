@@ -39,7 +39,7 @@ function MyProfilePage(){
                 <div className={styles.me}>
                     <div className={styles.profileInfo}>
                         <img className={styles.profileImage} src={me.profileImage} alt='avatar' />
-                        <div className={styles.username}>{keycloak.tokenParsed.name}</div>
+                        <div className={styles.username}>{keycloak.tokenParsed.preferred_username}<div className={styles.name}>{keycloak.tokenParsed.name}</div></div>
                     </div>
                     <div className={styles.editContainer}>
                         <div className={styles.edit}><ToggleSwitch /><div>Hidden mode</div></div>
