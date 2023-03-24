@@ -3,11 +3,11 @@
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
-    gap:30px;
     height: 100%;
     width: 100%;
     font-family: 'Archivo Black', sans-serif;
     font-size: 50px;
+    padding-top: 50px;
 }
 
 .column{
@@ -16,12 +16,8 @@
     justify-content: flex-start;
     gap: 30px;
     color: white;
-}
-
-.midColumn{
     min-width: 796px;
     max-width: 796px;
-    margin-top: 60px;
     align-items: center;
     padding-bottom: 20px;
 }
@@ -99,11 +95,32 @@
     font-size: 16px;
 }
 
-.edit{
+.editButton{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    color: #FFFFFF;
+    background-color: #587D3B;
+    font-family: 'Archivo', sans-serif;
+    font-style: normal;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 20px;
+    border-radius: 66px;
+    padding: 8px 16px;
+    gap: 5px;
+    margin-right: 15px;
+    width: fit-content;
+}
+
+.topBar{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap:5px;
-    width: 50%;
+    align-items: flex-end;
+    width: 100%;
+    height: fit-content;
+    padding-top: 15px;
 }
