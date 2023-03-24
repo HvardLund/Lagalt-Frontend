@@ -53,10 +53,17 @@ function FrontPage(){
             method: 'POST',
             headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'},
             body: JSON.stringify({
-                "id": keycloak.tokenParsed.sub,
+                "id": `${keycloak.tokenParsed.sub}`,
                 "desciption": 'Jeg er kul', 
             })
-        }).then(resp => console.log(resp))
+        }).then(resp => {
+            if (!resp.ok) {
+                throw new Error(resp.status);
+            }
+            console.log(resp);
+        }).catch(error => {
+            console.log(error);
+        });
     }
 
     return(
