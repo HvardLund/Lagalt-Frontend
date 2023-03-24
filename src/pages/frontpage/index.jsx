@@ -33,7 +33,7 @@ function FrontPage(){
 
     const select = (activity) => {
         setSelected(activity)
-        createUser()
+        //createUser()
     }
 
     useEffect(() => {
