@@ -4,7 +4,6 @@ import ProjectTag from '../../components/projectTag'
 import SkillList from '../../components/skillList'
 import styles from './newProjectpage.module.css'
 import { useState } from 'react'
-import { useEffect } from 'react'
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon'
 
 const allSkills = ['Skillpadde', 'Avoid indecies', 'too cool for school', 'ski ll', 'koding', 'sverre', 'kake']
@@ -21,6 +20,7 @@ function NewProjectPage(){
     const [selectedSkills, setSelectedSkills] = useState([])
     const [selectedTags, setSelectedTags] = useState([])
     const [newTag, setNewTag] = useState('')
+    const [selectedCategory, setSelectedCategory] = useState('All')
 
     const changeProgress = () => {
         setEditProgress(!editProgress)
@@ -77,8 +77,10 @@ function NewProjectPage(){
             setNewTag('')
         }
     }
-    
-    useEffect(() => {console.log(selectedTags)},[selectedTags])
+
+    const select = (activity) => {
+        setSelectedCategory(activity)
+    }
 
     return(
         <div className={styles.container}>
@@ -112,6 +114,12 @@ function NewProjectPage(){
                 </div>
             </div>
             <div className={`${styles.midColumn} ${styles.column}`}>
+                <div className={styles.navbar}>
+                    <div onClick={() => select('Games')} className={selectedCategory==='Games'?`${styles.selected} `:`${styles.navText}`}>Game dev</div>
+                    <div onClick={() => select('Web')} className={selectedCategory==='Web'?`${styles.selected}`:`${styles.navText}`}>Webdesign</div>
+                    <div onClick={() => select('Music')} className={selectedCategory==='Music'?`${styles.selected}`:`${styles.navText}`}>Music</div>
+                    <div onClick={() => select('Movie')} className={selectedCategory==='Movie'?`${styles.selected}`:`${styles.navText}`}>Film</div>
+                </div>
                 <DescriptionTextField handleChange={handleHeader} edit={true} type='header' content={newHeader}/>
                 <DescriptionTextField handleChange={handleIntroduction} edit={true} type='introduction' content={newIntro}/>
                 <DescriptionTextField handleChange={handleDescription} edit={true} type='description' content={newDescription}/>

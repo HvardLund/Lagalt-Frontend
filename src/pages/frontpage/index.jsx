@@ -2,7 +2,6 @@ import ProjectCard from '../../components/projectCard';
 import styles from './frontpage.module.css'
 import { useEffect, useState } from 'react';
 import Search from '../../components/search';
-import keycloak from '../../keycloak'
 
 const project1 = {
     id:1,
@@ -33,7 +32,6 @@ function FrontPage(){
 
     const select = (activity) => {
         setSelected(activity)
-        console.log(keycloak.token)
     }
 
     useEffect(() => {
