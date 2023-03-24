@@ -51,7 +51,7 @@ function FrontPage(){
     const createUser = async () => {
         await fetch(apiURL, {
             method: 'POST',
-            headers: {Authorization: `Bearer ${keycloak.token}`},
+            headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'},
             body: JSON.stringify({
                 id: keycloak.tokenParsed.sub,
                 desciption: 'Jeg er kul', 
