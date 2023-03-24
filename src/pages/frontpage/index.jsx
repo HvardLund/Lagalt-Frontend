@@ -33,6 +33,7 @@ function FrontPage(){
 
     const select = (activity) => {
         setSelected(activity)
+        console.log(keycloak.token)
     }
 
     useEffect(() => {
@@ -43,10 +44,6 @@ function FrontPage(){
         const value = event.target.value;
         setSearchPhrase(value);
     }
-
-    useEffect(() => {
-        console.log(searchPhrase)
-    },[searchPhrase])
 
     return(
         <div className={styles.container}>
@@ -77,7 +74,7 @@ function FrontPage(){
                 )}
             </div>
             <div className={`${styles.rightColumn} ${styles.column}`}>
-                <div>{keycloak.token}</div>
+                <div></div>
             </div>
             </div>
         </div>
