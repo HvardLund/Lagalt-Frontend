@@ -2,6 +2,7 @@ import ProjectCard from '../../components/projectCard';
 import styles from './frontpage.module.css'
 import { useEffect, useState } from 'react';
 import Search from '../../components/search';
+import keycloak from '../../keycloak'
 
 const project1 = {
     id:1,
@@ -32,6 +33,7 @@ function FrontPage(){
 
     const select = (activity) => {
         setSelected(activity)
+        console.log(keycloak.token)
     }
 
     useEffect(() => {
@@ -42,10 +44,6 @@ function FrontPage(){
         const value = event.target.value;
         setSearchPhrase(value);
     }
-
-    useEffect(() => {
-        console.log(searchPhrase)
-    },[searchPhrase])
 
     return(
         <div className={styles.container}>
