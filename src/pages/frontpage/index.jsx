@@ -33,7 +33,8 @@ function FrontPage(){
 
     const select = (activity) => {
         setSelected(activity)
-        createUser()
+        console.log(keycloak.token)
+        //createUser()
     }
 
     useEffect(() => {
