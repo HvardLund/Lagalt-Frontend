@@ -53,8 +53,8 @@ function FrontPage(){
             method: 'POST',
             headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'},
             body: JSON.stringify({
-                id: keycloak.tokenParsed.sub,
-                desciption: 'Jeg er kul', 
+                "id": keycloak.tokenParsed.sub,
+                "desciption": 'Jeg er kul', 
             })
         }).then(resp => console.log(resp))
     }
