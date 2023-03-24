@@ -54,7 +54,7 @@ function FrontPage(){
             headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'},
             body: JSON.stringify({
                 "id": `${keycloak.tokenParsed.sub}`,
-                "desciption": 'Jeg er kul', 
+                "description": 'Jeg er kul', 
             })
         }).then(resp => {
             if (!resp.ok) {
