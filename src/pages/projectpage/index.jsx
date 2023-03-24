@@ -61,7 +61,9 @@ function ProjectPage(){
                 <DescriptionTextField type='description' content={description}/>
             </div>
             <div className={`${styles.rightColumn} ${styles.column}`}>
-                {keycloak.tokenParsed && keycloak.tokenParsed.preferred_username === owner && <div className={styles.edit}><FeatherIcon onClick={() => navigate(`/project/${id}/edit`)} cursor='pointer' size="39" icon="edit-3" /></div>}
+                {keycloak.tokenParsed && keycloak.tokenParsed.preferred_username === owner &&
+                    <button className = {styles.editButton} onClick={() => navigate(`/project/${id}/edit`)}><FeatherIcon  cursor='pointer' size="20" icon="edit-3" />Edit</button>
+                }
                 <div className={styles.contentCard}>
                     <h2 className={styles.subHeader}>Members</h2>
                     <MemberList members={memberList}/>
@@ -72,7 +74,7 @@ function ProjectPage(){
                 </div>
                 <div className={styles.contentCard}>
                     <h2 className={styles.subHeader}>Tags</h2>
-                    <div className={styles.tagList}>{tags.map(tag => <ProjectTag selected={true} key={tag} name={tag}/>)}</div>
+                    <div className={styles.tagList}>{tags.map(tag => <ProjectTag key={tag} name={tag}/>)}</div>
                 </div>
             </div>
         </div>

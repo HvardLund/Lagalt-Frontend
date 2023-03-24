@@ -4,9 +4,10 @@ import DescriptionTextField from '../../components/descriptionTextField';
 import SkillList from '../../components/skillList';
 import keycloak from '../../keycloak';
 import FeatherIcon from 'feather-icons-react'
-import ToggleSwitch from '../../components/toggleSwitch';
+import { useState } from 'react';
 
 const skills = ['Skillpadde', 'Avoid indecies', 'too cool for school', 'ski ll', 'koding']
+const allSkills = ['Skillpadde', 'Avoid indecies', 'too cool for school', 'ski ll', 'koding', 'sverre', 'kake']
 
 const project1 = {
     id:1,
@@ -33,23 +34,43 @@ const projects = [project1, project2, project3]
 const about = 'Hei! Jeg er en kreativ person som er lidenskapelig opptatt av å utforske nye ideer og utfordringer. Jeg har en interesse for [sett inn interessefelt] og bruker min tid på å lære og utvikle meg selv innen dette området. Jeg er alltid på utkikk etter nye muligheter til å samarbeide og jobbe med andre mennesker som deler min lidenskap. Jeg er åpen for å delta i hobbyprosjekter og ser frem til å møte likesinnede mennesker her på plattformen!"'
 
 function MyProfilePage(){
+
+    const [edit, setEdit] = useState(false)
+    const [selectedSkills, setSelectedSkills] = useState(skills)
+
+    const buttonClick = () => {
+        setEdit(!edit)
+    }
+
+    let viewedSkills = edit?allSkills:skills
+
+    const handleCheckboxChange = (event) => {
+        const itemId = event.target.id;
+        const isChecked = event.target.checked;
+    
+        if (isChecked) {
+          setSelectedSkills([...selectedSkills, itemId]);
+        } else {
+          setSelectedSkills(selectedSkills.filter((id) => id !== itemId));
+        }
+    }
+
     return(
-        <div className={styles.container}>        
-            <div className={`${styles.midColumn} ${styles.column}`}>
+        <div className={styles.container}>
+            <div className={styles.topBar}>
+                <div onClick= {() => buttonClick()} className={styles.editButton}>{edit?'Save':<>Edit<FeatherIcon cursor='pointer' size="20" icon="edit-3" /></>}</div>
+            </div>        
+            <div className={`${styles.column}`}>
                 <div className={styles.me}>
                     <div className={styles.profileInfo}>
                         <img className={styles.profileImage} src={me.profileImage} alt='avatar' />
                         <div className={styles.username}>{keycloak.tokenParsed.preferred_username}<div className={styles.name}>{keycloak.tokenParsed.name}</div></div>
                     </div>
-                    <div className={styles.editContainer}>
-                        <div className={styles.edit}><ToggleSwitch /><div>Hidden mode</div></div>
-                        <div className={styles.edit}><FeatherIcon cursor='pointer' size="25" icon="edit-3" /><div>Edit profile</div></div>
-                    </div>
                 </div>
-                <DescriptionTextField type='description' content={about}></DescriptionTextField>
+                <DescriptionTextField edit={edit} type='description' content={about}></DescriptionTextField>
                 <div className={styles.contentCard}>
                     <h2 className={styles.subHeader}>Skills</h2>
-                    <SkillList skills = {skills}/>
+                    <SkillList handleCheckboxChange={handleCheckboxChange} selectedItems={selectedSkills} edit={edit} skills = {viewedSkills}/>
                 </div>
                 <h2 className={styles.subHeader}>Portfolio</h2>
                 {projects.map(project =>
@@ -63,7 +84,7 @@ function MyProfilePage(){
                         key={project.id}
                     />
                 )}
-            </div>
+            </div>   
         </div>
     )
 }
