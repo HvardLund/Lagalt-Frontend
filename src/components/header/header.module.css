@@ -1,4 +1,5 @@
 .container{
+    position: fixed;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -7,6 +8,7 @@
     color: #FFECB7;
     font-size: 45px;
     width: 100%;
+    z-index: 10;
 }
 
 .headerItem{
@@ -47,7 +49,7 @@
 .loginButton{
     width: 72px;
     height: 27px;
-    color: #FFECB7;
+    color: #FFFFFF;
     background-color: #587D3B;
     font-family: 'Archivo', sans-serif;
     font-style: normal;
