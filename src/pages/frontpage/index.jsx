@@ -2,6 +2,7 @@ import ProjectCard from '../../components/projectCard';
 import styles from './frontpage.module.css'
 import { useEffect, useState } from 'react';
 import Search from '../../components/search';
+import keycloak from '../../keycloak'
 
 const project1 = {
     id:1,
@@ -76,7 +77,7 @@ function FrontPage(){
                 )}
             </div>
             <div className={`${styles.rightColumn} ${styles.column}`}>
-                <div></div>
+                <div>{keycloak.token}</div>
             </div>
             </div>
         </div>
