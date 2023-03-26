@@ -2,55 +2,36 @@ import ProjectCard from '../../components/projectCard';
 import styles from './frontpage.module.css'
 import { useEffect, useState } from 'react';
 import Search from '../../components/search';
-import keycloak from '../../keycloak';
+//import keycloak from '../../keycloak';
 
-const project1 = {
-    id:1,
-    skills: ['Skillpadde', 'Avoid indecies', 'too cool for school', 'ski ll', 'koding'],
-    tags: ['tag1', 'tag2 med langt navn', 'tagger4', 'tag5'],
-    image: 'https://lagaltprojectimages.blob.core.windows.net/images/lagalt.png',
-    owner: { fullname: 'Nils', username: 'Nils...', profileImage: 'https://lagaltprojectimages.blob.core.windows.net/images/profile.svg'},
-    activityType: 'movie',
-    progress: 'Completed',
-    intro: 'Bli med på et sci-fi-basert rollespill og utforsk ulike planeter og galakser! Vi er et lidenskapelig team som arbeider med å skape en spennende ny spillopplevelse for spillere over hele verden. Hvis du er interessert i å bli med på denne hobbybaserte utviklingen, kontakt oss for mer informasjon om hvordan du kan bidra til å skape et fantastisk spill!'
-}
-
-const project2 = Object.assign({},project1)
-project2.id = 2
-project2.activityType='games'
-
-const project3 = Object.assign({},project1)
-project3.id = 3
-project3.activityType = 'web'
-
-const projects = [project1, project2, project3] 
+const tags = []
 
 function FrontPage(){
-
+    
+    const [projects, setProjects] = useState([])
     const [selected, setSelected] = useState('All')
     const [displayedProjects, setDisplayedProjects] = useState(projects)
     const [searchPhrase, setSearchPhrase] = useState('')
 
     const select = (activity) => {
         setSelected(activity)
-        console.log(keycloak.token)
-        //createUser()
     }
 
     useEffect(() => {
-        selected==='All'?(setDisplayedProjects(projects)):setDisplayedProjects(projects.filter(projects => projects.activityType===selected.toLowerCase()))
-    }, [selected])
-
+        console.log('front1')
+        selected ==='All'?(setDisplayedProjects(projects)):setDisplayedProjects(projects.filter(project => getRightActivityType(project.field)===selected.toLowerCase()))
+    },[selected, projects])
+    
     const handleSearch = (event) => {
         const value = event.target.value;
         setSearchPhrase(value);
     }
 
-    const apiURL = 'https://lagalt-bckend.azurewebsites.net/api/users'
+    const apiURL = 'https://lagalt-bckend.azurewebsites.net/api/'
 
-
+    /*
     const createUser = async () => {
-        await fetch(apiURL, {
+        await fetch(apiURL+'users', {
             method: 'POST',
             headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -66,6 +47,31 @@ function FrontPage(){
             console.log(error);
         });
     }
+    */
+    
+    const getRightActivityType = (activityType) =>{
+        if(activityType === 'Webdesign'){
+            return 'web'
+        }
+    }
+
+    useEffect(() => {
+        const getAllProjects = async () => {
+            try{
+                const response = await fetch(apiURL+'projects')
+                if(!response.ok){
+                    throw new Error('Could not load projects')
+                }
+                const data = await response.json()
+                setProjects(data)
+            }
+            catch(error){
+                return[error.message,[]]
+            }
+        }
+        console.log('front2')
+        getAllProjects()
+    },[])
 
     return(
         <div className={styles.container}>
@@ -82,14 +88,15 @@ function FrontPage(){
             </div>
             <div className={`${styles.midColumn} ${styles.column}`}>
                 {displayedProjects.map(project =>
-                    <ProjectCard 
-                        intro={project.intro}
-                        tags={project.tags} 
-                        image={project.image}
+                    <ProjectCard
+                        title={project.title} 
+                        intro={project.caption}
+                        tags={tags}
+                        image={project.images[0]}
                         owner={project.owner}
                         skills={project.skills}
                         id={project.id}
-                        activityType={project.activityType}
+                        activityType={getRightActivityType(project.field)}
                         progress={project.progress}
                         key={project.id}
                     />

@@ -3,6 +3,7 @@ import ProjectCard from '../../components/projectCard';
 import DescriptionTextField from '../../components/descriptionTextField';
 import SkillList from '../../components/skillList';
 import { useParams } from 'react-router';
+//import { useState } from 'react';
 
 const skills = ['Skillpadde', 'Avoid indecies', 'too cool for school', 'ski ll', 'koding']
 
@@ -33,6 +34,7 @@ const about = 'Hei! Jeg er en kreativ person som er lidenskapelig opptatt av å 
 function ProfilePage(){
 
     const {username} = useParams()
+    //const [projects, setProjects] = useState()
 
     return(
         <div className={styles.container}>        

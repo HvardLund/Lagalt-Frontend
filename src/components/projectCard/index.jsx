@@ -10,13 +10,13 @@ function ProjectCard(props) {
 
     const projectImage = props.image?props.image: 'https://lagaltprojectimages.blob.core.windows.net/images/noimage.png'
     const status = props.progress? props.progress: 'Founding'
-    const header = props.header? props.header: 'Header'
+    const title = props.title? props.title: 'Header'
     const intro = props.intro? props.intro: 'Introduction'
     const owner = props.owner?[props.owner]:[]
     const skills = props.skills?props.skills:[]
     const tags = props.tags?props.tags:[]
     const id = props.id
-    const activityType = props.activityType
+    let activityType = props.activityType? props.activityType : ''
 
     const navigate = useNavigate()
 
@@ -36,7 +36,7 @@ function ProjectCard(props) {
                         <ProgressBar stage={status}/>
                     </div>
                     <div className={`${styles.midColumn} ${styles.column}`}>
-                        <DescriptionTextField theme='frontpage' type='header' content={header}/>
+                        <DescriptionTextField theme='frontpage' type='header' content={title}/>
                         <DescriptionTextField theme='frontpage' type='introduction' content={intro}/>
                     </div>
                     <div className={`${styles.rightColumn} ${styles.column}`}>
