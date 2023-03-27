@@ -28,7 +28,7 @@ function ProgressBar(props) {
     return(
         <div className={styles.container}>
             <div className={`${styles.steps} ${styles[stagestyle]}`}>
-            {steps.map(({ step, label, reached }) => (
+            {steps.map(({ step, reached }) => (
                 <div className={styles.stepWrapper} key = {step}>
                     <div className={`${styles.step} ${styles[reached]}`}>
                         <span className={styles.stepCount}></span>
