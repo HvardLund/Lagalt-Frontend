@@ -7,10 +7,6 @@ import FeatherIcon from 'feather-icons-react'
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-const allSkills = ['Skillpadde', 'Avoid indecies', 'too cool for school', 'ski ll', 'koding', 'sverre', 'kake']
-
-
-
 const tags=[]
 
 function MyProfilePage(){
@@ -20,7 +16,9 @@ function MyProfilePage(){
     const [edit, setEdit] = useState(false)
     const [selectedSkills, setSelectedSkills] = useState(skills)
     const [myProjects, setMyProjects] = useState([])
-    const apiURL = `https://lagalt-bckend.azurewebsites.net/api/users/${keycloak.tokenParsed.sub}/projects`
+    const [allSkills, setAllSKills] = useState([])
+    const projectApiURL = `https://lagalt-bckend.azurewebsites.net/api/users/${keycloak.tokenParsed.sub}/projects`
+    const skillApiUrl = 'https://lagalt-bckend.azurewebsites.net/api/skills'
     const imageNotFound = "https://lagaltprojectimages.blob.core.windows.net/images/noimage.png"
     const profileImage = "https://lagaltprojectimages.blob.core.windows.net/images/profile.svg"
 
@@ -42,9 +40,26 @@ function MyProfilePage(){
     }
 
     useEffect(() => {
+        const getAllSkills = async () => {
+            try{
+                const response = await fetch(skillApiUrl)
+                if(!response.ok){
+                    throw new Error('Could not load projects')
+                }
+                const data = await response.json()
+                setAllSKills(data)
+            }
+            catch(error){
+                return[error.message,[]]
+            }
+        }
+        getAllSkills()
+    },[])
+
+    useEffect(() => {
         const getAllProjects = async () => {
             try{
-                const response = await fetch(apiURL)
+                const response = await fetch(projectApiURL)
                 if(!response.ok){
                     throw new Error('Could not load projects')
                 }
@@ -55,8 +70,9 @@ function MyProfilePage(){
                 return[error.message,[]]
             }
         }
+        alert('something wrong here')
         getAllProjects()
-    },[apiURL])
+    },[projectApiURL])
 
     return(
         <div className={styles.container}>

@@ -19,9 +19,6 @@ function ProfilePage(){
                     throw new Error('Could not load users')
                 }
                 const data = await response.json()
-                console.log(data.map(user => user.userName))
-                console.log(username.replaceAll('_', ' '))
-                console.log(data.filter(user => (user.userName === username.replaceAll('_', ' '))))
                 setUser(data.filter(user => (user.userName === username.replaceAll('_', ' ')))[0])
             }
             catch(error){
