@@ -12,7 +12,7 @@ const tags=[]
 function MyProfilePage(){
 
     const description = useSelector((state) => state.updateUser.description)
-    const skills = useSelector((state) => state.updateUser.skills)
+    let skills = useSelector((state) => state.updateUser.skills)
     const [edit, setEdit] = useState(false)
     const [selectedSkills, setSelectedSkills] = useState(skills)
     const [myProjects, setMyProjects] = useState([])
@@ -24,6 +24,7 @@ function MyProfilePage(){
 
     const buttonClick = () => {
         setEdit(!edit)
+        setSelectedSkills(skills)
     }
 
     let viewedSkills = edit?allSkills:skills
