@@ -99,7 +99,6 @@ function EditProjectPage(){
                     throw new Error('Could not load project')
                 }
                 const data = await response.json()
-                console.log(data)
                 if(data.owner !== keycloak.tokenParsed.preferred_username){navigate(`/projects/${id}`)}
                 setProject(data)
                 setProjectStatus(data.progress)
