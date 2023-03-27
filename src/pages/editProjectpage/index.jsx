@@ -5,31 +5,31 @@ import SkillList from '../../components/skillList'
 import styles from './editProjectpage.module.css'
 import { useState } from 'react'
 import { useEffect } from 'react'
-
-//import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon'
+import keycloak from '../../keycloak'
 
-const header = 'Galactic quest'
-const intro='Bli med på et sci-fi-basert rollespill og utforsk ulike planeter og galakser! Vi er et lidenskapelig team som arbeider med å skape en spennende ny spillopplevelse for spillere over hele verden. Hvis du er interessert i å bli med på denne hobbybaserte utviklingen, kontakt oss for mer informasjon om hvordan du kan bidra til å skape et fantastisk spill!'
-let description='Vi er en gruppe med lidenskapelige spillutviklere som arbeider med å utvikle et spennende nytt spill kalt "Galactic Quest". Dette er et sci-fi-basert rollespill der spillerne kan utforske ulike planeter og galakser, møte forskjellige karakterer og delta i episke kamper. Målet vårt er å lage et spill som både er underholdende og utfordrende, og som vil engasjere spillere over hele verden.\nSom en del av teamet vil du ha muligheten til å bidra til utviklingen av ulike aspekter av spillet, inkludert design av figurer og landskap, opprettelse av historiefortelling og utvikling av gameplay-mekanismer. Vi ser etter personer med forskjellige ferdigheter, fra programmering og kunstnerisk design til historiefortelling og lyddesign.\nProsjektet er hobbybasert, så det vil ikke være noen økonomisk kompensasjon for deltakelse. Men det vil være en fantastisk mulighet til å utvikle ferdighetene dine, samarbeide med lidenskapelige og talentfulle mennesker og bygge en portefølje av arbeid som kan hjelpe deg i din fremtidige karriere.\nHvis du er interessert i å bli med i teamet vårt, kan du kontakte oss for mer informasjon om hvordan du kan delta. Vi ser frem til å høre fra deg og å jobbe sammen for å skape en fantastisk spillopplevelse for spillere over hele verden!'
-const description2 = description + description
-const status = 'In progress'
-const projectImage = 'https://lagaltprojectimages.blob.core.windows.net/images/lagalt.png'
-const skills = ['Skillpadde', 'Avoid indecies', 'too cool for school', 'ski ll', 'koding']
-const allSkills = ['Skillpadde', 'Avoid indecies', 'too cool for school', 'ski ll', 'koding', 'sverre', 'kake']
-const projtags = ['tag1', 'tag2 med langt navn', 'tagger4', 'tag5']
+const allSkills = ['Skillpadde', 'Avoid indecies', 'too cool for school', 'ski ll', 'koding', 'sverre', 'kake', 'Java', 'Swift']
 
 function EditProjectPage(){
-    const [editProgress, setEditProgress] = useState(false)
 
-    const [projectStatus, setProjectStatus] = useState(status)
-    const [imageUrl, setImageUrl] = useState(projectImage)
-    const [newHeader, setNewHeader] = useState(header)
-    const [newIntro, setNewIntro] = useState(intro)
-    const [newDescription, setNewDescription] = useState(description2)
-    const [selectedSkills, setSelectedSkills] = useState(skills)
-    const [selectedTags, setSelectedTags] = useState(projtags)
+    const [project, setProject] = useState({})
+    const navigate = useNavigate()
+    const [editProgress, setEditProgress] = useState(false)
+    const imageNotFound = "https://lagaltprojectimages.blob.core.windows.net/images/noimage.png"
+
+    const [projectStatus, setProjectStatus] = useState('Founding')
+    const [imageUrl, setImageUrl] = useState(imageNotFound)
+    const [newHeader, setNewHeader] = useState('')
+    const [newIntro, setNewIntro] = useState('')
+    const [newDescription, setNewDescription] = useState('')
+    const [selectedSkills, setSelectedSkills] = useState([])
+    const [selectedTags, setSelectedTags] = useState([])
+    const [projectUrl, setProjectUrl] = useState('')
     const [newTag, setNewTag] = useState('')
+    const {id} = useParams()
+    
+    const apiURL = `https://lagalt-bckend.azurewebsites.net/api/projects/${id}`
 
     const changeProgress = () => {
         setEditProgress(!editProgress)
@@ -40,7 +40,11 @@ function EditProjectPage(){
     }
     const handleUrl = (event) => {
         const value = event.target.value
-        value.length > 0? setImageUrl(value): setImageUrl(projectImage)
+        value.length > 0? setImageUrl(value): setImageUrl(imageNotFound)
+    }
+    const handleProjectUrl = (event) => {
+        const value = event.target.value
+        value.length > 0? setProjectUrl(value): setProjectUrl('')
     }
     const handleHeader = (event) => {
         const value = event.target.value
@@ -87,9 +91,47 @@ function EditProjectPage(){
         }
     }
     
-    useEffect(() => {console.log(selectedTags)},[selectedTags])
+    useEffect(() => {
+        const getProject = async () => {
+            try{
+                const response = await fetch(apiURL)
+                if(!response.ok){
+                    throw new Error('Could not load project')
+                }
+                const data = await response.json()
+                console.log(data)
+                if(data.owner !== keycloak.tokenParsed.preferred_username){navigate(`/projects/${id}`)}
+                setProject(data)
+                setProjectStatus(data.progress)
+                setImageUrl(data.imageUrls[0]?data.imageUrls[0]:imageNotFound)
+                setNewHeader(data.title)
+                setNewIntro(data.caption)
+                setNewDescription(data.description)
+                setSelectedSkills(data.skills)
+                setSelectedTags(data.tags)
+                setProjectUrl(data.linkUrls[0]?data.linkUrls[0]:'')
+
+            }
+            catch(error){
+                return[error.message,[]]
+            }
+        }
+        getProject()
+    },[apiURL, id, navigate])
+
+    useEffect(() => {
+        setProjectStatus(project.progress)
+        setImageUrl(project.imageUrls?project.imageUrls[0]:imageNotFound)
+        setNewDescription(project.description)
+        setSelectedSkills(project.skills)
+        setSelectedTags(project.tags)
+        setNewHeader(project.title)
+        setNewIntro(project.caption)
+        setProjectUrl(project.linkUrls?project.linkUrls[0]:'')
+    },[project])
 
     return(
+        <div>{(project.owner? (project.owner === keycloak.tokenParsed.preferred_username):false)?
         <div className={styles.container}>
             <div className={`${styles.leftColumn} ${styles.column}`}>
             <img 
@@ -119,6 +161,8 @@ function EditProjectPage(){
                     :<ProgressBar stage={projectStatus}/>
                     }
                 </div>
+                <h2 className={styles.subHeader}>Project link</h2>
+                <DescriptionTextField handleChange={handleProjectUrl} edit={true} type='url' content={projectUrl}/>
             </div>
             <div className={`${styles.midColumn} ${styles.column}`}>
                 <DescriptionTextField handleChange={handleHeader} edit={true} type='header' content={newHeader}/>
@@ -141,31 +185,8 @@ function EditProjectPage(){
                     </div> 
                 </div>
             </div>
+        </div>:<div className={styles.loading}>loading...</div>}
         </div>
     )
 }
 export default EditProjectPage;
-
-
-/*
-import { BlobServiceClient } from '@azure/storage-blob'
-
-const [image, setImage] = useState(null)
-    const handleImageChange = e => {
-        if (e.target.files[0]) {
-            e.target.files[0] > 2000000? alert('Image cant be larger than 2 mb'):
-            setImage(URL.createObjectURL(e.target.files[0]))
-        }
-    }
-    
-    const handleUpload = async () => {
-        alert('not yet implemented')
-        //Not yet implemented
-    };
-
-                <input type="file" accept="image/png" onChange={handleImageChange} />
-                {image && (
-                    <img src={image} alt="Uploaded" style={{ maxWidth: '100%', maxHeight: '100%' }}/>
-                )}
-                <button onClick={handleUpload} disabled={!image}>Upload</button>
-*/

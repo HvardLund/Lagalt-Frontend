@@ -6,13 +6,14 @@ function MemberList(props) {
 
     const memberList = props.members? props.members:[]
     const navigate = useNavigate()
+    const profilePhoto = "https://lagaltprojectimages.blob.core.windows.net/images/profile.svg"
 
     return(
         <div className={styles.container}>
             {memberList.map(member =>
-            <div key={member.username} onClick={() => navigate(`/profile/${member.username.replaceAll(' ', '_')}`)}className={styles.member}>
-                <img className={styles.profilePhoto} src={member.profileImage} alt='avatar' />
-                <div className={styles.username}>{member.username}</div>
+            <div key={member} onClick={() => navigate(`/profile/${member.replaceAll(' ', '_')}`)}className={styles.member}>
+                <img className={styles.profilePhoto} src={profilePhoto} alt='avatar' />
+                <div className={styles.username}>{member}</div>
             </div>
             )}
         </div>
