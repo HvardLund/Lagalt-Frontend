@@ -5,13 +5,13 @@ import SkillList from '../../components/skillList';
 import keycloak from '../../keycloak';
 import FeatherIcon from 'feather-icons-react'
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
-const skills = ['Skillpadde', 'Avoid indecies', 'too cool for school', 'ski ll', 'koding']
 const allSkills = ['Skillpadde', 'Avoid indecies', 'too cool for school', 'ski ll', 'koding', 'sverre', 'kake']
 
 const project1 = {
     id:1,
-    skills: skills,
+    skills: allSkills,
     tags: ['tag1', 'tag2 med langt navn', 'tagger4', 'tag5'],
     image: 'assets/Prosjektbilde.png',
     owner: { fullname: 'Nils', username: 'Nils...', profileImage: 'assets/profile.svg'},
@@ -31,10 +31,10 @@ project3.activityType = 'web'
 
 const projects = [project1, project2, project3]
 
-const about = 'Hei! Jeg er en kreativ person som er lidenskapelig opptatt av å utforske nye ideer og utfordringer. Jeg har en interesse for [sett inn interessefelt] og bruker min tid på å lære og utvikle meg selv innen dette området. Jeg er alltid på utkikk etter nye muligheter til å samarbeide og jobbe med andre mennesker som deler min lidenskap. Jeg er åpen for å delta i hobbyprosjekter og ser frem til å møte likesinnede mennesker her på plattformen!"'
-
 function MyProfilePage(){
 
+    const description = useSelector((state) => state.updateUser.description)
+    const skills = useSelector((state) => state.updateUser.skills)
     const [edit, setEdit] = useState(false)
     const [selectedSkills, setSelectedSkills] = useState(skills)
 
@@ -67,7 +67,7 @@ function MyProfilePage(){
                         <div className={styles.username}>{keycloak.tokenParsed.preferred_username}<div className={styles.name}>{keycloak.tokenParsed.name}</div></div>
                     </div>
                 </div>
-                <DescriptionTextField edit={edit} type='description' content={about}></DescriptionTextField>
+                <DescriptionTextField edit={edit} type='description' content={description}></DescriptionTextField>
                 <div className={styles.contentCard}>
                     <h2 className={styles.subHeader}>Skills</h2>
                     <SkillList handleCheckboxChange={handleCheckboxChange} selectedItems={selectedSkills} edit={edit} skills = {viewedSkills}/>
