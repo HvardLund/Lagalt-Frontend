@@ -108,3 +108,15 @@
     gap: 5px;
     margin-right: 3px;
 }
+
+.loading{
+    padding-top: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: fit-content;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 20px;
+    color: #FFECB7;
+    min-height: fit-content;
+}
