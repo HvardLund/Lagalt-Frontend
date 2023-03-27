@@ -110,12 +110,10 @@ function NewProjectPage(){
             })
         }).then(resp => {
             if (!resp.ok) {
-                alert('user was not created properly, try reloading the page')
                 throw new Error(resp.status);
             }
             console.log(resp);
         }).catch(error => {
-            alert('user was not created properly, try reloading the page')
             console.log(error);
         });
       }
