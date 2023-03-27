@@ -9,9 +9,36 @@ import MyProfilePage from './pages/myProfilePage'
 import Header from './components/header'
 import KeycloakRoute from "./routes/KeycloakRoute"
 import { ROLES } from "./const/roles"
+import { useDispatch } from "react-redux";
+import keycloak from './keycloak';
+import { useEffect } from 'react';
+import { updateUser } from './redux-parts/userSLice';
 
 
 function App() {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const getUser = async (token) => {
+      try{
+          const response = await fetch(`https://lagalt-bckend.azurewebsites.net/api/users/${token}`, {
+              headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'}
+          }
+          )
+          if(!response.ok){
+              throw new Error('User could not be created')
+          }
+          const data = await response.json()
+          dispatch(updateUser(data))
+      }
+      catch(error){
+          console.log([error.message,[]])
+      }
+    }
+    getUser()
+  },[dispatch])
+  
   return (
     <BrowserRouter>
       <div className="App">
