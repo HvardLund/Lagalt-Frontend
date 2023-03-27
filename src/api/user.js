@@ -1,12 +1,10 @@
 import keycloak from "../keycloak";
 
-const apiURL = 'https://lagalt-bckend.azurewebsites.net/api/users'
-const apiURLWithUser = keycloak.tokenParsed? apiURL + keycloak.tokenParsed.sub: null
-
-export const checkForUser = async () => {
+export const checkForUser = async (token) => {
+  console.log(token)
   try{
-      const response = await fetch(apiURLWithUser, {
-          headers: {Authorization: `Bearer ${keycloak.token}`}
+      const response = await fetch(`https://lagalt-bckend.azurewebsites.net/api/users/${token}`, {
+          headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'}
       }
       )
       if(!response.ok){
