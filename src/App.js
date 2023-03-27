@@ -20,9 +20,9 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const getUser = async (token) => {
+    const getUser = async () => {
       try{
-          const response = await fetch(`https://lagalt-bckend.azurewebsites.net/api/users/${token}`, {
+          const response = await fetch(`https://lagalt-bckend.azurewebsites.net/api/users/${keycloak.tokenParsed.sub}`, {
               headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'}
           }
           )
