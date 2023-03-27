@@ -47,7 +47,7 @@ function MyProfilePage(){
                     throw new Error('Could not load projects')
                 }
                 const data = await response.json()
-                setAllSKills(data)
+                setAllSKills(data.map(skill => skill.name))
             }
             catch(error){
                 return[error.message,[]]
