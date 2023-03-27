@@ -10,9 +10,6 @@ import keycloak from '../../keycloak';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
-const owner = ''
-
-
 function ProjectPage(){
     
     const [project, setProject] = useState(false)
@@ -36,7 +33,6 @@ function ProjectPage(){
             }
         }
         getProject()
-        console.log('project')
     },[apiURL])
 
     return(
@@ -48,6 +44,11 @@ function ProjectPage(){
                     <h2 className={styles.subHeader}>Status</h2>
                     <ProgressBar stage={project?project.progress:'Founding'}/>
                 </div>
+                <div className={styles.contentCard}>
+                    <h2 className={styles.subHeader}>Urls</h2>
+                    <DescriptionTextField type='description' content={project.linkUrls}/>
+                </div>
+                <button className = {`${styles.greenButton} ${styles.applyButton}`} onClick={() => alert('hola')}>Apply now</button>
             </div>
             <div className={`${styles.midColumn} ${styles.column}`}>
                 <DescriptionTextField type='header' content={project.title}/>
@@ -55,8 +56,8 @@ function ProjectPage(){
                 <DescriptionTextField type='description' content={project.description}/>
             </div>
             <div className={`${styles.rightColumn} ${styles.column}`}>
-                {keycloak.tokenParsed && keycloak.tokenParsed.preferred_username === owner &&
-                    <button className = {styles.editButton} onClick={() => navigate(`/project/${id}/edit`)}><FeatherIcon  cursor='pointer' size="20" icon="edit-3" />Edit</button>
+                {keycloak.tokenParsed && keycloak.tokenParsed.preferred_username === project.owner &&
+                    <button className = {styles.greenButton} onClick={() => navigate(`/project/${id}/edit`)}><FeatherIcon  cursor='pointer' size="20" icon="edit-3" />Edit</button>
                 }
                 <div className={styles.contentCard}>
                     <h2 className={styles.subHeader}>Members</h2>

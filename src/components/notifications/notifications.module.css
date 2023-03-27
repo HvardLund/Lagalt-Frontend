@@ -7,7 +7,6 @@
     width: fit-content;
     height: fit-content;
     max-height: 42px;
-
 }
 
 .profileContainer{
@@ -19,8 +18,8 @@
     width: 50px;
 }
 
-.profilePicture{
-    max-height: 35px;
+.profileContainer:hover{
+    color:#F3AE32;
 }
   
 .menu {
@@ -38,7 +37,9 @@
 }
 
 .menuButton {
-    text-align: left;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
     color: #FFECB7;
     font-family: 'Archivo', sans-serif;
     font-weight: 500;
@@ -47,14 +48,22 @@
     cursor: pointer;
     padding: 10px;
     padding-left: 20px;
-    font-size: 20px;
+    font-size: 16px;
     width:100%;
 }
-
-.menuButton:hover{
-    background-color: #454242;
+ 
+.badge {
+    position: absolute;
+    font-size: 12px;
+    top: 8px;
+    right: 2px;
+    padding: 3px 8px;
+    background: #DA5E3F;
+    border-radius: 18px;
+    color: white;
 }
 
-.logoutButton:hover{
-    color: #DA5E3F;
+.notificationText{
+    text-align: left;
+    width: 75%;
 }

@@ -11,8 +11,10 @@ function FrontPage(){
     const [projects, setProjects] = useState([])
     const [selected, setSelected] = useState('All')
     const [displayedProjects, setDisplayedProjects] = useState(projects)
+    const [searchProjects, setSearchProjects] = useState(projects)
     const [searchPhrase, setSearchPhrase] = useState('')
     const apiURL = 'https://lagalt-bckend.azurewebsites.net/api/'
+    const imageNotFound = "https://lagaltprojectimages.blob.core.windows.net/images/noimage.png"
     
     const select = (activity) => {
         setSelected(activity)
@@ -27,6 +29,12 @@ function FrontPage(){
         const value = event.target.value;
         setSearchPhrase(value);
     }
+
+    useEffect(() => {
+        searchPhrase.trim().length > 0?
+        setSearchProjects(displayedProjects.filter(project =>
+            project.title.toLowerCase().includes(searchPhrase.toLowerCase()))):setSearchProjects(displayedProjects)        
+    },[searchPhrase, displayedProjects])
 
     useEffect(() => {
         const getAllProjects = async () => {
@@ -60,12 +68,12 @@ function FrontPage(){
                 <Search value={searchPhrase} handleSearch={handleSearch}/>
             </div>
             <div className={`${styles.midColumn} ${styles.column}`}>
-                {displayedProjects.map(project =>
+                {searchProjects.map(project =>
                     <ProjectCard
                         title={project.title} 
                         intro={project.caption}
                         tags={tags}
-                        image={project.images[0]}
+                        image={project.images[0]??imageNotFound}
                         owner={project.owner}
                         skills={project.skills}
                         id={project.id}

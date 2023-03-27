@@ -107,7 +107,8 @@
 
 .dropdown{
     margin:0;
-    margin-top: 8px;   
+    margin-top: 8px;
+    cursor: pointer;   
 }
 
 .progressButtonContainer{
@@ -168,4 +169,16 @@
 .addTagButton{
     cursor: pointer;
     width: 10%;
+}
+
+.loading{
+    padding-top: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: fit-content;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 20px;
+    color: #FFECB7;
+    min-height: fit-content;
 }

@@ -5,6 +5,7 @@ import SkillList from '../../components/skillList'
 import styles from './newProjectpage.module.css'
 import { useState } from 'react'
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon'
+import keycloak from '../../keycloak'
 
 const allSkills = ['Skillpadde', 'Avoid indecies', 'too cool for school', 'ski ll', 'koding', 'sverre', 'kake']
 
@@ -20,7 +21,8 @@ function NewProjectPage(){
     const [selectedSkills, setSelectedSkills] = useState([])
     const [selectedTags, setSelectedTags] = useState([])
     const [newTag, setNewTag] = useState('')
-    const [selectedCategory, setSelectedCategory] = useState('All')
+    const [selectedCategory, setSelectedCategory] = useState('Games')
+    const [projectUrl, setProjectUrl] = useState('')
 
     const changeProgress = () => {
         setEditProgress(!editProgress)
@@ -32,6 +34,10 @@ function NewProjectPage(){
     const handleUrl = (event) => {
         const value = event.target.value
         value.length > 0? setImageUrl(value): setImageUrl(defaultImage)
+    }
+    const handleProjectUrl = (event) => {
+        const value = event.target.value
+        value.length > 0? setProjectUrl(value): setProjectUrl('')
     }
     const handleHeader = (event) => {
         const value = event.target.value
@@ -82,6 +88,38 @@ function NewProjectPage(){
         setSelectedCategory(activity)
     }
 
+    const checkValues = () => {
+        newHeader.length > 0? createProject() : alert('Your project must have a header')
+    }
+
+    const createProject = async () => {
+        await fetch('https://lagalt-bckend.azurewebsites.net/api/projects/', {
+            method: 'POST',
+            headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                "field":selectedCategory,
+                "title": newHeader,
+                "description":newDescription,
+                "caption":newIntro,
+                "progress": projectStatus,
+                "tags": selectedTags,
+                "skills": selectedSkills,
+                "linkUrls":projectUrl,
+                "owner": keycloak.tokenParsed.preferred_username,
+                "imageUrls":[imageUrl],
+            })
+        }).then(resp => {
+            if (!resp.ok) {
+                alert('user was not created properly, try reloading the page')
+                throw new Error(resp.status);
+            }
+            console.log(resp);
+        }).catch(error => {
+            alert('user was not created properly, try reloading the page')
+            console.log(error);
+        });
+      }
+
     return(
         <div className={styles.container}>
             <div className={`${styles.leftColumn} ${styles.column}`}>
@@ -112,6 +150,8 @@ function NewProjectPage(){
                     :<ProgressBar stage={projectStatus}/>
                     }
                 </div>
+                <h2 className={styles.subHeader}>Project link</h2>
+                <DescriptionTextField handleChange={handleProjectUrl} edit={true} type='url' content={projectUrl}/>
             </div>
             <div className={`${styles.midColumn} ${styles.column}`}>
                 <div className={styles.navbar}>
@@ -125,6 +165,7 @@ function NewProjectPage(){
                 <DescriptionTextField handleChange={handleDescription} edit={true} type='description' content={newDescription}/>
             </div>
             <div className={`${styles.rightColumn} ${styles.column}`}>
+                <button className = {`${styles.greenButton}`} onClick={() => checkValues()}>Publish</button>
                 <div className={styles.contentCard}>
                     <h2 className={styles.subHeader}>Skills</h2>
                     <SkillList handleCheckboxChange={handleCheckboxChange} selectedItems={selectedSkills} edit={true} skills = {allSkills}/>
