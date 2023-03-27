@@ -20,12 +20,13 @@ export const checkForUser = async (token) => {
   }
 }
 
-const createUser = async () => {
+const createUser = async (username) => {
   await fetch('https://lagalt-bckend.azurewebsites.net/api/users/', {
       method: 'POST',
       headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'},
       body: JSON.stringify({
           "id": `${keycloak.tokenParsed.sub}`,
+          "userName": `${keycloak.tokenParsed.preferred_username}`,
           "description": 'Jeg er kul', 
       })
   }).then(resp => {
