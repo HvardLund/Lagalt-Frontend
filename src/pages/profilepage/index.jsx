@@ -19,9 +19,7 @@ function ProfilePage(){
                     throw new Error('Could not load users')
                 }
                 const data = await response.json()
-                console.log(data[0].userName)
-                console.log(username.replaceAll('_', ' ').toLowerCase())
-                setUser(data.filter(user => (user.userName === username.replaceAll('_', ' ').toLowerCase())))
+                setUser(data.filter(user => (user.userName === username.replaceAll('_', ' '))))
             }
             catch(error){
                 return[error.message,[]]
