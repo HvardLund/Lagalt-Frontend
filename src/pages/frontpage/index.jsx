@@ -51,7 +51,6 @@ function FrontPage(){
                 return[error.message,[]]
             }
         }
-        console.log('front2')
         getAllProjects()
     },[])
 
