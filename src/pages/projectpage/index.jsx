@@ -12,8 +12,6 @@ import { useState } from 'react';
 
 const owner = ''
 
-const skills = []
-const tags = []
 
 function ProjectPage(){
     
@@ -45,7 +43,7 @@ function ProjectPage(){
         <div>{project?
         <div className={styles.container}>
             <div className={`${styles.leftColumn} ${styles.column}`}>
-                <img className={styles.projectImage} src={project.images[0]??imageNotFound} alt='project foto'></img>
+                <img className={styles.projectImage} src={project.imageUrls[0]??imageNotFound} alt='project foto'></img>
                 <div className={styles.contentCard}>
                     <h2 className={styles.subHeader}>Status</h2>
                     <ProgressBar stage={project?project.progress:'Founding'}/>
@@ -66,11 +64,11 @@ function ProjectPage(){
                 </div>
                 <div className={styles.contentCard}>
                     <h2 className={styles.subHeader}>Skills</h2>
-                    <SkillList skills ={skills}/>
+                    <SkillList skills ={project.skills}/>
                 </div>
                 <div className={styles.contentCard}>
                     <h2 className={styles.subHeader}>Tags</h2>
-                    <div className={styles.tagList}>{tags.map(tag => <ProjectTag key={tag} name={tag}/>)}</div>
+                    <div className={styles.tagList}>{project.tags.map(tag => <ProjectTag key={tag} name={tag}/>)}</div>
                 </div>
             </div>       
         </div>:<div className={styles.loading}>loading...</div>}

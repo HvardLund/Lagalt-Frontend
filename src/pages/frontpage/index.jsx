@@ -12,47 +12,20 @@ function FrontPage(){
     const [selected, setSelected] = useState('All')
     const [displayedProjects, setDisplayedProjects] = useState(projects)
     const [searchPhrase, setSearchPhrase] = useState('')
-
+    const apiURL = 'https://lagalt-bckend.azurewebsites.net/api/'
+    
     const select = (activity) => {
         setSelected(activity)
     }
 
     useEffect(() => {
         console.log('front1')
-        selected ==='All'?(setDisplayedProjects(projects)):setDisplayedProjects(projects.filter(project => getRightActivityType(project.field)===selected.toLowerCase()))
+        selected ==='All'?(setDisplayedProjects(projects)):setDisplayedProjects(projects.filter(project => project.field===selected.toLowerCase()))
     },[selected, projects])
     
     const handleSearch = (event) => {
         const value = event.target.value;
         setSearchPhrase(value);
-    }
-
-    const apiURL = 'https://lagalt-bckend.azurewebsites.net/api/'
-
-    /*
-    const createUser = async () => {
-        await fetch(apiURL+'users', {
-            method: 'POST',
-            headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                "id": `${keycloak.tokenParsed.sub}`,
-                "description": 'Jeg er kul', 
-            })
-        }).then(resp => {
-            if (!resp.ok) {
-                throw new Error(resp.status);
-            }
-            console.log(resp);
-        }).catch(error => {
-            console.log(error);
-        });
-    }
-    */
-    
-    const getRightActivityType = (activityType) =>{
-        if(activityType === 'Webdesign'){
-            return 'web'
-        }
     }
 
     useEffect(() => {
@@ -96,7 +69,7 @@ function FrontPage(){
                         owner={project.owner}
                         skills={project.skills}
                         id={project.id}
-                        activityType={getRightActivityType(project.field)}
+                        activityType={project.field}
                         progress={project.progress}
                         key={project.id}
                     />

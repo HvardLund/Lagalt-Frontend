@@ -2,9 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import { initialize } from "./keycloak";
+import keycloak, { initialize } from "./keycloak";
 import Loading from "./components/loading/Loading";
 import reportWebVitals from './reportWebVitals';
+import { checkForUser } from './api/user'
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -14,6 +15,7 @@ root.render(<Loading message="Connecting to Keycloak..." />)
 // Initialize Keycloak
 initialize()
   .then(() => { // If No Keycloak Error occurred - Display the App
+    keycloak.authenticated?checkForUser():console.log('not logged in')
     root.render(
       <React.StrictMode>
         <App />

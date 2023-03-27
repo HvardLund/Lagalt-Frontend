@@ -1,23 +1,41 @@
-import axios from ".";
+import keycloak from "../keycloak";
 
-/**
- * SAMPLE FUNCTION: Create a new user on the database
- * @param {any} user User to be added to API's database
- * @returns { Promise<{user: any, error: string | null}> } user
- */
-export const createProfile = async (user) => {
-  try {
-    const { data } = await axios.get("URL-TO-API", {
-      data: user,
-    });
-    return Promise.resolve({
-      user: data,
-      error: null,
-    });
-  } catch (e) {
-    return Promise.reject({
-      error: e.message,
-      user: null,
-    });
+const apiURL = 'https://lagalt-bckend.azurewebsites.net/api/users'
+const apiURLWithUser = keycloak.tokenParsed? apiURL + keycloak.tokenParsed.sub: null
+
+export const checkForUser = async () => {
+  try{
+      const response = await fetch(apiURLWithUser, {
+          headers: {Authorization: `Bearer ${keycloak.token}`}
+      }
+      )
+      if(!response.ok){
+          throw new Error('Could not load projects')
+      }
+      const data = await response.json()
+      console.log(data);
   }
-};
+  catch(error){
+      console.log([error.message,[]])
+  }
+}
+
+const createUser = async () => {
+  await fetch(apiURL, {
+      method: 'POST',
+      headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'},
+      body: JSON.stringify({
+          "id": `${keycloak.tokenParsed.sub}`,
+          "description": 'Jeg er kul', 
+      })
+  }).then(resp => {
+      if (!resp.ok) {
+          alert('user was not created properly, try reloading the page')
+          throw new Error(resp.status);
+      }
+      console.log(resp);
+  }).catch(error => {
+      alert('user was not created properly, try reloading the page')
+      console.log(error);
+  });
+}
