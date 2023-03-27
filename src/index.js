@@ -6,6 +6,8 @@ import keycloak, { initialize } from "./keycloak";
 import Loading from "./components/loading/Loading";
 import reportWebVitals from './reportWebVitals';
 import { checkForUser } from './api/user'
+import store from './redux-parts/store';
+import { Provider } from "react-redux";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -18,7 +20,9 @@ initialize()
     keycloak.authenticated?checkForUser(keycloak.tokenParsed.sub):console.log('not logged in')
     root.render(
       <React.StrictMode>
-        <App />
+        <Provider store= {store}>
+          <App />
+        </Provider> 
       </React.StrictMode>
     );
   })

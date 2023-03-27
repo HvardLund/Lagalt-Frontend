@@ -10,7 +10,7 @@ export const checkForUser = async (token) => {
           createUser()
       }
       else if(!response.ok){
-          throw new Error('Could not load projects')
+          throw new Error('User could not be created')
       }
       const data = await response.json()
       console.log(data);
