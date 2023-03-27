@@ -1,13 +1,15 @@
 import keycloak from "../keycloak";
 
 export const checkForUser = async (token) => {
-  console.log(token)
   try{
       const response = await fetch(`https://lagalt-bckend.azurewebsites.net/api/users/${token}`, {
           headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'}
       }
       )
-      if(!response.ok){
+      if(response.status === 404){
+          createUser()
+      }
+      else if(!response.ok){
           throw new Error('Could not load projects')
       }
       const data = await response.json()
