@@ -21,7 +21,6 @@ function FrontPage(){
     }
 
     useEffect(() => {
-        console.log('front1')
         selected ==='All'?(setDisplayedProjects(projects)):setDisplayedProjects(projects.filter(project => project.field===selected))
     },[selected, projects])
     
