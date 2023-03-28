@@ -24,16 +24,16 @@ function Notifications() {
 
     useOutsideAlerter(containerRef)
 
-    const getApplications = async (apiUrl) => {
+    const getApplications = async (project) => {
         try{
-            const response = await fetch(apiUrl)
+            const response = await fetch(`https://lagalt-bckend.azurewebsites.net/api/applications/notapproved?projectId=${project.id}`)
             if(!response.ok){
                 throw new Error('Could not load projects')
             }
             const data = await response.json()
             console.log(data)
             console.log(data.map(user => user.userName))
-            //setNotifications([...notifications, ...data.map(user => user.userName)])
+            setNotifications([...notifications, ...data.map(user => `${user.userName} wants to join ${project.title}`)])
         }
         catch(error){
             return[error.message,[]]
@@ -42,13 +42,13 @@ function Notifications() {
 
     const getAllApplications = () => {
         ownedProjects.map(project => 
-            getApplications(`https://lagalt-bckend.azurewebsites.net/api/applications/notapproved?projectId=${2}`)
+            getApplications(project.id)
         )
     }
 
     const handleOpen = () => {
         setOpen(!open)
-        getApplications(`https://lagalt-bckend.azurewebsites.net/api/applications/notapproved?projectId=${2}`)   
+        getApplications(2)   
     }
 
     const accept = () => {
