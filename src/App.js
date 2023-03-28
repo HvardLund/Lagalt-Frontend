@@ -12,7 +12,7 @@ import { ROLES } from "./const/roles"
 import { useDispatch } from "react-redux";
 import keycloak from './keycloak';
 import { useEffect } from 'react';
-import { updateUser } from './redux-parts/userSLice';
+import { addProjects, updateUser } from './redux-parts/userSLice';
 
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
           }
           )
           if(!response.ok){
-              throw new Error('User could not be created')
+              throw new Error('User could not be loaded')
           }
           const data = await response.json()
           dispatch(updateUser(data))
@@ -44,17 +44,17 @@ function App() {
         try{
             const response = await fetch(`https://lagalt-bckend.azurewebsites.net/api/users/${keycloak.tokenParsed.sub}/OwnedProjects`)
             if(!response.ok){
-                throw new Error('Could not load projects')
+                throw new Error('Could not find your projects')
             }
             const data = await response.json()
-            console.log(data)
+            dispatch(addProjects(data))
         }
         catch(error){
             return[error.message,[]]
         }
     }
     getOwnedProjects()
-  },[])
+  },[dispatch])
   
   return (
     <BrowserRouter>
