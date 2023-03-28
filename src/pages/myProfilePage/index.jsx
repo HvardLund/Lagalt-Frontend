@@ -79,8 +79,11 @@ function MyProfilePage(){
     const handleDescription = (event) => {
         const value = event.target.value
         setNewDescription(value)
-        console.log(newDescription)
     }
+
+    useEffect(() => {
+        console.log(newDescription)
+    },[newDescription])
 
     const updateProfile = async () => {
         await fetch('https://lagalt-bckend.azurewebsites.net/api/projects/', {
