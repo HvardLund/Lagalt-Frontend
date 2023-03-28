@@ -2,6 +2,7 @@ import ProjectCard from '../../components/projectCard';
 import styles from './frontpage.module.css'
 import { useEffect, useState } from 'react';
 import Search from '../../components/search';
+import keycloak from '../../keycloak';
 //import keycloak from '../../keycloak';
 
 const tags = []
@@ -13,7 +14,7 @@ function FrontPage(){
     const [displayedProjects, setDisplayedProjects] = useState(projects)
     const [searchProjects, setSearchProjects] = useState(projects)
     const [searchPhrase, setSearchPhrase] = useState('')
-    const apiURL = 'https://lagalt-bckend.azurewebsites.net/api/'
+    const apiURL = !keycloak.authenticated? 'https://lagalt-bckend.azurewebsites.net/api/projects':`https://lagalt-bckend.azurewebsites.net/api/projects/skill?Id=${keycloak.tokenParsed.sub}`
     const imageNotFound = "https://lagaltprojectimages.blob.core.windows.net/images/noimage.png"
     
     const select = (activity) => {
