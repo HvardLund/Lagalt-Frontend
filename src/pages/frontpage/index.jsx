@@ -3,7 +3,6 @@ import styles from './frontpage.module.css'
 import { useEffect, useState } from 'react';
 import Search from '../../components/search';
 import keycloak from '../../keycloak';
-//import keycloak from '../../keycloak';
 
 function FrontPage(){
     
@@ -17,6 +16,7 @@ function FrontPage(){
     
     const select = (activity) => {
         setSelected(activity)
+        console.log(keycloak.token)
     }
 
     useEffect(() => {
