@@ -46,7 +46,7 @@ function Notifications() {
     }
 
     const handleOpen = () => {
-        if(!open){getAllApplications()}
+        if(!open){getApplications(2)}
         setOpen(!open)
     }
 
