@@ -3,7 +3,6 @@ import styles from './frontpage.module.css'
 import { useEffect, useState } from 'react';
 import Search from '../../components/search';
 import keycloak from '../../keycloak';
-//import keycloak from '../../keycloak';
 
 function FrontPage(){
     
@@ -12,7 +11,7 @@ function FrontPage(){
     const [displayedProjects, setDisplayedProjects] = useState(projects)
     const [searchProjects, setSearchProjects] = useState(projects)
     const [searchPhrase, setSearchPhrase] = useState('')
-    const apiURL = !keycloak.authenticated? 'https://lagalt-bckend.azurewebsites.net/api/projects':`https://lagalt-bckend.azurewebsites.net/api/projects/skill?Id=${keycloak.tokenParsed.sub}`
+    const apiURL = keycloak.authenticated? `https://lagalt-bckend.azurewebsites.net/api/projects/skill?id=${keycloak.tokenParsed.sub}`:'https://lagalt-bckend.azurewebsites.net/api/projects'
     const imageNotFound = "https://lagaltprojectimages.blob.core.windows.net/images/noimage.png"
     
     const select = (activity) => {

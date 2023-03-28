@@ -6,6 +6,7 @@ import styles from './newProjectpage.module.css'
 import { useState } from 'react'
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon'
 import keycloak from '../../keycloak'
+import { useNavigate } from 'react-router-dom'
 
 const allSkills = ['Skillpadde', 'Avoid indecies', 'too cool for school', 'ski ll', 'koding', 'sverre', 'kake']
 
@@ -23,6 +24,7 @@ function NewProjectPage(){
     const [newTag, setNewTag] = useState('')
     const [selectedCategory, setSelectedCategory] = useState('Games')
     const [projectUrl, setProjectUrl] = useState('')
+    const navigate = useNavigate()
 
     const changeProgress = () => {
         setEditProgress(!editProgress)
@@ -112,7 +114,7 @@ function NewProjectPage(){
             if (!resp.ok) {
                 throw new Error(resp.status);
             }
-            console.log(resp);
+            navigate('/')
         }).catch(error => {
             console.log(error);
         });
