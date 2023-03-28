@@ -16,7 +16,6 @@ function FrontPage(){
     
     const select = (activity) => {
         setSelected(activity)
-        console.log(keycloak.token)
     }
 
     useEffect(() => {

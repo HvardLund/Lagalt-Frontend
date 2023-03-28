@@ -31,7 +31,6 @@ function Notifications() {
                 throw new Error('Could not load projects')
             }
             const data = await response.json()
-            console.log(data.map(user => `${user.userName} wants to join ${project.title}`))
             setNotifications([...notifications, ...data.map(user => `${user.userName} wants to join ${project.title}`)])
         }
         catch(error){
