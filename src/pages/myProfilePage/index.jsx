@@ -72,7 +72,6 @@ function MyProfilePage(){
                 return[error.message,[]]
             }
         }
-        alert('something wrong here')
         getAllProjects()
     },[projectApiURL])
 
