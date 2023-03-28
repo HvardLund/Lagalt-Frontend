@@ -47,7 +47,7 @@ function App() {
                 throw new Error('Could not find your projects')
             }
             const data = await response.json()
-            console.log(data)
+            console.log(data.map(project => project.id))
             dispatch(addProjects(data.map(project => project.id)))
         }
         catch(error){

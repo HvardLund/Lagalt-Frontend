@@ -45,7 +45,8 @@ function Notifications() {
     */
 
     useEffect(() => {
-        setNotifications(ownedProjects)
+        console.log(ownedProjects)
+        //setNotifications(ownedProjects)
     },[ownedProjects])
 
     const accept = () => {
