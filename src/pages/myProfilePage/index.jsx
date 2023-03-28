@@ -5,13 +5,15 @@ import SkillList from '../../components/skillList';
 import keycloak from '../../keycloak';
 import FeatherIcon from 'feather-icons-react'
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch  } from 'react-redux';
+import { updateUser } from './redux-parts/userSLice';
 
 const tags=[]
 
 function MyProfilePage(){
 
     const description = useSelector((state) => state.updateUser.description)
+    const dispatch = useDispatch();
     let skills = useSelector((state) => state.updateUser.skills)
     const [edit, setEdit] = useState(false)
     const [selectedSkills, setSelectedSkills] = useState(skills)
@@ -26,6 +28,9 @@ function MyProfilePage(){
     const buttonClick = () => {
         setEdit(!edit)
         setSelectedSkills(skills)
+        if(edit){
+            dispatch(updateUser({description: newDescription, skills: selectedSkills}))
+        }
     }
 
     let viewedSkills = edit?allSkills:skills
@@ -79,10 +84,6 @@ function MyProfilePage(){
         const value = event.target.value
         setNewDescription(value)
     }
-
-    useEffect(() => {
-        console.log(newDescription)
-    },[newDescription])
 
     const updateProfile = async () => {
         await fetch('https://lagalt-bckend.azurewebsites.net/api/projects/', {
