@@ -79,7 +79,25 @@ function MyProfilePage(){
     const handleDescription = (event) => {
         const value = event.target.value
         setNewDescription(value)
-        console.log(description)
+        console.log(newDescription)
+    }
+
+    const updateProfile = async () => {
+        await fetch('https://lagalt-bckend.azurewebsites.net/api/projects/', {
+            method: 'PUT',
+            headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                "description": newDescription,
+                "skills": selectedSkills,
+            })
+        }).then(resp => {
+            if (!resp.ok) {
+                throw new Error(resp.status);
+            }
+            console.log(resp);
+        }).catch(error => {
+            console.log(error);
+        });
     }
 
     return(
