@@ -31,7 +31,9 @@ function Notifications() {
                 throw new Error('Could not load projects')
             }
             const data = await response.json()
-            setNotifications([...notifications, ...data.map(user => user.userName)])
+            console.log(data)
+            console.log(data.map(user => user.userName))
+            //setNotifications([...notifications, ...data.map(user => user.userName)])
         }
         catch(error){
             return[error.message,[]]
@@ -46,7 +48,7 @@ function Notifications() {
 
     const handleOpen = () => {
         setOpen(!open)
-        getApplications(2)   
+        getApplications(`https://lagalt-bckend.azurewebsites.net/api/applications/notapproved?projectId=${2}`)   
     }
 
     const accept = () => {
