@@ -45,7 +45,7 @@ function Notifications() {
     */
 
     const accept = () => {
-      setNotifications(ownedProjects.map(project => project.id))
+        console.log(ownedProjects)
     }
 
     const deny = () => {
