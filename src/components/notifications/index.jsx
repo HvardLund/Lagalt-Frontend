@@ -46,9 +46,7 @@ function Notifications() {
     }
 
     const handleOpen = () => {
-        setOpen(!open)
-        console.log(ownedProjects)
-        getApplications(ownedProjects[0])   
+        setOpen(!open)   
     }
 
     const accept = () => {
@@ -59,6 +57,11 @@ function Notifications() {
         alert('ok')
     }
     
+    useEffect(() => {
+        setNotifications([])
+        getApplications(ownedProjects[0])
+    },[ownedProjects])
+
     return(
         <div ref={containerRef} className={styles.container}>
             <div onClick={handleOpen} className={styles.profileContainer}>
