@@ -38,6 +38,23 @@ function App() {
     }
     getUser()
   },[dispatch])
+
+  useEffect(() => {
+    const getOwnedProjects = async () => {
+        try{
+            const response = await fetch(`https://lagalt-bckend.azurewebsites.net/api/${keycloak.tokenParsed.sub}/OwnedProjects`)
+            if(!response.ok){
+                throw new Error('Could not load projects')
+            }
+            const data = await response.json()
+            console.log(data)
+        }
+        catch(error){
+            return[error.message,[]]
+        }
+    }
+    getOwnedProjects()
+  },[])
   
   return (
     <BrowserRouter>
