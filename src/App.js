@@ -48,7 +48,7 @@ function App() {
             }
             const data = await response.json()
             console.log(data)
-            dispatch(addProjects(data))
+            dispatch(addProjects(data.map(project => project.id)))
         }
         catch(error){
             return[error.message,[]]
