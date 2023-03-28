@@ -37,7 +37,7 @@ function FrontPage(){
     useEffect(() => {
         const getAllProjects = async () => {
             try{
-                const response = await fetch(apiURL+'projects')
+                const response = await fetch(apiURL)
                 if(!response.ok){
                     throw new Error('Could not load projects')
                 }
