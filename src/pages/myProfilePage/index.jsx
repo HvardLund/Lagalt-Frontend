@@ -124,7 +124,7 @@ function MyProfilePage(){
                     <ProjectCard 
                         intro={project.caption} 
                         tags={tags} 
-                        image={project.images[0]??imageNotFound}
+                        image={project.imageUrls.length >0?project.images[0]:imageNotFound}
                         skills={project.skills}
                         owner={project.owner}
                         id={project.id}
