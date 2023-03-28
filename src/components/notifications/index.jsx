@@ -9,8 +9,7 @@ function Notifications() {
     const [notifications, setNotifications] = useState([]) 
     const containerRef = useRef(null);
     let ownedProjects = useSelector((state) => state.addProjects.projects)
-    const handleOpen = () => {setOpen(!open); console.log(ownedProjects)}
-    const apiURL = `https://lagalt-bckend.azurewebsites.net/api/${keycloak.tokenParsed.sub}/applications`
+    const apiURL = `https://lagalt-bckend.azurewebsites.net/api/applications/notapproved?projectId=`
 
     function useOutsideAlerter(ref) {
         useEffect(() => {
@@ -23,26 +22,33 @@ function Notifications() {
           };
         }, [ref]);
     }
+
     useOutsideAlerter(containerRef)
 
-    /*
-    useEffect(() => {
-      const getApplications = async () => {
-          try{
-              const response = await fetch(apiURL)
-              if(!response.ok){
-                  throw new Error('Could not load projects')
-              }
-              const data = await response.json()
-              setNotifications(data)
-          }
-          catch(error){
-              return[error.message,[]]
-          }
-      }
-      getApplications()
-    },[apiURL])
-    */
+    const getApplications = async (id) => {
+        try{
+            const response = await fetch(apiURL+id)
+            if(!response.ok){
+                throw new Error('Could not load projects')
+            }
+            const data = await response.json()
+            setNotifications([...notifications, ...data])
+        }
+        catch(error){
+            return[error.message,[]]
+        }
+    }
+
+    const getAllApplications = () => {
+        ownedProjects.map(project => 
+            getApplications(project)
+        )
+    }
+
+    const handleOpen = () => {
+        if(!open){getAllApplications()}
+        setOpen(!open)
+    }
 
     const accept = () => {
         alert('ok')
