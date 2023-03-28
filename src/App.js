@@ -42,7 +42,7 @@ function App() {
   useEffect(() => {
     const getOwnedProjects = async () => {
         try{
-            const response = await fetch(`https://lagalt-bckend.azurewebsites.net/api/${keycloak.tokenParsed.sub}/OwnedProjects`)
+            const response = await fetch(`https://lagalt-bckend.azurewebsites.net/api/users/${keycloak.tokenParsed.sub}/OwnedProjects`)
             if(!response.ok){
                 throw new Error('Could not load projects')
             }
