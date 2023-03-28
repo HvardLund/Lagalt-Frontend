@@ -6,10 +6,10 @@ import { useSelector } from 'react-redux';
 
 function Notifications() {
     const [open, setOpen] = useState(false)
-    const [notifications, setNotifications] = useState([])
-    const handleOpen = () => {setOpen(!open)}
+    const [notifications, setNotifications] = useState([]) 
     const containerRef = useRef(null);
     let ownedProjects = useSelector((state) => state.addProjects.projects)
+    const handleOpen = () => {setOpen(!open); console.log(ownedProjects)}
     const apiURL = `https://lagalt-bckend.azurewebsites.net/api/${keycloak.tokenParsed.sub}/applications`
 
     function useOutsideAlerter(ref) {
@@ -44,13 +44,8 @@ function Notifications() {
     },[apiURL])
     */
 
-    useEffect(() => {
-        console.log(ownedProjects)
-        //setNotifications(ownedProjects)
-    },[ownedProjects])
-
     const accept = () => {
-        console.log(ownedProjects)
+        alert('ok')
     }
 
     const deny = () => {
