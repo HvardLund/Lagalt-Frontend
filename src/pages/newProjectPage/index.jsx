@@ -14,7 +14,7 @@ function NewProjectPage(){
     const defaultImage = 'https://lagaltprojectimages.blob.core.windows.net/images/noimage.png'
     const [editProgress, setEditProgress] = useState(false)
     const [projectStatus, setProjectStatus] = useState('Founding')
-    const [imageUrl, setImageUrl] = useState(defaultImage)
+    const [imageUrl, setImageUrl] = useState('')
     const [newHeader, setNewHeader] = useState('')
     const [newIntro, setNewIntro] = useState('')
     const [newDescription, setNewDescription] = useState('')
@@ -33,7 +33,7 @@ function NewProjectPage(){
     }
     const handleUrl = (event) => {
         const value = event.target.value
-        value.length > 0? setImageUrl(value): setImageUrl(defaultImage)
+        value.length > 0? setImageUrl(value): setImageUrl('')
     }
     const handleProjectUrl = (event) => {
         const value = event.target.value
