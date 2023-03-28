@@ -18,7 +18,7 @@ function DescriptionTextField(props) {
                 {field_type==='header'&&<input value = {content} type='text' placeholder='Project name...' onChange={updateInputContent} className={`${styles.commonInput} ${styles.headerInput}`}></input>}
                 {field_type==='introduction'&&<textarea value = {content} placeholder='write a short project caption...' onChange={updateInputContent} className={`${styles.commonInput} ${styles.introductionInput}`}></textarea>}
                 {field_type==='description'&&<textarea value = {content} placeholder='write about your project...' onChange={updateInputContent} className={`${styles.commonInput} ${styles.descriptionInput}`}></textarea>}
-                {field_type==='url'&&<input value = {content} placeholder='provide an url to your new image' onChange={updateInputContent} className={`${styles.commonInput} ${styles.descriptionInput}`}></input>}
+                {field_type==='url'&&<input value = {content} placeholder='provide an url' onChange={updateInputContent} className={`${styles.commonInput} ${styles.descriptionInput}`}></input>}
             </>}
         </div>
     )

@@ -8,7 +8,7 @@ function Notifications() {
     const [notifications, setNotifications] = useState(['test1', 'test2', 'test3'])
     const handleOpen = () => {setOpen(!open)}
     const containerRef = useRef(null);
-    //const apiURL = `https://lagalt-bckend.azurewebsites.net/api/${keycloak.tokenParsed.sub}/applications`
+    const apiURL = `https://lagalt-bckend.azurewebsites.net/api/${keycloak.tokenParsed.sub}/applications`
 
     function useOutsideAlerter(ref) {
         useEffect(() => {
@@ -38,7 +38,6 @@ function Notifications() {
               return[error.message,[]]
           }
       }
-      console.log('front2')
       getApplications()
     },[apiURL])
     */
