@@ -17,6 +17,7 @@ function MyProfilePage(){
     const [selectedSkills, setSelectedSkills] = useState(skills)
     const [myProjects, setMyProjects] = useState([])
     const [allSkills, setAllSKills] = useState([])
+    const [newDescription, setNewDescription] = useState(description)
     const projectApiURL = `https://lagalt-bckend.azurewebsites.net/api/users/${keycloak.tokenParsed.sub}/projects`
     const skillApiUrl = 'https://lagalt-bckend.azurewebsites.net/api/skills'
     const imageNotFound = "https://lagaltprojectimages.blob.core.windows.net/images/noimage.png"
@@ -75,6 +76,12 @@ function MyProfilePage(){
         getAllProjects()
     },[projectApiURL])
 
+    const handleDescription = (event) => {
+        const value = event.target.value
+        setNewDescription(value)
+        console.log(description)
+    }
+
     return(
         <div className={styles.container}>
             <div className={styles.topBar}>
@@ -87,7 +94,7 @@ function MyProfilePage(){
                         <div className={styles.username}>{keycloak.tokenParsed.preferred_username}<div className={styles.name}>{keycloak.tokenParsed.name}</div></div>
                     </div>
                 </div>
-                <DescriptionTextField edit={edit} type='description' content={description}></DescriptionTextField>
+                <DescriptionTextField handleChange={handleDescription} edit={edit} type='description' content={newDescription}></DescriptionTextField>
                 <div className={styles.contentCard}>
                     <h2 className={styles.subHeader}>Skills</h2>
                     <SkillList handleCheckboxChange={handleCheckboxChange} selectedItems={selectedSkills} edit={edit} skills = {viewedSkills}/>

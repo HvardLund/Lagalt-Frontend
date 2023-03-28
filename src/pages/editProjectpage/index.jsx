@@ -129,6 +129,30 @@ function EditProjectPage(){
         setProjectUrl(project.linkUrls?project.linkUrls[0]:'')
     },[project])
 
+    const createProject = async () => {
+        await fetch('https://lagalt-bckend.azurewebsites.net/api/projects/', {
+            method: 'PUT',
+            headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                "title": newHeader,
+                "description":newDescription,
+                "caption":newIntro,
+                "progress": projectStatus,
+                "tags": selectedTags,
+                "skills": selectedSkills,
+                "linkUrls":projectUrl,
+                "imageUrls":[imageUrl],
+            })
+        }).then(resp => {
+            if (!resp.ok) {
+                throw new Error(resp.status);
+            }
+            console.log(resp);
+        }).catch(error => {
+            console.log(error);
+        });
+    }
+
     return(
         <div>{(project.owner? (project.owner === keycloak.tokenParsed.preferred_username):false)?
         <div className={styles.container}>
