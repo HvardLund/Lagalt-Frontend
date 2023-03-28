@@ -9,7 +9,6 @@ function Notifications() {
     const [notifications, setNotifications] = useState([]) 
     const containerRef = useRef(null);
     let ownedProjects = useSelector((state) => state.addProjects.projects)
-    const apiURL = `https://lagalt-bckend.azurewebsites.net/api/applications/notapproved?projectId=`
 
     function useOutsideAlerter(ref) {
         useEffect(() => {
@@ -25,14 +24,14 @@ function Notifications() {
 
     useOutsideAlerter(containerRef)
 
-    const getApplications = async (id) => {
+    const getApplications = async (apiUrl) => {
         try{
-            const response = await fetch(apiURL+id)
+            const response = await fetch(apiUrl)
             if(!response.ok){
                 throw new Error('Could not load projects')
             }
             const data = await response.json()
-            setNotifications([...notifications, ...data])
+            setNotifications([...notifications, ...data.map(user => user.userName)])
         }
         catch(error){
             return[error.message,[]]
@@ -41,13 +40,13 @@ function Notifications() {
 
     const getAllApplications = () => {
         ownedProjects.map(project => 
-            getApplications(project)
+            getApplications(`https://lagalt-bckend.azurewebsites.net/api/applications/notapproved?projectId=${2}`)
         )
     }
 
     const handleOpen = () => {
-        if(!open){getApplications(2)}
         setOpen(!open)
+        getApplications(2)   
     }
 
     const accept = () => {
