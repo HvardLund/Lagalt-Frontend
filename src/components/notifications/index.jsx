@@ -41,12 +41,13 @@ function Notifications() {
 
     const getAllApplications = () => {
         ownedProjects.map(project => 
-            getApplications(project.id)
+            getApplications(project)
         )
     }
 
     const handleOpen = () => {
         setOpen(!open)
+        console.log(ownedProjects)
         getApplications(2)   
     }
 
