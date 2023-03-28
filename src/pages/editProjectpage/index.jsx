@@ -129,7 +129,7 @@ function EditProjectPage(){
         setProjectUrl(project.linkUrls?project.linkUrls[0]:'')
     },[project])
 
-    const createProject = async () => {
+    const updateProject = async () => {
         await fetch('https://lagalt-bckend.azurewebsites.net/api/projects/', {
             method: 'PUT',
             headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'},
@@ -147,7 +147,6 @@ function EditProjectPage(){
             if (!resp.ok) {
                 throw new Error(resp.status);
             }
-            console.log(resp);
         }).catch(error => {
             console.log(error);
         });
