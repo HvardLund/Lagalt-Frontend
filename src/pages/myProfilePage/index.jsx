@@ -6,7 +6,7 @@ import keycloak from '../../keycloak';
 import FeatherIcon from 'feather-icons-react'
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch  } from 'react-redux';
-import { updateUser } from './redux-parts/userSLice';
+import { updateUser } from './../../redux-parts/userSLice'
 
 const tags=[]
 
