@@ -72,7 +72,7 @@ function FrontPage(){
                         title={project.title} 
                         intro={project.caption}
                         tags={tags}
-                        image={project.images[0]?project.images[0]:imageNotFound}
+                        image={project.images.length>0?project.images[0]:imageNotFound}
                         owner={project.owner}
                         skills={project.skills}
                         id={project.id}
