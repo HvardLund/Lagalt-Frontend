@@ -2,12 +2,14 @@ import styles from './notifications.module.css'
 import { useState, useEffect, useRef } from 'react';
 import keycloak from '../../keycloak';
 import FeatherIcon from 'feather-icons-react'
+import { useSelector } from 'react-redux';
 
 function Notifications() {
     const [open, setOpen] = useState(false)
     const [notifications, setNotifications] = useState(['test1', 'test2', 'test3'])
     const handleOpen = () => {setOpen(!open)}
     const containerRef = useRef(null);
+    let ownedProjects = useSelector((state) => state.addProjects.projects)
     const apiURL = `https://lagalt-bckend.azurewebsites.net/api/${keycloak.tokenParsed.sub}/applications`
 
     function useOutsideAlerter(ref) {
@@ -43,7 +45,7 @@ function Notifications() {
     */
 
     const accept = () => {
-      alert('ok')
+      setNotifications(ownedProjects.map(project => project.id))
     }
 
     const deny = () => {
