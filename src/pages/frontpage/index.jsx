@@ -11,7 +11,7 @@ function FrontPage(){
     const [displayedProjects, setDisplayedProjects] = useState(projects)
     const [searchProjects, setSearchProjects] = useState(projects)
     const [searchPhrase, setSearchPhrase] = useState('')
-    const apiURL = !keycloak.authenticated? 'https://lagalt-bckend.azurewebsites.net/api/projects':`https://lagalt-bckend.azurewebsites.net/api/projects/skill?Id=${keycloak.tokenParsed.sub}`
+    const apiURL = keycloak.authenticated? `https://lagalt-bckend.azurewebsites.net/api/projects/skill?id=${keycloak.tokenParsed.sub}`:'https://lagalt-bckend.azurewebsites.net/api/projects'
     const imageNotFound = "https://lagaltprojectimages.blob.core.windows.net/images/noimage.png"
     
     const select = (activity) => {
@@ -37,7 +37,7 @@ function FrontPage(){
     useEffect(() => {
         const getAllProjects = async () => {
             try{
-                const response = await fetch(apiURL+'projects')
+                const response = await fetch(apiURL)
                 if(!response.ok){
                     throw new Error('Could not load projects')
                 }
