@@ -5,8 +5,6 @@ import Search from '../../components/search';
 import keycloak from '../../keycloak';
 //import keycloak from '../../keycloak';
 
-const tags = []
-
 function FrontPage(){
     
     const [projects, setProjects] = useState([])
@@ -51,7 +49,7 @@ function FrontPage(){
             }
         }
         getAllProjects()
-    },[])
+    },[apiURL])
 
     return(
         <div className={styles.container}>
@@ -71,7 +69,7 @@ function FrontPage(){
                     <ProjectCard
                         title={project.title} 
                         intro={project.caption}
-                        tags={tags}
+                        tags={project.tags.length>0?project.images:[]}
                         image={project.imageUrls.length >0?project.images[0]:imageNotFound}
                         owner={project.owner}
                         skills={project.skills}
