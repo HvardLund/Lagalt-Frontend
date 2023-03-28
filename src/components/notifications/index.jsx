@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 
 function Notifications() {
     const [open, setOpen] = useState(false)
-    const [notifications, setNotifications] = useState()
+    const [notifications, setNotifications] = useState([])
     const handleOpen = () => {setOpen(!open)}
     const containerRef = useRef(null);
     let ownedProjects = useSelector((state) => state.addProjects.projects)
