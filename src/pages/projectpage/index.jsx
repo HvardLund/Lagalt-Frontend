@@ -48,7 +48,7 @@ function ProjectPage(){
                     <h2 className={styles.subHeader}>Urls</h2>
                     <DescriptionTextField type='description' content={project.linkUrls}/>
                 </div>
-                <button className = {`${styles.greenButton} ${styles.applyButton}`} onClick={() => alert('hola')}>Apply now</button>
+                {keycloak.authenticated && <button className = {`${styles.greenButton} ${styles.applyButton}`} onClick={() => alert('hola')}>Apply now</button>}
             </div>
             <div className={`${styles.midColumn} ${styles.column}`}>
                 <DescriptionTextField type='header' content={project.title}/>
