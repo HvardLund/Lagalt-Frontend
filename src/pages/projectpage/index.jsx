@@ -35,7 +35,28 @@ function ProjectPage(){
         getProject()
     },[apiURL])
 
-    const newApplication = () => {alert('hola')}
+    const createApplication = async () => {
+        await fetch('https://lagalt-bckend.azurewebsites.net/api/applications', {
+            method: 'POST',
+            headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                "id":0,
+                "motivation":"not available",
+                "approvedStatus":false,
+                "userId":keycloak.tokenParsed.sub,
+                "projectId":id,
+            })
+        }).then(resp => {
+            if (!resp.ok) {
+                throw new Error(resp.status);
+            }
+            navigate('/')
+        }).catch(error => {
+            console.log(error);
+        });
+      }
+
+    const newApplication = () => {createApplication()}
 
     return(
         <div>{project?
@@ -50,7 +71,7 @@ function ProjectPage(){
                     <h2 className={styles.subHeader}>Urls</h2>
                     <DescriptionTextField type='description' content={project.linkUrls}/>
                 </div>
-                {keycloak.authenticated && keycloak.tokenParsed.preferred_username !== project.owner && <button className = {`${styles.greenButton} ${styles.applyButton}`} onClick={() => newApplication}>Apply now</button>}
+                {keycloak.authenticated && keycloak.tokenParsed.preferred_username !== project.owner && !project.contributors.includes(keycloak.tokenParsed.preferred_username) && <button className = {`${styles.greenButton} ${styles.applyButton}`} onClick={newApplication}>Apply now</button>}
             </div>
             <div className={`${styles.midColumn} ${styles.column}`}>
                 <DescriptionTextField type='header' content={project.title}/>
