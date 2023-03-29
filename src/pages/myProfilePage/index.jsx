@@ -8,8 +8,6 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch  } from 'react-redux';
 import { updateUser } from './../../redux-parts/userSLice'
 
-const tags=[]
-
 function MyProfilePage(){
 
     const description = useSelector((state) => state.updateUser.description)
@@ -124,7 +122,7 @@ function MyProfilePage(){
                 {myProjects.map(project =>
                     <ProjectCard 
                         intro={project.caption} 
-                        tags={tags} 
+                        tags={project.tags.length>0?project.tags:[]} 
                         image={project.imageUrls.length >0?project.imageUrls[0]:imageNotFound}
                         skills={project.skills}
                         owner={project.owner}

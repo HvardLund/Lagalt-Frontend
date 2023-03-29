@@ -134,22 +134,30 @@ function EditProjectPage(){
             method: 'PUT',
             headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'},
             body: JSON.stringify({
+                "id": `${id}`,
+                "field": project.field,
                 "title": newHeader,
                 "description":newDescription,
                 "caption":newIntro,
                 "progress": projectStatus,
                 "tags": selectedTags,
                 "skills": selectedSkills,
-                "linkUrls":projectUrl,
                 "imageUrls":[imageUrl],
+                "links":projectUrl,
+                "usersContributed": [],
             })
         }).then(resp => {
             if (!resp.ok) {
                 throw new Error(resp.status);
             }
+            navigate(`/project/${id}`)
         }).catch(error => {
             console.log(error);
         });
+    }
+
+    const publish = () => {
+        updateProject()
     }
 
     return(
@@ -192,6 +200,7 @@ function EditProjectPage(){
                 <DescriptionTextField handleChange={handleDescription} edit={true} type='description' content={newDescription}/>
             </div>
             <div className={`${styles.rightColumn} ${styles.column}`}>
+                <button className = {`${styles.greenButton}`} onClick={publish}>Publish</button>
                 <div className={styles.contentCard}>
                     <h2 className={styles.subHeader}>Skills</h2>
                     <SkillList handleCheckboxChange={handleCheckboxChange} selectedItems={selectedSkills} edit={true} skills = {allSkills}/>
