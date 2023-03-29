@@ -48,7 +48,7 @@ function ProjectPage(){
                     <h2 className={styles.subHeader}>Urls</h2>
                     <DescriptionTextField type='description' content={project.linkUrls}/>
                 </div>
-                {keycloak.authenticated && <button className = {`${styles.greenButton} ${styles.applyButton}`} onClick={() => alert('hola')}>Apply now</button>}
+                {keycloak.authenticated && keycloak.tokenParsed.preferred_username !== project.owner && <button className = {`${styles.greenButton} ${styles.applyButton}`} onClick={() => alert('hola')}>Apply now</button>}
             </div>
             <div className={`${styles.midColumn} ${styles.column}`}>
                 <DescriptionTextField type='header' content={project.title}/>
@@ -59,6 +59,10 @@ function ProjectPage(){
                 {keycloak.tokenParsed && keycloak.tokenParsed.preferred_username === project.owner &&
                     <button className = {styles.greenButton} onClick={() => navigate(`/project/${id}/edit`)}><FeatherIcon  cursor='pointer' size="20" icon="edit-3" />Edit</button>
                 }
+                <div className={styles.contentCard}>
+                    <h2 className={styles.subHeader}>Owner</h2>
+                    <MemberList members={project.owner}/>
+                </div>
                 <div className={styles.contentCard}>
                     <h2 className={styles.subHeader}>Members</h2>
                     <MemberList members={project.contributors}/>
