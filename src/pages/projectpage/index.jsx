@@ -35,6 +35,8 @@ function ProjectPage(){
         getProject()
     },[apiURL])
 
+    const newApplication = () => {alert('hola')}
+
     return(
         <div>{project?
         <div className={styles.container}>
@@ -48,7 +50,7 @@ function ProjectPage(){
                     <h2 className={styles.subHeader}>Urls</h2>
                     <DescriptionTextField type='description' content={project.linkUrls}/>
                 </div>
-                {keycloak.authenticated && keycloak.tokenParsed.preferred_username !== project.owner && <button className = {`${styles.greenButton} ${styles.applyButton}`} onClick={() => alert('hola')}>Apply now</button>}
+                {keycloak.authenticated && keycloak.tokenParsed.preferred_username !== project.owner && <button className = {`${styles.greenButton} ${styles.applyButton}`} onClick={() => newApplication}>Apply now</button>}
             </div>
             <div className={`${styles.midColumn} ${styles.column}`}>
                 <DescriptionTextField type='header' content={project.title}/>
@@ -61,7 +63,7 @@ function ProjectPage(){
                 }
                 <div className={styles.contentCard}>
                     <h2 className={styles.subHeader}>Owner</h2>
-                    <MemberList members={project.owner}/>
+                    <MemberList members={[project.owner]}/>
                 </div>
                 <div className={styles.contentCard}>
                     <h2 className={styles.subHeader}>Members</h2>
