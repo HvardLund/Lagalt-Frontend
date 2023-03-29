@@ -126,7 +126,7 @@ function NewProjectPage(){
                 "tags": selectedTags,
                 "skills": selectedSkills,
                 "linkUrls":projectUrl,
-                "owner": `${keycloak.tokenParsed.preferred_username}`,
+                "owner": `${keycloak.tokenParsed.sub}`,
                 "imageUrls":[imageUrl],
             })
         }).then(resp => {
