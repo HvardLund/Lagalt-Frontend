@@ -39,7 +39,7 @@ function NewProjectPage(){
     }
     const handleProjectUrl = (event) => {
         const value = event.target.value
-        value.length > 0? setProjectUrl(value): setProjectUrl('')
+        value.length > 0? setProjectUrl([value]): setProjectUrl([])
     }
     const handleHeader = (event) => {
         const value = event.target.value

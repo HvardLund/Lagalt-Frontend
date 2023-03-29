@@ -27,7 +27,6 @@ function MyProfilePage(){
         setEdit(!edit)
         setSelectedSkills(skills)
         if(edit){
-            dispatch(updateUser({description: newDescription, skills: selectedSkills}))
             updateProfile()
         }
     }
