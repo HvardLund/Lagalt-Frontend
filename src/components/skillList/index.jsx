@@ -8,7 +8,8 @@ function SkillList(props) {
     const edit = props.edit ===true? true: false
     const selectedItems = props.selectedItems
     const handleCheckboxChange = props.handleCheckboxChange
-    let mySkills = useSelector((state) => state.updateUser.skills)
+    let reduxSkills = useSelector((state) => state.updateUser.skills)
+    let mySkills = reduxSkills.length > 0? reduxSkills:[]
 
     return(
         <div className={`${styles.container} ${styles[type]}`}>
