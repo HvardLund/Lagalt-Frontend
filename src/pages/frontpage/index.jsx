@@ -68,7 +68,7 @@ function FrontPage(){
                     <ProjectCard
                         title={project.title} 
                         intro={project.caption}
-                        tags={project.tags.length>0?project.images:[]}
+                        tags={project.tags.length>0?project.tags:[]}
                         image={project.imageUrls.length >0?project.imageUrls[0]:imageNotFound}
                         owner={project.owner}
                         skills={project.skills}

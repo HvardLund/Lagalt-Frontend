@@ -26,7 +26,7 @@ function Notifications() {
 
     const getApplications = async (project) => {
         try{
-            const response = await fetch(`https://lagalt-bckend.azurewebsites.net/api/applications/notapproved?projectId=${project.id}`)
+            const response = await fetch(`https://lagalt-bckend.azurewebsites.net/api/projeycts/${project.id}/notapproved`)
             if(!response.ok){
                 throw new Error('Could not load projects')
             }
