@@ -149,7 +149,7 @@ function EditProjectPage(){
     },[project])
 
     const updateProject = async () => {
-        await fetch('https://lagalt-bckend.azurewebsites.net/api/projects/', {
+        await fetch(`https://lagalt-bckend.azurewebsites.net/api/projects/${id}/update`, {
             method: 'PUT',
             headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'},
             body: JSON.stringify({
