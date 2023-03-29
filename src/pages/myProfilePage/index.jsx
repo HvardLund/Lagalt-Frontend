@@ -28,6 +28,7 @@ function MyProfilePage(){
         setSelectedSkills(skills)
         if(edit){
             dispatch(updateUser({description: newDescription, skills: selectedSkills}))
+            updateProfile()
         }
     }
 
@@ -84,10 +85,11 @@ function MyProfilePage(){
     }
 
     const updateProfile = async () => {
-        await fetch('https://lagalt-bckend.azurewebsites.net/api/projects/', {
+        await fetch(`https://lagalt-bckend.azurewebsites.net/api/users/${keycloak.tokenParsed.sub}`, {
             method: 'PUT',
             headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'},
             body: JSON.stringify({
+                "id": keycloak.tokenParsed.sub,
                 "description": newDescription,
                 "skills": selectedSkills,
             })
@@ -120,7 +122,8 @@ function MyProfilePage(){
                 </div>
                 <h2 className={styles.subHeader}>Portfolio</h2>
                 {myProjects.map(project =>
-                    <ProjectCard 
+                    <ProjectCard
+                        title={project.title} 
                         intro={project.caption} 
                         tags={project.tags.length>0?project.tags:[]} 
                         image={project.imageUrls.length >0?project.imageUrls[0]:imageNotFound}
