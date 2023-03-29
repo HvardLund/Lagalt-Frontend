@@ -57,7 +57,6 @@ function ProjectPage(){
       }
 
     const newApplication = () => {
-        alert('hola')
         createApplication()
     }
 
