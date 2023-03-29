@@ -8,8 +8,6 @@ import FeatherIcon from 'feather-icons-react/build/FeatherIcon'
 import keycloak from '../../keycloak'
 import { useNavigate } from 'react-router-dom'
 
-const allSkills = ['Skillpadde', 'Avoid indecies', 'too cool for school', 'ski ll', 'koding', 'sverre', 'kake']
-
 function NewProjectPage(){
     
     const [allSkills, setAllSKills] = useState([])

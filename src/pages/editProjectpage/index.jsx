@@ -9,15 +9,13 @@ import { useParams, useNavigate } from 'react-router-dom'
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon'
 import keycloak from '../../keycloak'
 
-const allSkills = ['Skillpadde', 'Avoid indecies', 'too cool for school', 'ski ll', 'koding', 'sverre', 'kake', 'Java', 'Swift']
-
 function EditProjectPage(){
 
     const [project, setProject] = useState({})
     const navigate = useNavigate()
     const [editProgress, setEditProgress] = useState(false)
     const imageNotFound = "https://lagaltprojectimages.blob.core.windows.net/images/noimage.png"
-
+    const [allSkills, setAllSKills] = useState([])
     const [projectStatus, setProjectStatus] = useState('Founding')
     const [imageUrl, setImageUrl] = useState(imageNotFound)
     const [newHeader, setNewHeader] = useState('')
@@ -27,9 +25,11 @@ function EditProjectPage(){
     const [selectedTags, setSelectedTags] = useState([])
     const [projectUrl, setProjectUrl] = useState('')
     const [newTag, setNewTag] = useState('')
+    const [field, setField] = useState('')
     const {id} = useParams()
     
     const apiURL = `https://lagalt-bckend.azurewebsites.net/api/projects/${id}`
+    const skillApiUrl = 'https://lagalt-bckend.azurewebsites.net/api/skills'
 
     const changeProgress = () => {
         setEditProgress(!editProgress)
@@ -90,6 +90,23 @@ function EditProjectPage(){
             setNewTag('')
         }
     }
+
+    useEffect(() => {
+        const getAllSkills = async () => {
+            try{
+                const response = await fetch(skillApiUrl)
+                if(!response.ok){
+                    throw new Error('Could not load projects')
+                }
+                const data = await response.json()
+                setAllSKills(data.map(skill => skill.name))
+            }
+            catch(error){
+                return[error.message,[]]
+            }
+        }
+        getAllSkills()
+    },[])
     
     useEffect(() => {
         const getProject = async () => {
@@ -109,6 +126,7 @@ function EditProjectPage(){
                 setSelectedSkills(data.skills)
                 setSelectedTags(data.tags)
                 setProjectUrl(data.linkUrls[0]?data.linkUrls[0]:'')
+                setField(data.field)
 
             }
             catch(error){
@@ -127,6 +145,7 @@ function EditProjectPage(){
         setNewHeader(project.title)
         setNewIntro(project.caption)
         setProjectUrl(project.linkUrls?project.linkUrls[0]:'')
+        setField(project.field)
     },[project])
 
     const updateProject = async () => {
@@ -134,8 +153,8 @@ function EditProjectPage(){
             method: 'PUT',
             headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'},
             body: JSON.stringify({
-                "id": `${id}`,
-                "field": project.field,
+                "id": id,
+                "field": field,
                 "title": newHeader,
                 "description":newDescription,
                 "caption":newIntro,
