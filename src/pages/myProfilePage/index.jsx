@@ -96,7 +96,7 @@ function MyProfilePage(){
             if (!resp.ok) {
                 throw new Error(resp.status);
             }
-            console.log(resp);
+            dispatch(updateUser(resp))
         }).catch(error => {
             console.log(error);
         });
