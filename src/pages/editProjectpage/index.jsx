@@ -44,7 +44,7 @@ function EditProjectPage(){
     }
     const handleProjectUrl = (event) => {
         const value = event.target.value
-        value.length > 0? setProjectUrl(value): setProjectUrl('')
+        value.length > 0? setProjectUrl([value]): setProjectUrl([''])
     }
     const handleHeader = (event) => {
         const value = event.target.value
@@ -125,7 +125,7 @@ function EditProjectPage(){
                 setNewDescription(data.description)
                 setSelectedSkills(data.skills)
                 setSelectedTags(data.tags)
-                setProjectUrl(data.linkUrls[0]?data.linkUrls[0]:'')
+                setProjectUrl(data.linkUrls[0]?data.linkUrls[0]:[])
                 setField(data.field)
 
             }
@@ -144,7 +144,7 @@ function EditProjectPage(){
         setSelectedTags(project.tags)
         setNewHeader(project.title)
         setNewIntro(project.caption)
-        setProjectUrl(project.linkUrls?project.linkUrls[0]:'')
+        setProjectUrl(project.linkUrls?project.linkUrls[0]:[])
         setField(project.field)
     },[project])
 
