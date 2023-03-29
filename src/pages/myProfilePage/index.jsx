@@ -27,6 +27,7 @@ function MyProfilePage(){
         setEdit(!edit)
         setSelectedSkills(skills)
         if(edit){
+            dispatch(updateUser({description:newDescription, skills:selectedSkills}))
             updateProfile()
         }
     }
@@ -96,7 +97,6 @@ function MyProfilePage(){
             if (!resp.ok) {
                 throw new Error(resp.status);
             }
-            dispatch(updateUser(resp))
         }).catch(error => {
             console.log(error);
         });
