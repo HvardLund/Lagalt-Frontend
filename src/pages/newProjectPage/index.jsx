@@ -3,7 +3,7 @@ import ProgressBar from '../../components/progressBar'
 import ProjectTag from '../../components/projectTag'
 import SkillList from '../../components/skillList'
 import styles from './newProjectpage.module.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon'
 import keycloak from '../../keycloak'
 import { useNavigate } from 'react-router-dom'
@@ -12,7 +12,9 @@ const allSkills = ['Skillpadde', 'Avoid indecies', 'too cool for school', 'ski l
 
 function NewProjectPage(){
     
+    const [allSkills, setAllSKills] = useState([])
     const defaultImage = 'https://lagaltprojectimages.blob.core.windows.net/images/noimage.png'
+    const skillApiUrl = 'https://lagalt-bckend.azurewebsites.net/api/skills'
     const [editProgress, setEditProgress] = useState(false)
     const [projectStatus, setProjectStatus] = useState('Founding')
     const [imageUrl, setImageUrl] = useState('')
@@ -94,6 +96,23 @@ function NewProjectPage(){
         newHeader.length > 0? createProject() : alert('Your project must have a header')
     }
 
+    useEffect(() => {
+        const getAllSkills = async () => {
+            try{
+                const response = await fetch(skillApiUrl)
+                if(!response.ok){
+                    throw new Error('Could not load projects')
+                }
+                const data = await response.json()
+                setAllSKills(data.map(skill => skill.name))
+            }
+            catch(error){
+                return[error.message,[]]
+            }
+        }
+        getAllSkills()
+    },[])
+
     const createProject = async () => {
         await fetch('https://lagalt-bckend.azurewebsites.net/api/projects/', {
             method: 'POST',
@@ -107,7 +126,7 @@ function NewProjectPage(){
                 "tags": selectedTags,
                 "skills": selectedSkills,
                 "linkUrls":projectUrl,
-                "owner": keycloak.tokenParsed.preferred_username,
+                "owner": `${keycloak.tokenParsed.preferred_username}`,
                 "imageUrls":[imageUrl],
             })
         }).then(resp => {
@@ -129,7 +148,7 @@ function NewProjectPage(){
                 alt='project foto'
                 onError={({ currentTarget }) => {
                     currentTarget.onerror = null
-                    currentTarget.src='https://lagaltprojectimages.blob.core.windows.net/images/noimage.png'
+                    currentTarget.src=defaultImage
                 }}
                 >
             </img>
