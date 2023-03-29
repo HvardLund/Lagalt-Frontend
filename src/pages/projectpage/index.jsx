@@ -56,7 +56,10 @@ function ProjectPage(){
         });
       }
 
-    const newApplication = () => {createApplication()}
+    const newApplication = () => {
+        alert('hola')
+        createApplication()
+    }
 
     return(
         <div>{project?
