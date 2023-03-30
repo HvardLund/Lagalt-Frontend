@@ -58,8 +58,8 @@
     font-weight: 400;
     color: #323941;
     width: 95%;
-    background: #eeeeee;
-    border: 1px solid #D5D8DE;
+    background: #272524;
+    border: 1px solid #272524;
     border-radius: 4px;
 
     outline: none;
@@ -97,10 +97,10 @@
 
 .introductionInput:empty:before {
     content:attr(data-placeholder);
-    color: gray;
+    color: white;
 }
 
 .descriptionInput:empty:before {
     content:attr(data-placeholder);
-    color: gray;
+    color: white;
 }
