@@ -71,10 +71,6 @@
     cursor: text;
 }
 
-.commonInput::-webkit-scrollbar {
-    display:none;
-}
-
 .commonInput::placeholder{
     color:#AEA486;
 }
@@ -89,7 +85,7 @@
     min-height: 18px;
     font-size: 16px;
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y: hidden;
     resize: vertical;
 }
 
@@ -99,7 +95,7 @@
     min-height: 18px;
     font-size: 16px;
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y: hidden;
     resize: vertical;
 }
 

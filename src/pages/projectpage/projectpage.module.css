@@ -109,6 +109,10 @@
     margin-right: 3px;
 }
 
+.greenButton:hover{
+    background-color: #819770;
+}
+
 .applyButton{
     align-self: center;
 }
