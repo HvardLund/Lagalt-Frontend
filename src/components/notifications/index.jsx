@@ -25,7 +25,11 @@ function Notifications() {
 
     useOutsideAlerter(containerRef)
 
-      //fetching projects owned by the user and storing them to redux
+    useEffect(() => {
+        getAllApplications()
+    },[ownedProjects])
+
+    //fetching projects owned by the user and storing them to redux
     useEffect(() => {
         const getOwnedProjects = async () => {
             try{
@@ -34,6 +38,7 @@ function Notifications() {
                     throw new Error('Could not find your projects')
                 }
                 const data = await response.json()
+                console.log(data)
                 setOwnedProjects(data)
             }
             catch(error){
@@ -76,6 +81,7 @@ function Notifications() {
             if (!resp.ok) {
                 throw new Error(resp.status);
             }
+            if(resp.ok){getAllApplications()}
         }).catch(error => {
             console.log(error);
         });
@@ -104,18 +110,12 @@ function Notifications() {
         console.log(projectId)
         reviewApplication(applicationId)
         addContributors(projectId)
-        getAllApplications()
     }
 
     //deny application
     const deny = (id) => {
         reviewApplication(id)
-        getAllApplications()
     }
-
-    useEffect(() => {
-        getAllApplications()
-    },[ownedProjects])
 
     return(
         <div ref={containerRef} className={styles.container}>
