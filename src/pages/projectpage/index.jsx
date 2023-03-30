@@ -17,7 +17,7 @@ function ProjectPage(){
     const navigate = useNavigate()
     const imageNotFound = "https://lagaltprojectimages.blob.core.windows.net/images/noimage.png"
     const apiURL = `https://lagalt-bckend.azurewebsites.net/api/projects/${id}`
-    const [confirmed, setConfirmed] = useState(true)
+    const [confirmed, setConfirmed] = useState(false)
 
     useEffect(() => {
         const getProject = async () => {
