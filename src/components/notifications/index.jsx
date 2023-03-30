@@ -57,7 +57,7 @@ function Notifications() {
                 throw new Error('Could not load projects')
             }
             const data = await response.json()
-            if(data.length > 0){setNotifications(notifications => [...notifications, data.map(application => [`${application.userName} wants to join ${project.title}`, application.id, project.id])])}
+            if(data.length > 0){setNotifications(notifications => [...notifications, data.map(application => [`${application.userName} wants to join ${project.title}`, application.id, project.id, application.userName])])}
         }
         catch(error){
             return[error.message,[]]
@@ -85,10 +85,13 @@ function Notifications() {
         });
     }
 
-    const addContributors = async (id) => {
+    const addContributors = async (id, userName) => {
         await fetch(`https://lagalt-bckend.azurewebsites.net/api/projects/${id}/contributors`, {
             method: 'PUT',
             headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                "contributor": [userName]
+            })
         }).then(resp => {
             if (!resp.ok) {
                 throw new Error(resp.status);
@@ -104,11 +107,11 @@ function Notifications() {
     }
 
     //accept application
-    const accept = (applicationId, projectId) => {
+    const accept = (applicationId, projectId, userName) => {
         reviewApplication(applicationId)
+        addContributors(projectId)
         setNotifications([])
         getAllApplications()
-        addContributors(projectId)
     }
 
     //deny application
@@ -130,7 +133,7 @@ function Notifications() {
                         <button className={styles.menuButton}>
                             <div className={styles.notificationText}>{notification[0]}</div>
                             <FeatherIcon onClick = {() => deny(notification[1])}size="20px" icon="x" color='#DA5E3F'></FeatherIcon>
-                            <FeatherIcon onClick = {() => accept(notification[1], notification[2])} size="20px" icon="check" color='#587D3B'></FeatherIcon>
+                            <FeatherIcon onClick = {() => accept(notification[1], notification[2], notification[3])} size="20px" icon="check" color='#587D3B'></FeatherIcon>
                         </button>
                     )}
                 </div>
