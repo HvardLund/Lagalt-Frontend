@@ -1,6 +1,6 @@
 # Lagalt - Frontend
 ## Overview
-This repository contains the code for the frontend of the LagAlt project handed out as a mandatory exercise at the Noroff acceleration program (spring 2023).
+This repository contains the code for the frontend of the LagAlt project handed out as a mandatory project at the Noroff acceleration program (spring 2023).
 
 The project consists of creating the website lagalt.no, a platform that aims to facilitate connecting individuals in creative fields with projects that requires specific skills. In order to apply to join or create projects, the user must register with a username and create a password. After registering, the user accesses their profile page which will contain a portfolio of their projects, in addition to a user description and the users skills. The website also has a main page which contains projects by other users. By clicking on one of these projects, the user will get to the project page, the last of the three pages the website contains. In this page, application to the specific project clicked can be done. 
 
@@ -8,6 +8,10 @@ The website uses Oauth for handling authentication, and the website's backend ex
 
 ## Development
 The frontend framework used is React. Further info can be found in the sections below.
+
+### User manual
+The following youtube video goes through the functionalities of the website and how to use them:  
+https://www.youtube.com/watch?v=C1nhJqucTGk
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
