@@ -160,7 +160,7 @@ function EditProjectPage(){
 
     //method used to update the project data, with the new values in each component
     const updateProject = async () => {
-        await fetch(`https://lagalt-bckend.azurewebsites.net/api/projects/${id}/update`, {
+        await fetch(`https://lagalt-bckend.azurewebsites.net/api/projects/${id}`, {
             method: 'PUT',
             headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'},
             body: JSON.stringify({
