@@ -52,7 +52,7 @@ function Notifications() {
 
     useEffect(() => {
         getAllApplications()
-    },[open])
+    },[])
 
     //sets approved status to true
     const reviewApplication = async (id) => {
@@ -83,8 +83,7 @@ function Notifications() {
 
     //Open/close the menu on click
     const handleOpen = () => {
-        setOpen(!open)
-        getAllApplications()  
+        setOpen(!open)  
     }
 
     const accept = (applicationId, projectId) => {
@@ -110,8 +109,8 @@ function Notifications() {
                     {notifications.map(notification => 
                         <button className={styles.menuButton}>
                             <div className={styles.notificationText}>{notification[0]}</div>
-                            <FeatherIcon onClick = {deny(notification[1])}size="20px" icon="x" color='#DA5E3F'></FeatherIcon>
-                            <FeatherIcon onClick = {accept(notification[1], notification[2])} size="20px" icon="check" color='#587D3B'></FeatherIcon>
+                            <FeatherIcon onClick = {() => deny(notification[1])}size="20px" icon="x" color='#DA5E3F'></FeatherIcon>
+                            <FeatherIcon onClick = {() => accept(notification[1], notification[2])} size="20px" icon="check" color='#587D3B'></FeatherIcon>
                         </button>
                     )}
                 </div>
