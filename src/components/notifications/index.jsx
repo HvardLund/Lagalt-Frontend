@@ -43,10 +43,10 @@ function Notifications() {
 
     //get all applications for all projects where the logged in user is the owner
     const getAllApplications = () => {
-        console.log(ownedProjects)
-        ownedProjects.map(project => 
+        ownedProjects.array.forEach(project => {
+            console.log(project)
             getApplications(project.id)
-        )
+        })
     }
 
     //sets approved status to true
@@ -79,8 +79,8 @@ function Notifications() {
     //Open/close the menu on click
     const handleOpen = () => {
         setOpen(!open)
-        console.log(ownedProjects)
-        getApplications(ownedProjects[0])  
+        console.log(ownedProjects[0])
+        getAllApplications()  
     }
 
     const accept = (applicationId, projectId) => {
