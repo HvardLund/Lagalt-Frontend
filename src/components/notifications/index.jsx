@@ -109,7 +109,7 @@ function Notifications() {
     //accept application
     const accept = (applicationId, projectId, userName) => {
         reviewApplication(applicationId)
-        addContributors(projectId)
+        //addContributors(projectId) This method is not currently working
         setNotifications([])
         getAllApplications()
     }
