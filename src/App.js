@@ -31,7 +31,7 @@ function App() {
               throw new Error('User could not be loaded')
           }
           const data = await response.json()
-          dispatch(updateUser(data))
+          dispatch(updateUser({description: data.description, skills: data.skills}))
       }
       catch(error){
           console.log([error.message,[]])
@@ -39,26 +39,6 @@ function App() {
     }
     getUser()
   },[dispatch])
-
-  /*
-  //fetching projects owned by the user and storing them to redux
-  useEffect(() => {
-    const getOwnedProjects = async () => {
-        try{
-            const response = await fetch(`https://lagalt-bckend.azurewebsites.net/api/users/${keycloak.tokenParsed.sub}/OwnedProjects`)
-            if(!response.ok){
-                throw new Error('Could not find your projects')
-            }
-            const data = await response.json()
-            dispatch(addProjects({projects: data}))
-        }
-        catch(error){
-            return[error.message,[]]
-        }
-    }
-    getOwnedProjects()
-  },[dispatch])
-  */
   
   return (
     <BrowserRouter>
