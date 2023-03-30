@@ -36,7 +36,6 @@ function Notifications() {
                 throw new Error('Could not load projects')
             }
             const data = await response.json()
-            console.log(data)
             setNotifications([...notifications, ...data.map(application => [`${application.userName} wants to join ${project.title}`, application.id, project.id])])
         }
         catch(error){
@@ -50,6 +49,10 @@ function Notifications() {
             getApplications(project)
         })
     }
+
+    useEffect(() => {
+        getAllApplications()
+    },[])
 
     //sets approved status to true
     const reviewApplication = async (id) => {
@@ -81,22 +84,20 @@ function Notifications() {
     //Open/close the menu on click
     const handleOpen = () => {
         setOpen(!open)
-        console.log(ownedProjects[0])
         getAllApplications()  
     }
 
     const accept = (applicationId, projectId) => {
+        console.log(projectId)
         reviewApplication(applicationId)
         addContributors(projectId)
+        getAllApplications()
     }
 
     const deny = (id) => {
         reviewApplication(id)
+        getAllApplications()
     }
-
-    useEffect(() => {
-        console.log(notifications)
-    },[notifications])
 
     return(
         <div ref={containerRef} className={styles.container}>
