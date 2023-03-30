@@ -29,7 +29,7 @@ function Notifications() {
     //load applications for a project
     const getApplications = async (project) => {
         try{
-            const response = await fetch(`https://lagalt-bckend.azurewebsites.net/api/projeycts/${project.id}/notapproved`)
+            const response = await fetch(`https://lagalt-bckend.azurewebsites.net/api/projects/${project.id}/notapproved`)
             if(!response.ok){
                 throw new Error('Could not load projects')
             }
@@ -63,7 +63,7 @@ function Notifications() {
     
     useEffect(() => {
         setNotifications([])
-        getApplications(ownedProjects[0])
+        getAllApplications()
     },[ownedProjects])
 
     return(
