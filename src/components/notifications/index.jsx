@@ -44,7 +44,7 @@ function Notifications() {
     //get all applications for all projects where the logged in user is the owner
     const getAllApplications = () => {
         ownedProjects.map(project => 
-            getApplications(project)
+            getApplications(project.id)
         )
     }
 
@@ -92,6 +92,10 @@ function Notifications() {
     useEffect(() => {
         getAllApplications()
     },[ownedProjects])
+
+    useEffect(() => {
+        console.log(notifications)
+    },[notifications])
 
     return(
         <div ref={containerRef} className={styles.container}>
