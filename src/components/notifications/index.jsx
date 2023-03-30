@@ -108,7 +108,7 @@ function Notifications() {
         reviewApplication(applicationId)
         setNotifications([])
         getAllApplications()
-        //addContributors(projectId)
+        addContributors(projectId)
     }
 
     //deny application
