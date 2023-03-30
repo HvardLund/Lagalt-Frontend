@@ -44,7 +44,6 @@ function ProjectPage(){
             method: 'POST',
             headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'},
             body: JSON.stringify({
-                "id":0,
                 "motivation":"not available",
                 "approvedStatus":false,
                 "userId":keycloak.tokenParsed.sub,
