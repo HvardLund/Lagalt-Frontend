@@ -1,11 +1,14 @@
 import styles from './memberList.module.css'
 import { useNavigate } from 'react-router';
 
-
+//component that is displaying a list of members/contributors
 function MemberList(props) {
 
+    //the actual list of members
     const memberList = props.members? props.members:[]
     const navigate = useNavigate()
+
+    //link to profile photo hosted on azure
     const profilePhoto = "https://lagaltprojectimages.blob.core.windows.net/images/profile.svg"
 
     return(

@@ -19,6 +19,7 @@ function App() {
 
   const dispatch = useDispatch();
 
+  //fetching the userdata and storing it to redux state
   useEffect(() => {
     const getUser = async () => {
       try{
@@ -39,6 +40,7 @@ function App() {
     getUser()
   },[dispatch])
 
+  //fetching projects owned by the user and storing them to redux
   useEffect(() => {
     const getOwnedProjects = async () => {
         try{

@@ -1,8 +1,10 @@
 import styles from './search.module.css'
 import FeatherIcon from 'feather-icons-react'
 
+//search field
 function Search(props) {
 
+    //method for handling search functionality passed to parent
     const handleSearch = props.handleSearch
     const value=props.value
 

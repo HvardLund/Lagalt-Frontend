@@ -6,8 +6,10 @@ import SkillList from '../skillList'
 import styles from './projectCard.module.css'
 import { useNavigate } from "react-router-dom"
 
+//project card displaying the most important aspects of a project
 function ProjectCard(props) {
 
+    //Project attributes
     const projectImage = props.image?props.image: 'https://lagaltprojectimages.blob.core.windows.net/images/noimage.png'
     const status = props.progress? props.progress: 'Founding'
     const title = props.title? props.title: 'Header'

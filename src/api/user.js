@@ -1,5 +1,6 @@
 import keycloak from "../keycloak";
 
+//check if user already exists in the database, if not create a new user
 export const checkForUser = async (token) => {
   try{
       const response = await fetch(`https://lagalt-bckend.azurewebsites.net/api/users/${token}`, {
@@ -20,6 +21,7 @@ export const checkForUser = async (token) => {
   }
 }
 
+//method for creating a new user in the backend with data from the keycloak user
 const createUser = async () => {
   await fetch('https://lagalt-bckend.azurewebsites.net/api/users/', {
       method: 'POST',
@@ -34,7 +36,6 @@ const createUser = async () => {
           alert('user was not created properly, try reloading the page')
           throw new Error(resp.status);
       }
-      console.log(resp);
   }).catch(error => {
       alert('user was not created properly, try reloading the page')
       console.log(error);
