@@ -222,8 +222,6 @@ function EditProjectPage(){
                     :<ProgressBar stage={projectStatus}/>
                     }
                 </div>
-                <h2 className={styles.subHeader}>Project link</h2>
-                <DescriptionTextField handleChange={handleProjectUrl} edit={true} type='url' content={projectUrl}/>
             </div>
             <div className={`${styles.midColumn} ${styles.column}`}>
                 <DescriptionTextField handleChange={handleHeader} edit={true} type='header' content={newHeader}/>
