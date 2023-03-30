@@ -173,7 +173,7 @@ function EditProjectPage(){
                 "tags": selectedTags,
                 "skills": selectedSkills,
                 "imageUrls":[imageUrl],
-                "links":projectUrl,
+                //"links":projectUrl,
                 "usersContributed": [],
             })
         }).then(resp => {
