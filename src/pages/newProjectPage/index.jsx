@@ -129,7 +129,7 @@ function NewProjectPage(){
                 "progress": projectStatus,
                 "tags": selectedTags,
                 "skills": selectedSkills,
-                "linkUrls":projectUrl,
+                //"linkUrls":projectUrl,
                 "owner": `${keycloak.tokenParsed.sub}`,
                 "imageUrls":[imageUrl],
             })
