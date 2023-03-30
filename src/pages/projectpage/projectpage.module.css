@@ -124,3 +124,10 @@
     color: #FFECB7;
     min-height: fit-content;
 }
+
+.confirmed{
+    color: #587D3B;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 16px;
+    text-align: center;
+}
