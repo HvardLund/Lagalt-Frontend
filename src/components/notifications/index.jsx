@@ -43,7 +43,6 @@ function Notifications() {
 
     //get all applications for all projects where the logged in user is the owner
     const getAllApplications = () => {
-        setNotifications([])
         ownedProjects.map(project => 
             getApplications(project)
         )
