@@ -5,11 +5,12 @@ import FeatherIcon from 'feather-icons-react'
 import { useSelector } from 'react-redux';
 
 //notification menu component
-function Notifications() {
+function Notifications(props) {
     const [open, setOpen] = useState(false)
-    const [notifications, setNotifications] = useState([]) 
+    const notifications = props.notifications
+    const accept = props.accept
+    const deny = props.deny
     const containerRef = useRef(null);
-    let ownedProjects = useSelector((state) => state.addProjects.projects)
 
     //make notification menu close on click outside
     function useOutsideAlerter(ref) {
@@ -26,76 +27,9 @@ function Notifications() {
 
     useOutsideAlerter(containerRef)
 
-    //load applications for a project
-    const getApplications = async (project) => {
-        try{
-            const response = await fetch(`https://lagalt-bckend.azurewebsites.net/api/projects/${project.id}/notapproved`, {
-                headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'},
-            })
-            if(!response.ok){
-                throw new Error('Could not load projects')
-            }
-            const data = await response.json()
-            setNotifications([...notifications, ...data.map(application => [`${application.userName} wants to join ${project.title}`, application.id, project.id])])
-        }
-        catch(error){
-            return[error.message,[]]
-        }
-    }
-
-    //get all applications for all projects where the logged in user is the owner
-    const getAllApplications = () => {
-        ownedProjects.forEach(project => {
-            getApplications(project)
-        })
-    }
-
-    useEffect(() => {
-        getAllApplications()
-    },[])
-
-    //sets approved status to true
-    const reviewApplication = async (id) => {
-        await fetch(`https://lagalt-bckend.azurewebsites.net/api/applications/${id}/approve`, {
-            method: 'PUT',
-            headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'},
-        }).then(resp => {
-            if (!resp.ok) {
-                throw new Error(resp.status);
-            }
-        }).catch(error => {
-            console.log(error);
-        });
-    }
-
-    const addContributors = async (id) => {
-        await fetch(`https://lagalt-bckend.azurewebsites.net/api/projects/${id}/contributors`, {
-            method: 'PUT',
-            headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'},
-        }).then(resp => {
-            if (!resp.ok) {
-                throw new Error(resp.status);
-            }
-        }).catch(error => {
-            console.log(error);
-        });
-    }
-
     //Open/close the menu on click
     const handleOpen = () => {
         setOpen(!open)  
-    }
-
-    const accept = (applicationId, projectId) => {
-        console.log(projectId)
-        reviewApplication(applicationId)
-        addContributors(projectId)
-        getAllApplications()
-    }
-
-    const deny = (id) => {
-        reviewApplication(id)
-        getAllApplications()
     }
 
     return(
