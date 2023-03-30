@@ -9,6 +9,13 @@ The website uses Oauth for handling authentication, and the website's backend ex
 ## Development
 The frontend framework used is React. Further info can be found in the sections below.
 
+## Installations and prerequisites
+In order to clone repo and play with the project yourself, you need to download the following:
+* React
+* Node.js
+
+For details of running a react application, see information below
+
 ### User manual
 The following youtube video goes through the functionalities of the website and how to use them:  
 https://www.youtube.com/watch?v=C1nhJqucTGk
