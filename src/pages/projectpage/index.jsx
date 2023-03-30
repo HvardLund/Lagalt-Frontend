@@ -72,6 +72,10 @@ function ProjectPage(){
                     <h2 className={styles.subHeader}>Status</h2>
                     <ProgressBar stage={project?project.progress:'Founding'}/>
                 </div>
+                <div className={styles.contentCard}>
+                    <h2 className={styles.subHeader}>Urls</h2>
+                    <DescriptionTextField type='description' content={project.linkUrls}/>
+                </div>
                 {keycloak.authenticated && keycloak.tokenParsed.preferred_username !== project.owner && !project.contributors.includes(keycloak.tokenParsed.preferred_username) && confirmed && <div className = {styles.confirmed}>You have successfully applied</div>}
                 {keycloak.authenticated && keycloak.tokenParsed.preferred_username !== project.owner && !project.contributors.includes(keycloak.tokenParsed.preferred_username) && !confirmed && <button className = {`${styles.greenButton} ${styles.applyButton}`} onClick={newApplication}>Apply now</button>}
             </div>
