@@ -182,7 +182,7 @@ function NewProjectPage(){
                 <DescriptionTextField handleChange={handleDescription} edit={true} type='description' content={newDescription}/>
             </div>
             <div className={`${styles.rightColumn} ${styles.column}`}>
-                <button className = {`${styles.greenButton}`} onClick={() => checkValues()}>Publish</button>
+                {newHeader.length > 0 && <button className = {`${styles.greenButton}`} onClick={() => checkValues()}>Publish</button>}
                 <div className={styles.contentCard}>
                     <h2 className={styles.subHeader}>Skills</h2>
                     <SkillList handleCheckboxChange={handleCheckboxChange} selectedItems={selectedSkills} edit={true} skills = {allSkills}/>
