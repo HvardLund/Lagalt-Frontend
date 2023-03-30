@@ -113,7 +113,7 @@ function Notifications() {
 
     //deny application
     const deny = (id) => {
-        console.log(id)
+        console.log(notifications)
         //reviewApplication(id)
         //setNotifications([])
         //getAllApplications()
