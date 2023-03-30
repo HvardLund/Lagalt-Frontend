@@ -8,8 +8,10 @@ import FeatherIcon from 'feather-icons-react/build/FeatherIcon'
 import keycloak from '../../keycloak'
 import { useNavigate } from 'react-router-dom'
 
+//page for adding a new project
 function NewProjectPage(){
     
+    //porject attributes
     const [allSkills, setAllSKills] = useState([])
     const defaultImage = 'https://lagaltprojectimages.blob.core.windows.net/images/noimage.png'
     const skillApiUrl = 'https://lagalt-bckend.azurewebsites.net/api/skills'
@@ -26,6 +28,7 @@ function NewProjectPage(){
     const [projectUrl, setProjectUrl] = useState('')
     const navigate = useNavigate()
 
+    //handling changes to the various components
     const changeProgress = () => {
         setEditProgress(!editProgress)
     }
@@ -90,10 +93,12 @@ function NewProjectPage(){
         setSelectedCategory(activity)
     }
 
+    //checking if project has a title before publishing
     const checkValues = () => {
         newHeader.length > 0? createProject() : alert('Your project must have a header')
     }
 
+    //loading all possible skills from the database
     useEffect(() => {
         const getAllSkills = async () => {
             try{
@@ -111,6 +116,7 @@ function NewProjectPage(){
         getAllSkills()
     },[])
 
+    //post the new project to the database
     const createProject = async () => {
         await fetch('https://lagalt-bckend.azurewebsites.net/api/projects/', {
             method: 'POST',

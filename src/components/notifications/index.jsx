@@ -4,6 +4,7 @@ import keycloak from '../../keycloak';
 import FeatherIcon from 'feather-icons-react'
 import { useSelector } from 'react-redux';
 
+//notification menu component
 function Notifications() {
     const [open, setOpen] = useState(false)
     const [notifications, setNotifications] = useState([]) 
@@ -11,6 +12,7 @@ function Notifications() {
     let ownedProjects = useSelector((state) => state.addProjects.projects)
     const dummyNotifications = ["Hansen want to join your project", "Norasb wants to join your project"]
 
+    //make notification menu close on click outside
     function useOutsideAlerter(ref) {
         useEffect(() => {
           function handleClickOutside(event) {
@@ -25,6 +27,7 @@ function Notifications() {
 
     useOutsideAlerter(containerRef)
 
+    //load applications for a project
     const getApplications = async (project) => {
         try{
             const response = await fetch(`https://lagalt-bckend.azurewebsites.net/api/projeycts/${project.id}/notapproved`)
@@ -39,12 +42,14 @@ function Notifications() {
         }
     }
 
+    //get all applications for all projects where the logged in user is the owner
     const getAllApplications = () => {
         ownedProjects.map(project => 
             getApplications(project)
         )
     }
 
+    //Open/close the menu on click
     const handleOpen = () => {
         setOpen(!open)   
     }

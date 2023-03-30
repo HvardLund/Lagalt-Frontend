@@ -10,6 +10,7 @@ import keycloak from '../../keycloak';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
+//displaying a single project
 function ProjectPage(){
     
     const [project, setProject] = useState(false)
@@ -19,6 +20,7 @@ function ProjectPage(){
     const apiURL = `https://lagalt-bckend.azurewebsites.net/api/projects/${id}`
     const [confirmed, setConfirmed] = useState(false)
 
+    //fetching the project
     useEffect(() => {
         const getProject = async () => {
             try{
@@ -36,6 +38,7 @@ function ProjectPage(){
         getProject()
     },[apiURL])
 
+    //posting a new application
     const createApplication = async () => {
         await fetch('https://lagalt-bckend.azurewebsites.net/api/applications', {
             method: 'POST',
@@ -57,6 +60,7 @@ function ProjectPage(){
         });
       }
 
+    //posting a new application when the apply button is clicked
     const newApplication = () => {
         createApplication()
     }

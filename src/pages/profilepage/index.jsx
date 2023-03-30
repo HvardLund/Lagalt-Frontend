@@ -4,6 +4,7 @@ import SkillList from '../../components/skillList';
 import { useParams } from 'react-router';
 import { useEffect, useState } from 'react';
 
+//simple page displaying user data for user that are not logged in
 function ProfilePage(){
 
     const {username} = useParams()
@@ -11,6 +12,7 @@ function ProfilePage(){
     const apiURL = 'https://lagalt-bckend.azurewebsites.net/api/users'
     const profileImage = "https://lagaltprojectimages.blob.core.windows.net/images/profile.svg"
 
+    //fetching all users and filtering out the one from the url/useParams
     useEffect(() => {
         const getAllUsers = async () => {
             try{

@@ -3,12 +3,14 @@ import { useState, useEffect, useRef } from 'react';
 import keycloak from '../../keycloak';
 import { useNavigate } from 'react-router';
 
+//navigation menu used in the page header
 function ProfileMenu() {
     const [open, setOpen] = useState(false)
     const handleOpen = () => {setOpen(!open)}
     const containerRef = useRef(null);
     const navigate = useNavigate()
 
+    //make sure outside clicks close the menu
     function useOutsideAlerter(ref) {
         useEffect(() => {
           function handleClickOutside(event) {
@@ -23,11 +25,13 @@ function ProfileMenu() {
 
     useOutsideAlerter(containerRef)
 
+    //sends user to profile page
     const handleMyProfile = () => {
       setOpen(false)
       navigate("/profile/me")
     }
 
+    //sends user to new project page
     const handleNewProject = () => {
       setOpen(false)
       navigate("/project/new")

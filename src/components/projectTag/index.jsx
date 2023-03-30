@@ -1,5 +1,6 @@
 import styles from './tag.module.css'
 
+//styling for a single project tag
 function ProjectTag(props) {
 
     const tag = props.name

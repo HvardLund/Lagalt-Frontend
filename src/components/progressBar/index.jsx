@@ -1,6 +1,6 @@
 import styles from './progressBar.module.css'
 
-
+//progress bar component with three stages
 function ProgressBar(props) {
 
     const stage = props.stage

@@ -1,11 +1,21 @@
 import styles from './descriptionTextField.module.css'
 
+//Component for displaying and editing text
 function DescriptionTextField(props) {
 
+    //what type of field it is, header, introduction, description and URL is supported
     const field_type = props.type
+
+    //the text content that is displayed in the field
     const content = props.content
+
+    //component theme
     const theme = props.theme? props.theme:'projectpage'
+
+    //denotes wether the component is editable or not
     const edit = props.edit===true? true:false
+
+    //method that is passed to the parent to handle input data
     const updateInputContent = props.handleChange
 
     return(
