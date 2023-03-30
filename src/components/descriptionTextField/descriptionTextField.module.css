@@ -71,6 +71,10 @@
     cursor: text;
 }
 
+.commonInput::-webkit-scrollbar {
+    display:none;
+}
+
 .commonInput::placeholder{
     color:#AEA486;
 }
