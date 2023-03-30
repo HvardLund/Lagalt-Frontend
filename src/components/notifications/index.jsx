@@ -62,7 +62,7 @@ function Notifications() {
     }
     
     useEffect(() => {
-        getAllApplications()
+        getApplications(ownedProjects[0])
     },[ownedProjects])
 
     return(
