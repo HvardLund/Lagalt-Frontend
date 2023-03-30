@@ -52,7 +52,7 @@ function Notifications() {
 
     useEffect(() => {
         getAllApplications()
-    },[])
+    },[open])
 
     //sets approved status to true
     const reviewApplication = async (id) => {
