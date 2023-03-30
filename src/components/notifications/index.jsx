@@ -34,7 +34,7 @@ function Notifications() {
                     throw new Error('Could not find your projects')
                 }
                 const data = await response.json()
-                setOwnedProjects({projects: data})
+                setOwnedProjects(data)
             }
             catch(error){
                 return[error.message,[]]
