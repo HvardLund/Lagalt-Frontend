@@ -34,7 +34,7 @@ function Notifications() {
                 throw new Error('Could not load projects')
             }
             const data = await response.json()
-            setNotifications([...notifications, ...data.map(application => `${application.userName} wants to join ${project.title}`)])
+            setNotifications([...notifications, ...data.map(application => [`${application.userName} wants to join ${project.title}`, application.id, project.id])])
         }
         catch(error){
             return[error.message,[]]
@@ -43,9 +43,37 @@ function Notifications() {
 
     //get all applications for all projects where the logged in user is the owner
     const getAllApplications = () => {
+        setNotifications([])
         ownedProjects.map(project => 
             getApplications(project)
         )
+    }
+
+    //sets approved status to true
+    const reviewApplication = async (id) => {
+        await fetch(`https://lagalt-bckend.azurewebsites.net/api/applications/${id}/approve`, {
+            method: 'PUT',
+            headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'},
+        }).then(resp => {
+            if (!resp.ok) {
+                throw new Error(resp.status);
+            }
+        }).catch(error => {
+            console.log(error);
+        });
+    }
+
+    const addContributors = async (id) => {
+        await fetch(`https://lagalt-bckend.azurewebsites.net/api/projects/${id}/contributors`, {
+            method: 'PUT',
+            headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'},
+        }).then(resp => {
+            if (!resp.ok) {
+                throw new Error(resp.status);
+            }
+        }).catch(error => {
+            console.log(error);
+        });
     }
 
     //Open/close the menu on click
@@ -53,12 +81,13 @@ function Notifications() {
         setOpen(!open)   
     }
 
-    const accept = () => {
-        alert('ok')
+    const accept = (applicationId, projectId) => {
+        reviewApplication(applicationId)
+        addContributors(projectId)
     }
 
-    const deny = () => {
-        alert('ok')
+    const deny = (id) => {
+        reviewApplication(id)
     }
     
     useEffect(() => {
@@ -75,9 +104,9 @@ function Notifications() {
                 <div className={styles.menu}>
                     {notifications.map(notification => 
                         <button className={styles.menuButton}>
-                            <div className={styles.notificationText}>{notification}</div>
-                            <FeatherIcon onClick = {deny}size="20px" icon="x" color='#DA5E3F'></FeatherIcon>
-                            <FeatherIcon onClick = {accept} size="20px" icon="check" color='#587D3B'></FeatherIcon>
+                            <div className={styles.notificationText}>{notification[0]}</div>
+                            <FeatherIcon onClick = {deny(notification[1])}size="20px" icon="x" color='#DA5E3F'></FeatherIcon>
+                            <FeatherIcon onClick = {accept(notification[1], notification[2])} size="20px" icon="check" color='#587D3B'></FeatherIcon>
                         </button>
                     )}
                 </div>
