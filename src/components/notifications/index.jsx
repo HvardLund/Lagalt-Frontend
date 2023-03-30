@@ -38,7 +38,6 @@ function Notifications() {
                     throw new Error('Could not find your projects')
                 }
                 const data = await response.json()
-                console.log(data)
                 setOwnedProjects(data)
             }
             catch(error){
@@ -58,8 +57,8 @@ function Notifications() {
                 throw new Error('Could not load projects')
             }
             const data = await response.json()
-            const newNotifications = notifications.concat(data.map(application => [`${application.userName} wants to join ${project.title}`, application.id, project.id]))
-            setNotifications([newNotifications])
+            let newNotifications = notifications.concat(data.map(application => [`${application.userName} wants to join ${project.title}`, application.id, project.id]))
+            setNotifications(newNotifications)
         }
         catch(error){
             return[error.message,[]]
@@ -108,7 +107,6 @@ function Notifications() {
 
     //accept application
     const accept = (applicationId, projectId) => {
-        console.log(projectId)
         reviewApplication(applicationId)
         //addContributors(projectId)
     }
