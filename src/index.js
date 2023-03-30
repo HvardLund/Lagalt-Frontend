@@ -17,6 +17,7 @@ root.render(<Loading message="Connecting to Keycloak..." />)
 // Initialize Keycloak
 initialize()
   .then(() => { // If No Keycloak Error occurred - Display the App
+    //create a user in the backend, if it does not already exist
     keycloak.authenticated?checkForUser(keycloak.tokenParsed.sub):console.log('not logged in')
     root.render(
       <React.StrictMode>

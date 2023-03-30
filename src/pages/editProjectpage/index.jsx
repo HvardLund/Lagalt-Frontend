@@ -9,6 +9,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon'
 import keycloak from '../../keycloak'
 
+//page for editing a project
 function EditProjectPage(){
 
     const [project, setProject] = useState({})
@@ -28,9 +29,13 @@ function EditProjectPage(){
     const [field, setField] = useState('')
     const {id} = useParams()
     
+    //apis for a single project used when updating the project
     const apiURL = `https://lagalt-bckend.azurewebsites.net/api/projects/${id}`
+
+    //api used to fetch all skills
     const skillApiUrl = 'https://lagalt-bckend.azurewebsites.net/api/skills'
 
+    //The following methods handles changes to each individual component on the edit page storing them in a hook
     const changeProgress = () => {
         setEditProgress(!editProgress)
     }
@@ -79,6 +84,8 @@ function EditProjectPage(){
         const value = event.target.value
         setNewTag(value)
     }
+
+    //makes sure tag is added to list on enter press
     const pressEnter = (event) => {
         if (event.key === 'Enter') {
             addTag()
@@ -91,6 +98,7 @@ function EditProjectPage(){
         }
     }
 
+    //all skill are fetched upon loading the page
     useEffect(() => {
         const getAllSkills = async () => {
             try{
@@ -108,6 +116,7 @@ function EditProjectPage(){
         getAllSkills()
     },[])
     
+    //project data is fetched upon loading the page
     useEffect(() => {
         const getProject = async () => {
             try{
@@ -136,6 +145,7 @@ function EditProjectPage(){
         getProject()
     },[apiURL, id, navigate])
 
+    //update all attributes when the value of project is changed
     useEffect(() => {
         setProjectStatus(project.progress)
         setImageUrl(project.imageUrls?project.imageUrls[0]:imageNotFound)
@@ -148,6 +158,7 @@ function EditProjectPage(){
         setField(project.field)
     },[project])
 
+    //method used to update the project data, with the new values in each component
     const updateProject = async () => {
         await fetch(`https://lagalt-bckend.azurewebsites.net/api/projects/${id}/update`, {
             method: 'PUT',
@@ -175,6 +186,7 @@ function EditProjectPage(){
         });
     }
 
+    //calling the update project method upon clicking the publish button
     const publish = () => {
         updateProject()
     }

@@ -8,12 +8,20 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch  } from 'react-redux';
 import { updateUser } from './../../redux-parts/userSLice'
 
+//profile page for the currently logged in user
 function MyProfilePage(){
 
+    //user description
     const description = useSelector((state) => state.updateUser.description)
     const dispatch = useDispatch();
+
+    //user skills
     let skills = useSelector((state) => state.updateUser.skills)
+
+    //decide if user data is editable or not
     const [edit, setEdit] = useState(false)
+
+    //new skills that are selected
     const [selectedSkills, setSelectedSkills] = useState(skills)
     const [myProjects, setMyProjects] = useState([])
     const [allSkills, setAllSKills] = useState([])
@@ -23,6 +31,7 @@ function MyProfilePage(){
     const imageNotFound = "https://lagaltprojectimages.blob.core.windows.net/images/noimage.png"
     const profileImage = "https://lagaltprojectimages.blob.core.windows.net/images/profile.svg"
 
+    //handles button click. If in edit mode, post new values
     const buttonClick = () => {
         setEdit(!edit)
         setSelectedSkills(skills)
@@ -34,6 +43,7 @@ function MyProfilePage(){
 
     let viewedSkills = edit?allSkills:skills
 
+    //handle selection of new skills
     const handleCheckboxChange = (event) => {
         const itemId = event.target.id;
         const isChecked = event.target.checked;
@@ -45,6 +55,7 @@ function MyProfilePage(){
         }
     }
 
+    //fetch all skills
     useEffect(() => {
         const getAllSkills = async () => {
             try{
@@ -62,6 +73,7 @@ function MyProfilePage(){
         getAllSkills()
     },[])
 
+    //fetching all projects
     useEffect(() => {
         const getAllProjects = async () => {
             try{
@@ -79,11 +91,13 @@ function MyProfilePage(){
         getAllProjects()
     },[projectApiURL])
 
+    //handle changes to description field
     const handleDescription = (event) => {
         const value = event.target.value
         setNewDescription(value)
     }
 
+    //updating user data in the database based on new values
     const updateProfile = async () => {
         await fetch(`https://lagalt-bckend.azurewebsites.net/api/users/${keycloak.tokenParsed.sub}`, {
             method: 'PUT',
