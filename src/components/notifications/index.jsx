@@ -43,6 +43,7 @@ function Notifications() {
 
     //get all applications for all projects where the logged in user is the owner
     const getAllApplications = () => {
+        console.log(ownedProjects)
         ownedProjects.map(project => 
             getApplications(project.id)
         )
@@ -77,7 +78,9 @@ function Notifications() {
 
     //Open/close the menu on click
     const handleOpen = () => {
-        setOpen(!open)   
+        setOpen(!open)
+        console.log(ownedProjects)
+        getAllApplications()   
     }
 
     const accept = (applicationId, projectId) => {
@@ -88,10 +91,6 @@ function Notifications() {
     const deny = (id) => {
         reviewApplication(id)
     }
-    
-    useEffect(() => {
-        getAllApplications()
-    },[ownedProjects])
 
     useEffect(() => {
         console.log(notifications)
