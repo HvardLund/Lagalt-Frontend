@@ -34,7 +34,7 @@ function Notifications() {
                 throw new Error('Could not load projects')
             }
             const data = await response.json()
-            setNotifications([...notifications, ...data.map(user => `${user.userName} wants to join ${project.title}`)])
+            setNotifications([...notifications, ...data.map(application => `${application.userName} wants to join ${project.title}`)])
         }
         catch(error){
             return[error.message,[]]
@@ -62,7 +62,7 @@ function Notifications() {
     }
     
     useEffect(() => {
-        getApplications(ownedProjects[0])
+        getAllApplications()
     },[ownedProjects])
 
     return(
