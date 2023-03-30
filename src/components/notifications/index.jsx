@@ -57,7 +57,7 @@ function Notifications() {
                 throw new Error('Could not load projects')
             }
             const data = await response.json()
-            setNotifications(notifications => [...notifications, data.map(application => [`${application.userName} wants to join ${project.title}`, application.id, project.id])])
+            if(data.length > 0){setNotifications(notifications => [...notifications, data.map(application => [`${application.userName} wants to join ${project.title}`, application.id, project.id])])}
         }
         catch(error){
             return[error.message,[]]
