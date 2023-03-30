@@ -113,10 +113,9 @@ function Notifications() {
 
     //deny application
     const deny = (id) => {
-        console.log(notifications)
-        //reviewApplication(id)
-        //setNotifications([])
-        //getAllApplications()
+        reviewApplication(id)
+        setNotifications([])
+        getAllApplications()
     }
 
     return(
@@ -127,7 +126,7 @@ function Notifications() {
             </div>
             {open ? (
                 <div className={styles.menu}>
-                    {notifications.map(notification => 
+                    {notifications.flat(1).map(notification => 
                         <button className={styles.menuButton}>
                             <div className={styles.notificationText}>{notification[0]}</div>
                             <FeatherIcon onClick = {() => deny(notification[1])}size="20px" icon="x" color='#DA5E3F'></FeatherIcon>
