@@ -17,6 +17,7 @@ function ProjectPage(){
     const navigate = useNavigate()
     const imageNotFound = "https://lagaltprojectimages.blob.core.windows.net/images/noimage.png"
     const apiURL = `https://lagalt-bckend.azurewebsites.net/api/projects/${id}`
+    const [confirmed, setConfirmed] = useState(true)
 
     useEffect(() => {
         const getProject = async () => {
@@ -50,7 +51,7 @@ function ProjectPage(){
             if (!resp.ok) {
                 throw new Error(resp.status);
             }
-            navigate('/')
+            if(resp.ok)(setConfirmed(true))
         }).catch(error => {
             console.log(error);
         });
@@ -73,7 +74,8 @@ function ProjectPage(){
                     <h2 className={styles.subHeader}>Urls</h2>
                     <DescriptionTextField type='description' content={project.linkUrls}/>
                 </div>
-                {keycloak.authenticated && keycloak.tokenParsed.preferred_username !== project.owner && !project.contributors.includes(keycloak.tokenParsed.preferred_username) && <button className = {`${styles.greenButton} ${styles.applyButton}`} onClick={newApplication}>Apply now</button>}
+                {keycloak.authenticated && keycloak.tokenParsed.preferred_username !== project.owner && !project.contributors.includes(keycloak.tokenParsed.preferred_username) && confirmed && <div className = {styles.confirmed}>You have successfully applied</div>}
+                {keycloak.authenticated && keycloak.tokenParsed.preferred_username !== project.owner && !project.contributors.includes(keycloak.tokenParsed.preferred_username) && !confirmed && <button className = {`${styles.greenButton} ${styles.applyButton}`} onClick={newApplication}>Apply now</button>}
             </div>
             <div className={`${styles.midColumn} ${styles.column}`}>
                 <DescriptionTextField type='header' content={project.title}/>
