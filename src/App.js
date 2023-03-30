@@ -12,7 +12,7 @@ import { ROLES } from "./const/roles"
 import { useDispatch } from "react-redux";
 import keycloak from './keycloak';
 import { useEffect } from 'react';
-import { addProjects, updateUser } from './redux-parts/userSLice';
+import { updateUser } from './redux-parts/userSLice';
 
 
 function App() {
@@ -31,7 +31,8 @@ function App() {
               throw new Error('User could not be loaded')
           }
           const data = await response.json()
-          dispatch(updateUser({description: data.description, skills: data.skills}))
+          console.log(data)
+          dispatch(updateUser(data))
       }
       catch(error){
           console.log([error.message,[]])
