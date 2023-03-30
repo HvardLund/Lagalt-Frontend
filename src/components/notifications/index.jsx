@@ -85,6 +85,7 @@ function Notifications() {
         });
     }
 
+    /*
     const addContributors = async (id, userName) => {
         await fetch(`https://lagalt-bckend.azurewebsites.net/api/projects/${id}/contributors`, {
             method: 'PUT',
@@ -100,6 +101,7 @@ function Notifications() {
             console.log(error);
         });
     }
+    */
 
     //Open/close the menu on click
     const handleOpen = () => {
