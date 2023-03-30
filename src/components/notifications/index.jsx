@@ -57,7 +57,7 @@ function Notifications() {
                 throw new Error('Could not load projects')
             }
             const data = await response.json()
-            setNotifications([...notifications, data.map(application => [`${application.userName} wants to join ${project.title}`, application.id, project.id])])
+            setNotifications(notifications => [...notifications, data.map(application => [`${application.userName} wants to join ${project.title}`, application.id, project.id])])
         }
         catch(error){
             return[error.message,[]]
@@ -80,7 +80,6 @@ function Notifications() {
             if (!resp.ok) {
                 throw new Error(resp.status);
             }
-            if(resp.ok){getAllApplications()}
         }).catch(error => {
             console.log(error);
         });
@@ -107,12 +106,16 @@ function Notifications() {
     //accept application
     const accept = (applicationId, projectId) => {
         reviewApplication(applicationId)
+        setNotifications([])
+        getAllApplications()
         //addContributors(projectId)
     }
 
     //deny application
     const deny = (id) => {
         reviewApplication(id)
+        setNotifications([])
+        getAllApplications()
     }
 
     return(
