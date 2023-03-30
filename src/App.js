@@ -40,6 +40,7 @@ function App() {
     getUser()
   },[dispatch])
 
+  /*
   //fetching projects owned by the user and storing them to redux
   useEffect(() => {
     const getOwnedProjects = async () => {
@@ -57,6 +58,7 @@ function App() {
     }
     getOwnedProjects()
   },[dispatch])
+  */
   
   return (
     <BrowserRouter>

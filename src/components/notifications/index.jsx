@@ -2,14 +2,12 @@ import styles from './notifications.module.css'
 import { useState, useEffect, useRef } from 'react';
 import keycloak from '../../keycloak';
 import FeatherIcon from 'feather-icons-react'
-import { useSelector } from 'react-redux';
 
 //notification menu component
-function Notifications(props) {
+function Notifications() {
     const [open, setOpen] = useState(false)
-    const notifications = props.notifications
-    const accept = props.accept
-    const deny = props.deny
+    const [notifications, setNotifications] = useState([])
+    const [ownedProjects, setOwnedProjects] = useState([]) 
     const containerRef = useRef(null);
 
     //make notification menu close on click outside
@@ -27,10 +25,97 @@ function Notifications(props) {
 
     useOutsideAlerter(containerRef)
 
+      //fetching projects owned by the user and storing them to redux
+    useEffect(() => {
+        const getOwnedProjects = async () => {
+            try{
+                const response = await fetch(`https://lagalt-bckend.azurewebsites.net/api/users/${keycloak.tokenParsed.sub}/OwnedProjects`)
+                if(!response.ok){
+                    throw new Error('Could not find your projects')
+                }
+                const data = await response.json()
+                setOwnedProjects({projects: data})
+            }
+            catch(error){
+                return[error.message,[]]
+            }
+        }
+    getOwnedProjects()
+    },[])
+
+    //load applications for a project
+    const getApplications = async (project) => {
+        try{
+            const response = await fetch(`https://lagalt-bckend.azurewebsites.net/api/projects/${project.id}/notapproved`, {
+                headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'},
+            })
+            if(!response.ok){
+                throw new Error('Could not load projects')
+            }
+            const data = await response.json()
+            setNotifications([...notifications, ...data.map(application => [`${application.userName} wants to join ${project.title}`, application.id, project.id])])
+        }
+        catch(error){
+            return[error.message,[]]
+        }
+    }
+
+    //get all applications for all projects where the logged in user is the owner
+    const getAllApplications = () => {
+        ownedProjects.forEach(project => {
+            getApplications(project)
+        })
+    }
+
+    //sets approved status to true
+    const reviewApplication = async (id) => {
+        await fetch(`https://lagalt-bckend.azurewebsites.net/api/applications/${id}/approve`, {
+            method: 'PUT',
+            headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'},
+        }).then(resp => {
+            if (!resp.ok) {
+                throw new Error(resp.status);
+            }
+        }).catch(error => {
+            console.log(error);
+        });
+    }
+
+    const addContributors = async (id) => {
+        await fetch(`https://lagalt-bckend.azurewebsites.net/api/projects/${id}/contributors`, {
+            method: 'PUT',
+            headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'},
+        }).then(resp => {
+            if (!resp.ok) {
+                throw new Error(resp.status);
+            }
+        }).catch(error => {
+            console.log(error);
+        });
+    }
+
     //Open/close the menu on click
     const handleOpen = () => {
         setOpen(!open)  
     }
+
+    //accept application
+    const accept = (applicationId, projectId) => {
+        console.log(projectId)
+        reviewApplication(applicationId)
+        addContributors(projectId)
+        getAllApplications()
+    }
+
+    //deny application
+    const deny = (id) => {
+        reviewApplication(id)
+        getAllApplications()
+    }
+
+    useEffect(() => {
+        getAllApplications()
+    },[ownedProjects])
 
     return(
         <div ref={containerRef} className={styles.container}>
