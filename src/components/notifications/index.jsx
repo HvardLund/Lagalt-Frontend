@@ -58,6 +58,8 @@ function Notifications() {
             }
             const data = await response.json()
             let newNotifications = notifications.concat(data.map(application => [`${application.userName} wants to join ${project.title}`, application.id, project.id]))
+            console.log(notifications)
+            console.log(newNotifications)
             setNotifications(newNotifications)
         }
         catch(error){
