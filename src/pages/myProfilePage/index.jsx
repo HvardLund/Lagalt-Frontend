@@ -12,7 +12,7 @@ import { updateUser } from './../../redux-parts/userSLice'
 function MyProfilePage(){
 
     //user description
-    const description = useSelector((state) => state.updateUser.description)
+    let description = useSelector((state) => state.updateUser.description)
     const dispatch = useDispatch();
 
     //user skills
