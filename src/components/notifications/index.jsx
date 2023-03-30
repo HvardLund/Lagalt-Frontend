@@ -29,7 +29,9 @@ function Notifications() {
     //load applications for a project
     const getApplications = async (project) => {
         try{
-            const response = await fetch(`https://lagalt-bckend.azurewebsites.net/api/projects/${project.id}/notapproved`)
+            const response = await fetch(`https://lagalt-bckend.azurewebsites.net/api/projects/${project.id}/notapproved`, {
+                headers: {Authorization: `Bearer ${keycloak.token}`, 'Content-Type': 'application/json'},
+            })
             if(!response.ok){
                 throw new Error('Could not load projects')
             }
