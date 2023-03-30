@@ -80,7 +80,7 @@ function Notifications() {
     const handleOpen = () => {
         setOpen(!open)
         console.log(ownedProjects)
-        getAllApplications()   
+        getApplications(ownedProjects[0])  
     }
 
     const accept = (applicationId, projectId) => {
