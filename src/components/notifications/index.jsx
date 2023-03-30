@@ -43,7 +43,7 @@ function Notifications() {
 
     //get all applications for all projects where the logged in user is the owner
     const getAllApplications = () => {
-        ownedProjects.array.forEach(project => {
+        ownedProjects.forEach(project => {
             console.log(project)
             getApplications(project.id)
         })
