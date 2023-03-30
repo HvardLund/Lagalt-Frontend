@@ -10,7 +10,6 @@ function Notifications() {
     const [notifications, setNotifications] = useState([]) 
     const containerRef = useRef(null);
     let ownedProjects = useSelector((state) => state.addProjects.projects)
-    const dummyNotifications = ["Hansen want to join your project", "Norasb wants to join your project"]
 
     //make notification menu close on click outside
     function useOutsideAlerter(ref) {
@@ -71,11 +70,11 @@ function Notifications() {
         <div ref={containerRef} className={styles.container}>
             <div onClick={handleOpen} className={styles.profileContainer}>
                 <span><FeatherIcon size="32" icon="bell" /></span>
-                {dummyNotifications.length>0 &&<span className={styles.badge}>{dummyNotifications.length}</span>}
+                {notifications.length>0 &&<span className={styles.badge}>{notifications.length}</span>}
             </div>
             {open ? (
                 <div className={styles.menu}>
-                    {dummyNotifications.map(notification => 
+                    {notifications.map(notification => 
                         <button className={styles.menuButton}>
                             <div className={styles.notificationText}>{notification}</div>
                             <FeatherIcon onClick = {deny}size="20px" icon="x" color='#DA5E3F'></FeatherIcon>
