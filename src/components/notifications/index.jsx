@@ -62,7 +62,6 @@ function Notifications() {
     }
     
     useEffect(() => {
-        setNotifications([])
         getAllApplications()
     },[ownedProjects])
 
